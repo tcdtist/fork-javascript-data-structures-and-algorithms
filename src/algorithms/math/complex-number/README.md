@@ -56,9 +56,7 @@ của một điểm trên mặt phẳng. Việc khôi phục lại các tọa đ
 
 Sử dụng công thức Euler, điều này có thể được viết dưới dạng:
 
-![Dạng Euler](https://wikimedia.org/api/rest_v
-
-1/media/math/render/svg/0a087c772212e7375cb321d83fc1fcc715cd0ed2)
+![Dạng Euler](https://wikimedia.org/api/rest_v1/media/math/render/svg/0a087c772212e7375cb321d83fc1fcc715cd0ed2)
 
 ## Các Phép Tính Cơ Bản
 

@@ -1,23 +1,23 @@
-# Linear Search
+# Tìm Kiếm Tuyến Tính
 
-_Read this in other languages:_
+_Tiếp tục đọc trong các ngôn ngữ khác:_
 [_Tiếng Việt_](README.md)
 
-In computer science, linear search or sequential search is a
-method for finding a target value within a list. It sequentially
-checks each element of the list for the target value until a
-match is found or until all the elements have been searched.
-Linear search runs in at worst linear time and makes at most `n`
-comparisons, where `n` is the length of the list.
+Trong khoa học máy tính, tìm kiếm tuyến tính hoặc tìm kiếm tuần tự là một
+phương pháp để tìm một giá trị mục tiêu trong một danh sách. Nó kiểm tra
+từng phần tử của danh sách một cách tuần tự để tìm giá trị mục tiêu cho đến khi
+tìm thấy một kết quả phù hợp hoặc cho đến khi tất cả các phần tử đã được kiểm tra.
+Tìm kiếm tuyến tính chạy trong trường hợp xấu nhất là thời gian tuyến tính và tạo ra tối đa `n`
+so sánh, trong đó `n` là độ dài của danh sách.
 
-![Linear Search](https://www.tutorialspoint.com/data_structures_algorithms/images/linear_search.gif)
+![Tìm Kiếm Tuyến Tính](https://www.tutorialspoint.com/data_structures_algorithms/images/linear_search.gif)
 
-## Complexity
+## Phức Tạp
 
-**Time Complexity**: `O(n)` - since in worst case we're checking each element
-exactly once.
+**Phức Tạp Thời Gian**: `O(n)` - vì trong trường hợp xấu nhất chúng ta kiểm tra từng phần tử
+một lần.
 
-## References
+## Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Linear_search)
 - [TutorialsPoint](https://www.tutorialspoint.com/data_structures_algorithms/linear_search_algorithm.htm)

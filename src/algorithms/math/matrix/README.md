@@ -1,63 +1,66 @@
-# Matrices
+# Ma trận
 
-In mathematics, a **matrix** (plural **matrices**) is a rectangular array or table of numbers, symbols, or expressions, arranged in rows and columns. For example, the dimension of the matrix below is `2 × 3` (read "two by three"), because there are two rows and three columns:
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
+
+Trong toán học, một **ma trận** (số ít **ma trận**, số nhiều **ma trận**) là một mảng chữ nhật hoặc bảng các số, ký hiệu hoặc biểu thức, được sắp xếp thành các hàng và cột. Ví dụ, kích thước của ma trận dưới đây là `2 × 3` (đọc là "hai lần ba"), bởi vì có hai hàng và ba cột:
 
 ```
 | 1  9 -13 |
 | 20 5 -6  |
 ```
 
-![An `m × n` matrix](https://upload.wikimedia.org/wikipedia/commons/b/bf/Matris.png)
+![Một ma trận `m × n`](https://upload.wikimedia.org/wikipedia/commons/b/bf/Matris.png)
 
-An `m × n` matrix: the `m` rows are horizontal, and the `n` columns are vertical. Each element of a matrix is often denoted by a variable with two subscripts. For example, <i>a<sub>2,1</sub></i> represents the element at the second row and first column of the matrix
+Một ma trận `m × n`: `m` hàng là ngang, và `n` cột là dọc. Mỗi phần tử của một ma trận thường được ký hiệu bằng một biến với hai chỉ số. Ví dụ, <i>a<sub>2,1</sub></i> đại diện cho phần tử ở hàng thứ hai và cột thứ nhất của ma trận.
 
-## Operations on matrices
+## Các phép toán trên ma trận
 
-### Addition
+### Cộng
 
-To add two matrices: add the numbers in the matching positions:
+Để cộng hai ma trận: cộng các số ở vị trí tương ứng:
 
-![Matrices addition](https://www.mathsisfun.com/algebra/images/matrix-addition.gif)
+![Cộng ma trận](https://www.mathsisfun.com/algebra/images/matrix-addition.gif)
 
-The two matrices must be the same size, i.e. the rows must match in size, and the columns must match in size.
+Hai ma trận phải có cùng kích thước, tức là số hàng phải giống nhau, và số cột phải giống nhau.
 
-### Subtracting
+### Trừ
 
-To subtract two matrices: subtract the numbers in the matching positions:
+Để trừ hai ma trận: trừ các số ở vị trí tương ứng:
 
-![Matrices subtraction](https://www.mathsisfun.com/algebra/images/matrix-subtraction.gif)
+![Trừ ma trận](https://www.mathsisfun.com/algebra/images/matrix-subtraction.gif)
 
-### Multiply by a Constant
+### Nhân với một Hằng số
 
-We can multiply a matrix by a constant (the value 2 in this case):
+Chúng ta có thể nhân một ma trận với một hằng số (giá trị 2 trong trường hợp này):
 
-![Matrices multiplication be a constant](https://www.mathsisfun.com/algebra/images/matrix-multiply-constant.gif)
+![Nhân ma trận với một hằng số](https://www.mathsisfun.com/algebra/images/matrix-multiply-constant.gif)
 
-### Multiplying by Another Matrix
+### Nhân với Một Ma trận Khác
 
-To multiply a matrix by another matrix we need to do the [dot product](https://www.mathsisfun.com/algebra/vectors-dot-product.html) of rows and columns.
+Để nhân một ma trận với một ma trận khác, chúng ta cần thực hiện [tích vô hướng](https://www.mathsisfun.com/algebra/vectors-dot-product.html) của các hàng và cột.
 
-To work out the answer for the **1st row** and **1st column**:
+Để tính kết quả cho **hàng thứ nhất** và **cột thứ nhất**:
 
-![Matrices multiplication - 1st step](https://www.mathsisfun.com/algebra/images/matrix-multiply-a.svg)
+![Nhân ma trận - Bước 1](https://www.mathsisfun.com/algebra/images/matrix-multiply-a.svg)
 
-Here it is for the 1st row and 2nd column:
+Đây là cho hàng thứ nhất và cột thứ hai:
 
-![Matrices multiplication - 2st step](https://www.mathsisfun.com/algebra/images/matrix-multiply-b.svg)
+![Nhân ma trận - Bước 2](https://www.mathsisfun.com/algebra/images/matrix-multiply-b.svg)
 
-If we'll do the same for the rest of the rows and columns we'll get the following resulting matrix:
+Nếu chúng ta làm tương tự cho phần còn lại của các hàng và cột, chúng ta sẽ nhận được ma trận kết quả sau:
 
-![Matrices multiplication - Result](https://www.mathsisfun.com/algebra/images/matrix-multiply-c.svg)
+![Nhân ma trận - Kết quả](https://www.mathsisfun.com/algebra/images/matrix-multiply-c.svg)
 
-### Transposing
+### Chuyển vị
 
-To "transpose" a matrix, swap the rows and columns.
+Để "chuyển vị" một ma trận, đổi chỗ các hàng và cột.
 
-We put a "T" in the top right-hand corner to mean transpose:
+Chúng ta đặt một "T" ở góc trên bên phải để biểu thị chuyển vị:
 
-![Transposing](https://www.mathsisfun.com/algebra/images/matrix-transpose.gif)
+![Chuyển vị](https://www.mathsisfun.com/algebra/images/matrix-transpose.gif)
 
-## References
+## Tham khảo
 
-- [Matrices on MathIsFun](https://www.mathsisfun.com/algebra/matrix-introduction.html)
-- [Matrix on Wikipedia](https://en.wikipedia.org/wiki/Matrix_(mathematics))
+- [Ma trận trên MathIsFun](https://www.mathsisfun.com/algebra/matrix-introduction.html)
+- [Ma trận trên Wikipedia](<https://en.wikipedia.org/wiki/Matrix_(mathematics)>)

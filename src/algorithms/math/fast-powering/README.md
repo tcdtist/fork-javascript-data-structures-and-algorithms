@@ -1,49 +1,44 @@
-# Fast Powering Algorithm
+# Thuật toán lũy thừa nhanh
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-**The power of a number** says how many times to use the number in a
-multiplication.
+**Sức mạnh của một số** cho biết phải sử dụng số đó bao nhiêu lần trong một phép nhân.
 
-It is written as a small number to the right and above the base number.
+Nó được viết dưới dạng một số nhỏ bên phải và phía trên số cơ bản.
 
-![Power](https://www.mathsisfun.com/algebra/images/exponent-8-2.svg)
+![Lũy thừa](https://www.mathsisfun.com/algebra/images/exponent-8-2.svg)
 
-## Naive Algorithm Complexity
+## Độ phức tạp của thuật toán ngây thơ
 
-How to find `a` raised to the power `b`?
+Làm thế nào để tính `a` mũ `b`?
 
-We multiply `a` to itself, `b` times. That
-is, `a^b = a * a * a * ... * a` (`b` occurrences of `a`).
+Chúng ta nhân `a` cho chính nó, `b` lần. Tức là, `a^b = a * a * a * ... * a` (`b` lần của `a`).
 
-This operation will take `O(n)` time since we need to do multiplication operation
-exactly `n` times.
+Phép tính này sẽ mất `O(n)` thời gian vì chúng ta cần thực hiện phép nhân chính xác `n` lần.
 
-## Fast Power Algorithm
+## Thuật toán lũy thừa nhanh
 
-Can we do better than naive algorithm does? Yes we may solve the task of
-powering in `O(log(n))` time.
+Liệu chúng ta có thể làm tốt hơn so với thuật toán ngây thơ không? Có, chúng ta có thể giải quyết bài toán lũy thừa trong thời gian `O(log(n))`.
 
-The algorithm uses divide and conquer approach to compute power. Currently the
-algorithm work for two positive integers `X` and `Y`.
+Thuật toán sử dụng phương pháp chia để trị để tính lũy thừa. Hiện tại, thuật toán này hoạt động cho hai số nguyên dương `X` và `Y`.
 
-The idea behind the algorithm is based on the fact that:
+Ý tưởng đằng sau thuật toán dựa trên sự thật rằng:
 
-For **even** `Y`:
+Đối với `Y` **chẵn**:
 
 ```text
 X^Y = X^(Y/2) * X^(Y/2)
 ```
 
-For **odd** `Y`:
+Đối với `Y` **lẻ**:
 
 ```text
 X^Y = X^(Y//2) * X^(Y//2) * X
-where Y//2 is result of division of Y by 2 without reminder.
+trong đó Y//2 là kết quả của phép chia của Y cho 2 mà không có phần dư.
 ```
 
-**For example**
+**Ví dụ**
 
 ```text
 2^4 = (2 * 2) * (2 * 2) = (2^2) * (2^2)
@@ -53,19 +48,17 @@ where Y//2 is result of division of Y by 2 without reminder.
 2^5 = (2 * 2) * (2 * 2) * 2 = (2^2) * (2^2) * (2)
 ```
 
-Now, since on each step we need to compute the same `X^(Y/2)` power twice we may optimise
-it by saving it to some intermediate variable to avoid its duplicate calculation.
+Bây giờ, vì ở mỗi bước chúng ta cần tính lũy thừa `X^(Y/2)` giống nhau hai lần, chúng ta có thể tối ưu hóa nó bằng cách lưu trữ vào một biến trung gian để tránh tính toán trùng lặp.
 
-**Time Complexity**
+**Độ phức tạp thời gian**
 
-Since each iteration we split the power by half then we will call function
-recursively `log(n)` times. This the time complexity of the algorithm is reduced to:
+Vì mỗi lần lặp chúng ta chia mũ cho hai, sau đó chúng ta sẽ gọi hàm đệ quy `log(n)` lần. Do đó, độ phức tạp thời gian của thuật toán được giảm xuống thành:
 
 ```text
 O(log(n))
 ```
 
-## References
+## Tham khảo
 
 - [YouTube](https://www.youtube.com/watch?v=LUWavfN9zEo&index=80&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&t=0s)
 - [Wikipedia](https://en.wikipedia.org/wiki/Exponentiation_by_squaring)

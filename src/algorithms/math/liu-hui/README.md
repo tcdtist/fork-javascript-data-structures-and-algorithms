@@ -1,68 +1,71 @@
-# Liu Hui's π Algorithm
+# Thuật toán π của Liu Hui
 
-Liu Hui remarked in his commentary to The Nine Chapters on the Mathematical Art,
-that the ratio of the circumference of an inscribed hexagon to the diameter of 
-the circle was `three`, hence `π` must be greater than three. He went on to provide 
-a detailed step-by-step description of an iterative algorithm to calculate `π` to 
-any required accuracy based on bisecting polygons; he calculated `π` to 
-between `3.141024` and `3.142708` with a 96-gon; he suggested that `3.14` was 
-a good enough approximation, and expressed `π` as `157/50`; he admitted that 
-this number was a bit small. Later he invented an ingenious quick method to 
-improve on it, and obtained `π ≈ 3.1416` with only a 96-gon, with an accuracy 
-comparable to that from a 1536-gon. His most important contribution in this 
-area was his simple iterative `π` algorithm.
+_Xem bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-## Area of a circle
+Trong bình luận của mình về Tám Chương về Nghệ Thuật Toán Học,
+Liu Hui đã chú ý rằng tỉ lệ của chu vi của một hình lục giác nội tiếp với đường
+kính của hình tròn là `ba`, vì vậy `π` phải lớn hơn ba. Ông tiếp tục cung cấp
+một mô tả chi tiết từng bước của một thuật toán lặp để tính `π` với
+bất kỳ độ chính xác cần thiết dựa trên việc chia đôi các đa giác; ông tính `π` tới
+từ `3.141024` đến `3.142708` với một hình 96 cạnh; ông đề xuất rằng `3.14`
+là một xấp xỉ đủ tốt, và diễn đạt `π` là `157/50`; ông thừa nhận rằng
+số này nhỏ hơn một chút. Sau đó, ông đã phát minh ra một phương pháp nhanh chóng và
+tinh tế để cải thiện nó, và thu được `π ≈ 3.1416` chỉ với một hình 96 cạnh, với một độ chính xác
+tương đương với một hình 1536 cạnh. Đó là đóng góp quan trọng nhất của ông trong
+lĩnh vực này là thuật toán `π` lặp lại đơn giản của ông.
 
-Liu Hui argued:
+## Diện tích của một hình tròn
 
-> Multiply one side of a hexagon by the radius (of its 
-circumcircle), then multiply this by three, to yield the 
-area of a dodecagon; if we cut a hexagon into a 
-dodecagon, multiply its side by its radius, then again 
-multiply by six, we get the area of a 24-gon; the finer 
-we cut, the smaller the loss with respect to the area 
-of circle, thus with further cut after cut, the area of 
-the resulting polygon will coincide and become one with 
-the circle; there will be no loss
+Liu Hui lập luận:
+
+> Nhân một cạnh của một hình lục giác với bán kính (của nó
+> vòng ngoài), sau đó nhân tiếp điều này với ba, để thu được
+> diện tích của một hình đa giác dodecagon; nếu chúng ta chia một hình lục giác thành
+> dodecagon, nhân cạnh của nó với bán kính của nó, sau đó lại
+> nhân với sáu, chúng ta thu được diện tích của một hình đa giác 24 cạnh; càng tinh tế
+> chúng ta cắt, mất mát càng nhỏ so với diện tích
+> của hình tròn, do đó với mỗi lần cắt sau, diện tích của
+> hình đa giác kết quả sẽ trùng khớp và trở thành một với
+> hình tròn; không có mất mát nào sẽ xảy ra
 
 ![Liu Hui](https://upload.wikimedia.org/wikipedia/commons/6/69/Cutcircle2.svg)
 
-Liu Hui's method of calculating the area of a circle.
+Phương pháp của Liu Hui để tính diện tích của một hình tròn.
 
-Further, Liu Hui proved that the area of a circle is half of its circumference 
-multiplied by its radius. He said:
+Hơn nữa, Liu Hui chứng minh rằng diện tích của một hình tròn bằng một nửa chu vi của nó
+nhân với bán kính của nó. Ông nói:
 
-> Between a polygon and a circle, there is excess radius. Multiply the excess 
-radius by a side of the polygon. The resulting area exceeds the boundary of 
-the circle
+> Giữa một đa giác và một hình tròn, có sự dư thừa về bán kính. Nhân sự
+> dư thừa bán kính với một cạnh của đa giác. Kết quả là diện tích vượt quá biên của
+> hình tròn
 
-In the diagram `d = excess radius`. Multiplying `d` by one side results in 
-oblong `ABCD` which exceeds the boundary of the circle. If a side of the polygon 
-is small (i.e. there is a very large number of sides), then the excess radius 
-will be small, hence excess area will be small.
+Trong biểu đồ `d = dư thừa bán kính`. Nhân `d` với một cạnh sẽ dẫn đến
+hình chữ nhật `ABCD` vượt quá biên của hình tròn. Nếu một cạnh của đa giác
+nhỏ (tức là có một số lượng rất lớn các cạnh), thì dư thừa bán kính
+sẽ nhỏ, do đó diện tích dư thừa sẽ nhỏ.
 
-> Multiply the side of a polygon by its radius, and the area doubles; 
-hence multiply half the circumference by the radius to yield the area of circle.
+> Nhân một cạnh của một đa giác với bán kính của nó, và diện tích tăng gấp đôi;
+> do đó nhân nửa chu vi với bán kính để thu được diện tích của hình tròn.
 
 ![Liu Hui](https://upload.wikimedia.org/wikipedia/commons/9/95/Cutcircle.svg)
 
-The area within a circle is equal to the radius multiplied by half the 
-circumference, or `A = r x C/2 = r x r x π`.
+Diện tích bên trong một hình tròn bằng cách nhân bán kính với một nửa của
+chu vi, hoặc `A = r x C/2 = r x r x π`.
 
-## Iterative algorithm
+## Thuật toán lặp lại
 
-Liu Hui began with an inscribed hexagon. Let `M` be the length of one side `AB` of 
-hexagon, `r` is the radius of circle.
+Liu Hui bắt đầu với một hình lục giác nội tiếp. Hãy cho `M` là chiều dài của một cạnh `AB` của
+hình lục giác, `r` là bán kính của hình tròn.
 
 ![Liu Hui](https://upload.wikimedia.org/wikipedia/commons/4/46/Liuhui_geyuanshu.svg)
 
-Bisect `AB` with line `OPC`, `AC` becomes one side of dodecagon (12-gon), let 
-its length be `m`. Let the length of `PC` be `j` and the length of `OP` be `G`.
+Chia `AB` đôi với đoạn thẳng `OPC`, `AC` trở thành một cạnh của dodecagon (12 cạnh), hãy
+chiều dài của nó là `m`. Hãy cho chiều dài của `PC` là `j` và chiều dài của `OP` là `G`.
 
-`AOP`, `APC` are two right angle triangles. Liu Hui used 
-the [Gou Gu](https://en.wikipedia.org/wiki/Pythagorean_theorem) (Pythagorean theorem)
-theorem repetitively:
+`AOP`, `APC` là hai tam giác vuông. Liu Hui đã sử dụng
+[Định lý Gou Gu](https://en.wikipedia.org/wiki/Pythagorean_theorem) (Định lý Pythagoras)
+lặp đi lặp lại:
 
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/dbfc192c78539c3901c7bad470302ededb76f813)
 
@@ -78,15 +81,14 @@ theorem repetitively:
 
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/3ffeafe88d2983b364ad3442746063e3207fe842)
 
+Từ đây, bây giờ có một kỹ thuật để xác định `m` từ `M`, cho biết
+độ dài cạnh cho một đa giác với gấp đôi số cạnh. Bắt đầu với một
+hình lục giác, Liu Hui có thể xác định chiều dài cạnh của một dodecagon bằng cách sử dụng công thức này.
+Sau đó tiếp tục lặp lại để xác định chiều dài cạnh của một
+24-gon cho trước chiều dài cạnh của một dodecagon. Ông có thể làm điều này đệ quy như
+nhiều lần cần thiết. Biết cách xác định diện tích của các đa giác này,
+Liu Hui sau đó có thể ước lượng `π`.
 
-From here, there is now a technique to determine `m` from `M`, which gives the 
-side length for a polygon with twice the number of edges. Starting with a 
-hexagon, Liu Hui could determine the side length of a dodecagon using this 
-formula. Then continue repetitively to determine the side length of a 
-24-gon given the side length of a dodecagon. He could do this recursively as 
-many times as necessary. Knowing how to determine the area of these polygons, 
-Liu Hui could then approximate `π`.
-
-## References
+## Tài Liệu Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Liu_Hui%27s_%CF%80_algorithm)

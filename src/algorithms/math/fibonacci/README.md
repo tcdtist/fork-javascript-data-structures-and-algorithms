@@ -1,23 +1,20 @@
-# Fibonacci Number
+# Số Fibonacci
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In mathematics, the Fibonacci numbers are the numbers in the following
-integer sequence, called the Fibonacci sequence, and characterized by
-the fact that every number after the first two is the sum of the two
-preceding ones:
+Trong toán học, các số Fibonacci là các số trong chuỗi số nguyên sau đây, gọi là chuỗi Fibonacci, và được đặc trưng bởi việc mỗi số sau hai số đầu tiên là tổng của hai số liền trước:
 
 `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...`
 
-A tiling with squares whose side lengths are successive Fibonacci numbers
+Một lát với các hình vuông có độ dài cạnh lần lượt là các số Fibonacci liên tiếp
 
 ![Fibonacci](https://upload.wikimedia.org/wikipedia/commons/d/db/34%2A21-FibonacciBlocks.png)
 
-The Fibonacci spiral: an approximation of the golden spiral created by drawing circular arcs connecting the opposite corners of squares in the Fibonacci tiling;[4] this one uses squares of sizes 1, 1, 2, 3, 5, 8, 13 and 21.
+Spiral Fibonacci: một xấp xỉ của vòng xoắn vàng được tạo ra bằng cách vẽ các cung tròn kết nối các góc đối diện của các hình vuông trong việc lát Fibonacci;[4] hình này sử dụng các hình vuông có kích thước 1, 1, 2, 3, 5, 8, 13 và 21.
 
 ![Fibonacci Spiral](https://upload.wikimedia.org/wikipedia/commons/2/2e/FibonacciSpiral.svg)
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number)

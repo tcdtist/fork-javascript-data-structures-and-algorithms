@@ -1,62 +1,56 @@
-# Square Root (Newton's Method)
+# Phương pháp căn bậc hai (Phương pháp Newton)
 
-In numerical analysis, a branch of mathematics, there are several square root 
-algorithms or methods of computing the principal square root of a non-negative real 
-number. As, generally, the roots of a function cannot be computed exactly.
-The root-finding algorithms provide approximations to roots expressed as floating
-point numbers.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Finding ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/bff86975b0e7944720b3e635c53c22c032a7a6f1) is
-the same as solving the equation ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/6cf57722151ef19ba1ca918d702b95c335e21cad) for a
-positive `x`. Therefore, any general numerical root-finding algorithm can be used.
+Trong phân tích số, một nhánh của toán học, có một số thuật toán hoặc phương pháp để tính căn bậc hai chính của một số thực không âm. Như, nói chung, các căn bậc của một hàm không thể tính chính xác. Các thuật toán tìm gốc cung cấp các xấp xỉ cho các căn được biểu diễn dưới dạng số dấu chấm động.
 
-**Newton's method** (also known as the Newton–Raphson method), named after 
-_Isaac Newton_ and _Joseph Raphson_, is one example of a root-finding algorithm. It is a 
-method for finding successively better approximations to the roots of a real-valued function.
+Việc tìm ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/bff86975b0e7944720b3e635c53c22c032a7a6f1) là
+giống như giải phương trình ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/6cf57722151ef19ba1ca918d702b95c335e21cad) cho một
+`x` dương. Do đó, bất kỳ thuật toán tìm gốc số nào cũng có thể được sử dụng.
 
-Let's start by explaining the general idea of Newton's method and then apply it to our particular
-case with finding a square root of the number.
+**Phương pháp Newton** (còn được gọi là phương pháp Newton–Raphson), được đặt theo
+_Isaac Newton_ và _Joseph Raphson_, là một ví dụ về một thuật toán tìm gốc. Đây là một
+phương pháp để tìm các xấp xỉ tốt hơn đối với các gốc của một hàm có giá trị thực.
 
-## Newton's Method General Idea
+Hãy bắt đầu bằng cách giải thích ý tưởng chung của phương pháp Newton và sau đó áp dụng nó vào trường hợp cụ thể của chúng ta với việc tìm căn bậc hai của số.
 
-The Newton–Raphson method in one variable is implemented as follows:
+## Ý tưởng chung của Phương pháp Newton
 
-The method starts with a function `f` defined over the real numbers `x`, the function's derivative `f'`, and an 
-initial guess `x0` for a root of the function `f`. If the function satisfies the assumptions made in the derivation 
-of the formula and the initial guess is close, then a better approximation `x1` is:
+Phương pháp Newton–Raphson trong một biến được thực hiện như sau:
+
+Phương pháp bắt đầu với một hàm `f` được xác định trên các số thực `x`, đạo hàm của hàm `f` `f'`, và một
+đoán đầu `x0` cho một gốc của hàm `f`. Nếu hàm thỏa mãn các giả định được đưa ra trong công thức và đoán đầu tiên gần, thì xấp xỉ tốt hơn `x1` là:
 
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/52c50eca0b7c4d64ef2fdca678665b73e944cb84)
 
-Geometrically, `(x1, 0)` is the intersection of the `x`-axis and the tangent of 
-the graph of `f` at `(x0, f (x0))`.
+Hình học, `(x1, 0)` là sự giao nhau của trục `x` và tiếp tuyến của đồ thị của `f` tại `(x0, f (x0))`.
 
-The process is repeated as:
+Quá trình được lặp lại như sau:
 
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/710c11b9ec4568d1cfff49b7c7d41e0a7829a736)
 
-until a sufficiently accurate value is reached.
+cho đến khi đạt được giá trị đủ chính xác.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/e/e0/NewtonIteration_Ani.gif)
 
-## Newton's Method of Finding a Square Root
+## Phương pháp Newton để Tìm Căn bậc hai
 
-As it was mentioned above, finding ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/bff86975b0e7944720b3e635c53c22c032a7a6f1) is
-the same as solving the equation ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/6cf57722151ef19ba1ca918d702b95c335e21cad) for a
-positive `x`.
+Như đã đề cập ở trên, việc tìm ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/bff86975b0e7944720b3e635c53c22c032a7a6f1) là
+giống như giải phương trình ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/6cf57722151ef19ba1ca918d702b95c335e21cad) cho một
+`x` dương.
 
-The derivative of the function `f(x)` in case of square root problem is `2x`.
+Đạo hàm của hàm `f(x)` trong trường hợp của vấn đề căn bậc hai là `2x`.
 
-After applying the Newton's formula (see above) we get the following equation for our algorithm iterations:
+Sau khi áp dụng công thức Newton (xem ở trên) chúng ta có phương trình sau cho các lần lặp của thuật toán:
 
 ```text
 x := x - (x² - S) / (2x)
 ```
 
-The `x² − S` above is how far away `x²` is from where it needs to be, and the 
-division by `2x` is the derivative of `x²`, to scale how much we adjust `x` by how 
-quickly `x²` is changing.
+Phần `x² − S` ở trên là khoảng cách `x²` so với nơi cần phải đến, và phép chia cho `2x` là đạo hàm của `x²`, để tỷ lệ điều chỉnh `x` bằng cách nhanh chóng `x²` đang thay đổi.
 
-## References
+## Tham khảo
 
-- [Methods of computing square roots on Wikipedia](https://en.wikipedia.org/wiki/Methods_of_computing_square_roots)
-- [Newton's method on Wikipedia](https://en.wikipedia.org/wiki/Newton%27s_method)
+- [Các phương pháp tính căn bậc hai trên Wikipedia](https://en.wikipedia.org/wiki/Methods_of_computing_square_roots)
+- [Phương pháp Newton trên Wikipedia](https://en.wikipedia.org/wiki/Newton%27s_method)

@@ -1,19 +1,17 @@
-# Is a power of two
+# Is a power of two - Là Lũy Thừa Của Hai
 
-Given a positive integer, write a function to find if it is
-a power of two or not.
+_Xem bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-**Naive solution**
+Cho một số nguyên dương, hãy viết một hàm để kiểm tra xem nó có phải là lũy thừa của hai hay không.
 
-In naive solution we just keep dividing the number by two
-unless the number becomes `1` and every time we do so, we
-check that remainder after division is always `0`. Otherwise, the number can't be a power of two.
+**Giải pháp Naive**
 
-**Bitwise solution**
+Trong giải pháp Naive, chúng ta chỉ cần tiếp tục chia số cho hai cho đến khi số trở thành `1` và mỗi lần làm như vậy, chúng ta kiểm tra rằng phần dư sau khi chia luôn là `0`. Nếu không, số đó không thể là một lũy thừa của hai.
 
-Powers of two in binary form always have just one bit set.
-The only exception is with a signed integer (e.g. an 8-bit
-signed integer with a value of -128 looks like: `10000000`)
+**Giải pháp Bitwise**
+
+Các lũy thừa của hai trong hệ nhị phân luôn chỉ có một bit được thiết lập. Duy nhất ngoại lệ là với một số nguyên có dấu (ví dụ: một số nguyên có dấu 8 bit với giá trị -128 sẽ trông như sau: `10000000`)
 
 ```
 1: 0001
@@ -22,15 +20,13 @@ signed integer with a value of -128 looks like: `10000000`)
 8: 1000
 ```
 
-So after checking that the number is greater than zero,
-we can use a bitwise hack to test that one and only one
-bit is set.
+Vì vậy, sau khi kiểm tra số có lớn hơn không, chúng ta có thể sử dụng một phép toán bitwise để kiểm tra rằng chỉ có một bit được thiết lập.
 
 ```
-number & (number - 1)
+số & (số - 1)
 ```
 
-For example for number `8` that operations will look like:
+Ví dụ cho số `8`, phép toán đó sẽ như sau:
 
 ```
   1000
@@ -44,8 +40,8 @@ For example for number `8` that operations will look like:
   0000
 ```
 
-## References
+## Tài Liệu Tham Khảo
 
 - [GeeksForGeeks](https://www.geeksforgeeks.org/program-to-find-whether-a-no-is-power-of-two/)
-- [Bitwise Solution on Stanford](http://www.graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2)
-- [Binary number subtraction on YouTube](https://www.youtube.com/watch?v=S9LJknZTyos&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=66)
+- [Giải pháp Bitwise trên Stanford](http://www.graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2)
+- [Phép trừ số nhị phân trên YouTube](https://www.youtube.com/watch?v=S9LJknZTyos&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=66)

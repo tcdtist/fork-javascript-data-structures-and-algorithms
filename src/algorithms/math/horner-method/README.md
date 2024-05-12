@@ -1,20 +1,23 @@
-# Horner's Method
+# Phương Pháp của Horner
 
-In mathematics, Horner's method (or Horner's scheme) is an algorithm for polynomial evaluation. With this method, it is possible to evaluate a polynomial with only `n` additions and `n` multiplications. Hence, its storage requirements are `n` times the number of bits of `x`.
+_Xem bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Horner's method can be based on the following identity:
+Trong toán học, phương pháp của Horner (hoặc còn gọi là phương pháp Horner) là một thuật toán để tính giá trị của đa thức. Với phương pháp này, có thể tính giá trị của một đa thức chỉ với `n` phép cộng và `n` phép nhân. Do đó, yêu cầu lưu trữ của nó là `n` lần số bit của `x`.
 
-![Horner's rule](https://wikimedia.org/api/rest_v1/media/math/render/svg/2a576e42d875496f8b0f0dda5ebff7c2415532e4)
+Phương pháp của Horner có thể được dựa trên công thức sau đây:
 
-This identity is called _Horner's rule_.
+![Quy tắc của Horner](https://wikimedia.org/api/rest_v1/media/math/render/svg/2a576e42d875496f8b0f0dda5ebff7c2415532e4)
 
-To solve the right part of the identity above, for a given `x`, we start by iterating through the polynomial from the inside out, accumulating each iteration result. After `n` iterations, with `n` being the order of the polynomial, the accumulated result gives us the polynomial evaluation. 
+Công thức này được gọi là _quy tắc của Horner_.
 
-**Using the polynomial:**
-`4 * x^4 + 2 * x^3 + 3 * x^2 + x^1 + 3`, a traditional approach to evaluate it at `x = 2`, could be representing it as an array `[3, 1, 3, 2, 4]` and iterate over it saving each iteration value at an accumulator, such as `acc += pow(x=2, index) * array[index]`. In essence, each power of a number (`pow`) operation is `n-1` multiplications. So, in this scenario, a total of `14` operations would have happened, composed of `4` additions, `5` multiplications, and `5` pows (we're assuming that each power is calculated by repeated multiplication).
+Để giải quyết phần bên phải của công thức trên, với một `x` cụ thể, chúng ta bắt đầu bằng cách lặp qua đa thức từ bên trong ra ngoài, tích lũy kết quả của mỗi lần lặp. Sau `n` lần lặp, với `n` là bậc của đa thức, kết quả tích lũy sẽ cho chúng ta giá trị của đa thức.
 
-Now, **using the same scenario but with Horner's rule**, the polynomial can be re-written as `x * (x * (x * (4 * x + 2) + 3) + 1) + 3`, representing it as `[4, 2, 3, 1, 3]` it is possible to save the first iteration as `acc = arr[0] * (x=2) + arr[1]`, and then finish iterations for `acc *= (x=2) + arr[index]`. In the same scenario but using Horner's rule, a total of `10` operations would have happened, composed of only `4` additions and `4` multiplications.
+**Sử dụng đa thức:**
+`4 * x^4 + 2 * x^3 + 3 * x^2 + x^1 + 3`, một cách tiếp cận truyền thống để tính giá trị của nó tại `x = 2`, có thể được biểu diễn dưới dạng một mảng `[3, 1, 3, 2, 4]` và lặp qua nó, lưu mỗi giá trị lặp lại vào một biến tích lũy, ví dụ như `acc += pow(x=2, index) * array[index]`. Về bản chất, mỗi phép tính lũy thừa của một số (`pow`) đều có `n-1` phép nhân. Vì vậy, trong kịch bản này, tổng cộng sẽ có `14` phép tính đã xảy ra, bao gồm `4` phép cộng, `5` phép nhân và `5` phép lũy thừa (chúng ta giả định rằng mỗi lũy thừa được tính bằng cách nhân lặp lại).
 
-## References
+Bây giờ, **sử dụng cùng một kịch bản nhưng với quy tắc của Horner**, đa thức có thể được viết lại thành `x * (x * (x * (4 * x + 2) + 3) + 1) + 3`, biểu diễn nó dưới dạng `[4, 2, 3, 1, 3]`, có thể lưu giá trị của lần lặp đầu tiên là `acc = arr[0] * (x=2) + arr[1]`, và sau đó kết thúc các lần lặp cho `acc *= (x=2) + arr[index]`. Trong cùng một kịch bản nhưng sử dụng quy tắc của Horner, tổng cộng sẽ có `10` phép tính đã xảy ra, bao gồm chỉ `4` phép cộng và `4` phép nhân.
+
+## Tài Liệu Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Horner%27s_method)

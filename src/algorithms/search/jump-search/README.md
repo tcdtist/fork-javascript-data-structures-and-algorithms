@@ -1,27 +1,25 @@
-# Jump Search
+# Tìm Kiếm Bước Nhảy
 
-Like Binary Search, **Jump Search** (or **Block Search**) is a searching algorithm 
-for sorted arrays. The basic idea is to check fewer elements (than linear search) 
-by jumping ahead by fixed steps or skipping some elements in place of searching all 
-elements.
+_Tiếp tục đọc trong các ngôn ngữ khác:_
+[_Tiếng Việt_](README.md)
 
-For example, suppose we have an array `arr[]` of size `n` and block (to be jumped)
-of size `m`. Then we search at the indexes `arr[0]`, `arr[m]`, `arr[2 * m]`, ..., `arr[k * m]` and 
-so on. Once we find the interval `arr[k * m] < x < arr[(k+1) * m]`, we perform a 
-linear search operation from the index `k * m` to find the element `x`.
+Giống như Tìm kiếm nhị phân, **Tìm kiếm bước nhảy** (hoặc **Tìm kiếm khối**) là một thuật toán tìm kiếm
+cho các mảng đã được sắp xếp. Ý tưởng cơ bản là kiểm tra ít phần tử hơn
+(so với tìm kiếm tuyến tính) bằng cách nhảy về phía trước theo các bước cố định hoặc bỏ qua một số phần tử thay vì tìm kiếm tất cả
+các phần tử.
 
-**What is the optimal block size to be skipped?**
-In the worst case, we have to do `n/m` jumps and if the last checked value is 
-greater than the element to be searched for, we perform `m - 1` comparisons more 
-for linear search. Therefore the total number of comparisons in the worst case 
-will be `((n/m) + m - 1)`. The value of the function `((n/m) + m - 1)` will be 
-minimum when `m = √n`. Therefore, the best step size is `m = √n`.
+Ví dụ, giả sử chúng ta có một mảng `arr[]` có kích thước `n` và khối (để nhảy) có kích thước `m`. Sau đó, chúng ta tìm kiếm tại các chỉ số `arr[0]`, `arr[m]`, `arr[2 * m]`, ..., `arr[k * m]` và
+vân vân. Khi chúng ta tìm được khoảng `arr[k * m] < x < arr[(k+1) * m]`, chúng ta thực hiện một
+thao tác tìm kiếm tuyến tính từ chỉ số `k * m` để tìm phần tử `x`.
 
-## Complexity
+**Kích thước khối tối ưu là bao nhiêu để bỏ qua?**
+Trong trường hợp xấu nhất, chúng ta phải thực hiện `n/m` bước nhảy và nếu giá trị cuối cùng đã kiểm tra lớn hơn phần tử cần tìm, chúng ta thực hiện `m - 1` so sánh nữa cho tìm kiếm tuyến tính. Do đó, tổng số so sánh trong trường hợp xấu nhất sẽ là `((n/m) + m - 1)`. Giá trị của hàm `((n/m) + m - 1)` sẽ là tối thiểu khi `m = √n`. Do đó, kích thước bước tốt nhất là `m = √n`.
 
-**Time complexity**: `O(√n)` - because we do search by blocks of size `√n`.
+## Phức Tạp
 
-## References
+**Phức tạp thời gian**: `O(√n)` - bởi vì chúng ta tìm kiếm theo khối có kích thước `√n`.
+
+## Tham Khảo
 
 - [GeeksForGeeks](https://www.geeksforgeeks.org/jump-search/)
 - [Wikipedia](https://en.wikipedia.org/wiki/Jump_search)

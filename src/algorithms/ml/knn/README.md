@@ -1,44 +1,44 @@
-# k-Nearest Neighbors Algorithm
+# Thuật toán k-Nearest Neighbors (k-NN)
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-The **k-nearest neighbors algorithm (k-NN)** is a supervised Machine Learning algorithm. It's a classification algorithm, determining the class of a sample vector using a sample data.
+**Thuật toán k-Nearest Neighbors (k-NN)** là một thuật toán Học máy có giám sát. Đây là một thuật toán phân loại, xác định lớp của một vector mẫu bằng cách sử dụng dữ liệu mẫu.
 
-In k-NN classification, the output is a class membership. An object is classified by a plurality vote of its neighbors, with the object being assigned to the class most common among its `k` nearest neighbors (`k` is a positive integer, typically small). If `k = 1`, then the object is simply assigned to the class of that single nearest neighbor.
+Trong phân loại k-NN, đầu ra là một lớp. Một đối tượng được phân loại bằng cách bầu chọn đa số của các láng giềng của nó, với đối tượng được gán cho lớp phổ biến nhất trong `k` láng giềng gần nhất của nó (`k` là một số nguyên dương, thường nhỏ). Nếu `k = 1`, thì đối tượng được gán đơn giản cho lớp của láng giềng gần nhất duy nhất đó.
 
-The idea is to calculate the similarity between two data points on the basis of a distance metric. [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) is used mostly for this task.
+Ý tưởng là tính toán sự tương đồng giữa hai điểm dữ liệu dựa trên một phép đo khoảng cách. [Khoảng cách Euclid](https://en.wikipedia.org/wiki/Euclidean_distance) thường được sử dụng cho nhiệm vụ này.
 
-![Euclidean distance between two points](https://upload.wikimedia.org/wikipedia/commons/5/55/Euclidean_distance_2d.svg)
+![Khoảng cách Euclid giữa hai điểm](https://upload.wikimedia.org/wikipedia/commons/5/55/Euclidean_distance_2d.svg)
 
-_Image source: [Wikipedia](https://en.wikipedia.org/wiki/Euclidean_distance)_
+_Nguồn ảnh: [Wikipedia](https://en.wikipedia.org/wiki/Euclidean_distance)_
 
-The algorithm is as follows:
+Thuật toán được thực hiện như sau:
 
-1. Check for errors like invalid data/labels.
-2. Calculate the euclidean distance of all the data points in training data with the classification point
-3. Sort the distances of points along with their classes in ascending order
-4. Take the initial `K` classes and find the mode to get the most similar class
-5. Report the most similar class
+1. Kiểm tra lỗi như dữ liệu/nhãn không hợp lệ.
+2. Tính khoảng cách Euclid của tất cả các điểm dữ liệu trong dữ liệu huấn luyện với điểm phân loại
+3. Sắp xếp các khoảng cách của các điểm cùng với lớp của chúng theo thứ tự tăng dần
+4. Lấy `K` lớp ban đầu và tìm chế độ để có được lớp giống nhất nhất
+5. Báo cáo lớp giống nhất
 
-Here is a visualization of k-NN classification for better understanding:
+Dưới đây là một hình dung về phân loại k-NN để hiểu rõ hơn:
 
-![KNN Visualization 1](https://upload.wikimedia.org/wikipedia/commons/e/e7/KnnClassification.svg)
+![Trực quan hóa k-NN](https://upload.wikimedia.org/wikipedia/commons/e/e7/KnnClassification.svg)
 
-_Image source: [Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)_
+_Nguồn ảnh: [Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)_
 
-The test sample (green dot) should be classified either to blue squares or to red triangles. If `k = 3` (solid line circle) it is assigned to the red triangles because there are `2` triangles and only `1` square inside the inner circle. If `k = 5` (dashed line circle) it is assigned to the blue squares (`3` squares vs. `2` triangles inside the outer circle).
+Mẫu kiểm tra (chấm xanh lá cây) sẽ được phân loại vào các hình vuông màu xanh lá cây hoặc các tam giác màu đỏ. Nếu `k = 3` (vòng tròn đường kín) nó được gán cho các tam giác màu đỏ vì có `2` tam giác và chỉ có `1` hình vuông trong vòng tròn trong. Nếu `k = 5` (vòng tròn đường kẻ đứt) nó được gán cho các hình vuông màu xanh (`3` hình vuông so với `2` tam giác trong vòng tròn bên ngoài).
 
-Another k-NN classification example:
+Một ví dụ khác về phân loại k-NN:
 
-![KNN Visualization 2](https://media.geeksforgeeks.org/wp-content/uploads/graph2-2.png)
+![Trực quan hóa k-NN](https://media.geeksforgeeks.org/wp-content/uploads/graph2-2.png)
 
-_Image source: [GeeksForGeeks](https://media.geeksforgeeks.org/wp-content/uploads/graph2-2.png)_
+_Nguồn ảnh: [GeeksForGeeks](https://media.geeksforgeeks.org/wp-content/uploads/graph2-2.png)_
 
-Here, as we can see, the classification of unknown points will be judged by their proximity to other points.
+Ở đây, như chúng ta có thể thấy, việc phân loại các điểm không xác định sẽ được đánh giá bằng sự gần gũi của chúng đối với các điểm khác.
 
-It is important to note that `K` is preferred to have odd values in order to break ties. Usually `K` is taken as `3` or `5`.
+Lưu ý rằng `K` được ưa chuộng là có các giá trị lẻ để phá vỡ sự ràng buộc. Thông thường `K` được lấy là `3` hoặc `5`.
 
-## References
+## Tham khảo
 
-- [k-nearest neighbors algorithm on Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)
+- [Thuật toán k-nearest neighbors trên Wikipedia](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)

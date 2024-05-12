@@ -1,26 +1,17 @@
-# Binary Search
+# Tìm kiếm nhị phân
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, binary search, also known as half-interval
-search, logarithmic search, or binary chop, is a search algorithm
-that finds the position of a target value within a sorted
-array. Binary search compares the target value to the middle
-element of the array; if they are unequal, the half in which
-the target cannot lie is eliminated and the search continues
-on the remaining half until it is successful. If the search
-ends with the remaining half being empty, the target is not
-in the array.
+Trong khoa học máy tính, tìm kiếm nhị phân, còn được gọi là tìm kiếm nửa khoảng, tìm kiếm theo logarithmic, hoặc chia nhị phân, là một thuật toán tìm kiếm mục tiêu trong một mảng đã được sắp xếp. Tìm kiếm nhị phân so sánh giá trị mục tiêu với phần tử ở giữa của mảng; nếu chúng không bằng nhau, một nửa mà mục tiêu không thể nằm ở đó sẽ bị loại bỏ và tìm kiếm tiếp tục trên nửa còn lại cho đến khi thành công. Nếu tìm kiếm kết thúc với nửa còn lại là trống, mục tiêu không có trong mảng.
 
-![Binary Search](https://upload.wikimedia.org/wikipedia/commons/8/83/Binary_Search_Depiction.svg)
+![Tìm kiếm nhị phân](https://upload.wikimedia.org/wikipedia/commons/8/83/Binary_Search_Depiction.svg)
 
-## Complexity
+## Phức tạp
 
-**Time Complexity**: `O(log(n))` - since we split search area by two for every
-next iteration.
+**Phức tạp thời gian**: `O(log(n))` - vì chúng ta chia khu vực tìm kiếm thành hai cho mỗi vòng lặp tiếp theo.
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 - [YouTube](https://www.youtube.com/watch?v=P3YID7liBug&index=29&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

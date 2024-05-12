@@ -1,40 +1,35 @@
-# Interpolation Search
+# Tìm kiếm nội suy
 
-**Interpolation search** is an algorithm for searching for a key in an array that 
-has been ordered by numerical values assigned to the keys (key values).
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-For example we have a sorted array of `n` uniformly distributed values `arr[]`, 
-and we need to write a function to search for a particular element `x` in the array.
+**Tìm kiếm nội suy** là một thuật toán để tìm kiếm một khóa trong một mảng đã được sắp xếp theo các giá trị số được gán cho các khóa (giá trị khóa).
 
-**Linear Search** finds the element in `O(n)` time, **Jump Search** takes `O(√ n)` time 
-and **Binary Search** take `O(Log n)` time.
+Ví dụ, chúng ta có một mảng đã được sắp xếp của `n` giá trị phân phối đều `arr[]`, và chúng ta cần viết một hàm để tìm kiếm một phần tử cụ thể `x` trong mảng đó.
 
-The **Interpolation Search** is an improvement over Binary Search for instances, 
-where the values in a sorted array are _uniformly_ distributed. Binary Search 
-always goes to the middle element to check. On the other hand, interpolation 
-search may go to different locations according to the value of the key being 
-searched. For example, if the value of the key is closer to the last element, 
-interpolation search is likely to start search toward the end side.
+**Tìm kiếm tuyến tính** tìm phần tử trong thời gian `O(n)`, **Tìm kiếm nhảy** mất thời gian `O(√ n)` và **Tìm kiếm nhị phân** mất thời gian `O(Log n)`.
 
-To find the position to be searched, it uses following formula:
+**Tìm kiếm nội suy** là một cải tiến so với Tìm kiếm nhị phân trong các trường hợp, nơi các giá trị trong một mảng đã được sắp xếp _đều nhau_. Tìm kiếm nhị phân luôn đi đến phần tử giữa để kiểm tra. Ngược lại, tìm kiếm nội suy có thể đi đến các vị trí khác nhau tùy theo giá trị của khóa đang được tìm kiếm. Ví dụ, nếu giá trị của khóa gần với phần tử cuối cùng, tìm kiếm nội suy có thể bắt đầu tìm kiếm về phía cuối.
+
+Để tìm vị trí cần tìm kiếm, nó sử dụng công thức sau:
 
 ```
-// The idea of formula is to return higher value of pos
-// when element to be searched is closer to arr[hi]. And
-// smaller value when closer to arr[lo]
+// Ý tưởng của công thức là trả về giá trị cao hơn của pos
+// khi phần tử cần tìm kiếm gần với arr[hi]. Và
+// giá trị nhỏ hơn khi gần với arr[lo]
 pos = lo + ((x - arr[lo]) * (hi - lo) / (arr[hi] - arr[Lo]))
 
-arr[] - Array where elements need to be searched
-x - Element to be searched
-lo - Starting index in arr[]
-hi - Ending index in arr[]
+arr[] - Mảng chứa các phần tử cần tìm kiếm
+x - Phần tử cần tìm kiếm
+lo - Chỉ số bắt đầu trong arr[]
+hi - Chỉ số kết thúc trong arr[]
 ```
 
-## Complexity
+## Phức tạp
 
-**Time complexity**: `O(log(log(n))`
+**Phức tạp thời gian**: `O(log(log(n))`
 
-## References
+## Tham khảo
 
 - [GeeksForGeeks](https://www.geeksforgeeks.org/interpolation-search/)
 - [Wikipedia](https://en.wikipedia.org/wiki/Interpolation_search)

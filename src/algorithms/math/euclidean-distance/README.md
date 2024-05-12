@@ -1,36 +1,39 @@
-# Euclidean Distance
+# Khoảng Cách Euclid - Khoảng cách Euclid
 
-In mathematics, the **Euclidean distance** between two points in Euclidean space is the length of a line segment between the two points. It can be calculated from the Cartesian coordinates of the points using the Pythagorean theorem, therefore occasionally being called the Pythagorean distance.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-![Euclidean distance between two points](https://upload.wikimedia.org/wikipedia/commons/5/55/Euclidean_distance_2d.svg)
+Trong toán học, **khoảng cách Euclid** giữa hai điểm trong không gian Euclid là độ dài của một đoạn thẳng nối hai điểm đó. Nó có thể được tính từ các tọa độ Descartes của các điểm bằng định lý Pythagoras, nên đôi khi còn được gọi là khoảng cách Pythagoras.
 
-## Distance formulas
+![Khoảng cách Euclid giữa hai điểm](https://upload.wikimedia.org/wikipedia/commons/5/55/Euclidean_distance_2d.svg)
 
-### One dimension
+## Công thức Khoảng cách
 
-The distance between any two points on the real line is the absolute value of the numerical difference of their coordinates
+### Một chiều
 
-![One dimension formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/7d75418dbec9482dbcb70f9063ad66e9cf7b5db9)
+Khoảng cách giữa hai điểm bất kỳ trên đường thẳng số thực là giá trị tuyệt đối của sự khác biệt số học của các tọa độ của chúng
 
-### Two dimensions
+![Công thức một chiều](https://wikimedia.org/api/rest_v1/media/math/render/svg/7d75418dbec9482dbcb70f9063ad66e9cf7b5db9)
 
-![Two dimensions formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/9c0157084fd89f5f3d462efeedc47d3d7aa0b773)
+### Hai chiều
 
-### Higher dimensions
+![Công thức hai chiều](https://wikimedia.org/api/rest_v1/media/math/render/svg/9c0157084fd89f5f3d462efeedc47d3d7aa0b773)
 
-In three dimensions, for points given by their Cartesian coordinates, the distance is
+### Các chiều cao hơn
 
-![Three dimensions formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/d1d13a40a7b203b455ae6d4be8b3cce898bda625)
+Trong ba chiều, cho các điểm được cho bởi các tọa độ Descartes của chúng, khoảng cách là
 
-Example: the distance between the two points `(8,2,6)` and `(3,5,7)`:
+![Công thức ba chiều](https://wikimedia.org/api/rest_v1/media/math/render/svg/d1d13a40a7b203b455ae6d4be8b3cce898bda625)
 
-![3-dimension example](https://www.mathsisfun.com/algebra/images/dist-2-points-3d.svg)
+Ví dụ: khoảng cách giữa hai điểm `(8,2,6)` và `(3,5,7)`:
 
-In general, for points given by Cartesian coordinates in `n`-dimensional Euclidean space, the distance is
+![Ví dụ ba chiều](https://www.mathsisfun.com/algebra/images/dist-2-points-3d.svg)
 
-![n-dimensional formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/a0ef4fe055b2a51b4cca43a05e5d1cd93f758dcc)
+Nhìn chung, cho các điểm được cho bởi các tọa độ Descartes trong không gian Euclid `n` chiều, khoảng cách là
 
-## References
+![Công thức n chiều](https://wikimedia.org/api/rest_v1/media/math/render/svg/a0ef4fe055b2a51b4cca43a05e5d1cd93f758dcc)
 
-- [Euclidean Distance on MathIsFun](https://www.mathsisfun.com/algebra/distance-2-points.html)
-- [Euclidean Distance on Wikipedia](https://en.wikipedia.org/wiki/Euclidean_distance)
+## Tham khảo
+
+- [Khoảng Cách Euclid trên MathIsFun](https://www.mathsisfun.com/algebra/distance-2-points.html)
+- [Khoảng Cách Euclid trên Wikipedia](https://en.wikipedia.org/wiki/Euclidean_distance)

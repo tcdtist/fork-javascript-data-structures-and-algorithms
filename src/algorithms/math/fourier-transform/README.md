@@ -1,131 +1,97 @@
-# Fourier Transform
+# Phép Biến Đổi Fourier
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-## Definitions
+## Định nghĩa
 
-The **Fourier Transform** (**FT**) decomposes a function of time (a signal) into
-the frequencies that make it up, in a way similar to how a musical chord can be
-expressed as the frequencies (or pitches) of its constituent notes.
+**Phép biến đổi Fourier** (**FT**) phân tách một hàm của thời gian (một tín hiệu) thành các tần số tạo thành nó, tương tự như cách một hợp âm nhạc có thể được biểu diễn dưới dạng các tần số (hoặc nốt âm) của các nốt nhạc thành phần của nó.
 
-The **Discrete Fourier Transform** (**DFT**) converts a finite sequence of
-equally-spaced samples of a function into a same-length sequence of
-equally-spaced samples of the discrete-time Fourier transform (DTFT), which is a
-complex-valued function of frequency. The interval at which the DTFT is sampled
-is the reciprocal of the duration of the input sequence. An inverse DFT is a
-Fourier series, using the DTFT samples as coefficients of complex sinusoids at
-the corresponding DTFT frequencies. It has the same sample-values as the original
-input sequence. The DFT is therefore said to be a frequency domain representation
-of the original input sequence. If the original sequence spans all the non-zero
-values of a function, its DTFT is continuous (and periodic), and the DFT provides
-discrete samples of one cycle. If the original sequence is one cycle of a periodic
-function, the DFT provides all the non-zero values of one DTFT cycle.
+**Biến đổi Fourier Rời rạc** (**DFT**) chuyển đổi một chuỗi hữu hạn các mẫu cách đều của một hàm thành một chuỗi cùng chiều dài các mẫu cách đều của phép biến đổi Fourier trong thời gian rời rạc (DTFT), mà là một hàm phức giá trị của tần số. Khoảng cách mà DTFT được lấy mẫu là nghịch đảo của thời gian của chuỗi đầu vào. Một DFT nghịch đảo là một chuỗi Fourier, sử dụng các mẫu DTFT như các hệ số của các hàm sin phức ở các tần số tương ứng với DTFT. Nó có các giá trị mẫu giống như chuỗi đầu vào ban đầu. Do đó, DFT được coi là biểu diễn miền tần số của chuỗi đầu vào ban đầu. Nếu chuỗi ban đầu bao gồm tất cả các giá trị khác không của một hàm, thì DTFT của nó là liên tục (và tuần hoàn), và DFT cung cấp các mẫu cách đều của một chu kỳ. Nếu chuỗi ban đầu là một chu kỳ của một hàm tuần hoàn, thì DFT cung cấp tất cả các giá trị khác không của một chu kỳ DTFT.
 
-The Discrete Fourier transform transforms a sequence of `N` complex numbers:
+Phép biến đổi Fourier rời rạc chuyển đổi một chuỗi `N` số phức:
 
 {x<sub>n</sub>} = x<sub>0</sub>, x<sub>1</sub>, x<sub>2</sub> ..., x<sub>N-1</sub>
 
-into another sequence of complex numbers:
+thành một chuỗi khác của các số phức:
 
 {X<sub>k</sub>} = X<sub>0</sub>, X<sub>1</sub>, X<sub>2</sub> ..., X<sub>N-1</sub>
 
-which is defined by:
+được xác định bởi:
 
 ![DFT](https://wikimedia.org/api/rest_v1/media/math/render/svg/1af0a78dc50bbf118ab6bd4c4dcc3c4ff8502223)
 
-The **Discrete-Time Fourier Transform** (**DTFT**) is a form of Fourier analysis
-that is applicable to the uniformly-spaced samples of a continuous function. The
-term discrete-time refers to the fact that the transform operates on discrete data
-(samples) whose interval often has units of time. From only the samples, it
-produces a function of frequency that is a periodic summation of the continuous
-Fourier transform of the original continuous function.
+**Biến đổi Fourier Rời rạc Thời gian** (**DTFT**) là một dạng của phân tích Fourier mà áp dụng cho các mẫu cách đều của một hàm liên tục. Thuật ngữ thời gian rời rạc chỉ đến việc phép biến đổi hoạt động trên dữ liệu rời rạc (mẫu) mà khoảng cách của nó thường có đơn vị thời gian. Từ chỉ các mẫu, nó tạo ra một hàm của tần số là sự tổng của chu kỳ tuần hoàn của biến đổi Fourier của hàm liên tục ban đầu.
 
-A **Fast Fourier Transform** (**FFT**) is an algorithm that samples a signal over
-a period of time (or space) and divides it into its frequency components. These
-components are single sinusoidal oscillations at distinct frequencies each with
-their own amplitude and phase.
+**Phép Biến Đổi Fourier Nhanh** (**FFT**) là một thuật toán mẫu một tín hiệu trong một khoảng thời gian (hoặc không gian) và phân chia nó thành các thành phần tần số của nó. Các thành phần này là các dao động sin đơn tần số riêng biệt mỗi cái có biên độ và pha riêng.
 
-This transformation is illustrated in Diagram below. Over the time period measured
-in the diagram, the signal contains 3 distinct dominant frequencies.
+Phép biến đổi này được minh họa trong biểu đồ dưới đây. Trong khoảng thời gian được đo trong biểu đồ, tín hiệu chứa 3 tần số quan trọng riêng biệt.
 
-View of a signal in the time and frequency domain:
+Xem tín hiệu trong miền thời gian và tần số:
 
 ![FFT](https://upload.wikimedia.org/wikipedia/commons/6/61/FFT-Time-Frequency-View.png)
 
-An FFT algorithm computes the discrete Fourier transform (DFT) of a sequence, or
-its inverse (IFFT). Fourier analysis converts a signal from its original domain
-to a representation in the frequency domain and vice versa. An FFT rapidly
-computes such transformations by factorizing the DFT matrix into a product of
-sparse (mostly zero) factors. As a result, it manages to reduce the complexity of
-computing the DFT from O(n<sup>2</sup>), which arises if one simply applies the
-definition of DFT, to O(n log n), where n is the data size.
+Một thuật toán FFT tính phép biến đổi Fourier rời rạc (DFT) của một chuỗi, hoặc phép nghịch đảo của nó (IFFT). Phân tích Fourier chuyển đổi một tín hiệu từ miền ban đầu của nó thành một biểu diễn trong miền tần số và ngược lại. Một FFT tính toán nhanh chóng các biến đổi như vậy bằng cách phân tách ma trận DFT thành một tích của các yếu tố thưa (phần lớn là không) số lượng. Do đó, nó quản lý giảm độ phức tạp của việc tính toán DFT từ O(n<sup>2</sup>), mà phát sinh nếu một cách đơn giản áp dụng định nghĩa của DFT, xuống O(n log n), trong đó n là kích thước dữ liệu.
 
-Here a discrete Fourier analysis of a sum of cosine waves at 10, 20, 30, 40,
-and 50 Hz:
+Dưới đây là một phân tích Fourier rời rạc của một tổng của sóng cosin tại 10, 20, 30, 40 và 50 Hz:
 
 ![FFT](https://upload.wikimedia.org/wikipedia/commons/6/64/FFT_of_Cosine_Summation_Function.png)
 
-## Explanation
+## Giải thích
 
-The Fourier Transform is one of deepest insights ever made. Unfortunately, the
-meaning is buried within dense equations:
+Phép Biến Đổi Fourier là một trong những hiểu biết sâu sắc nhất từng được thực hiện. Thật không may, ý nghĩa bị chôn vùi trong các phương trình dày đặc:
 
 ![](https://betterexplained.com/wp-content/plugins/wp-latexrender/pictures/45c088dbb767150fc0bacfeb49dd49e5.png)
 
-and
+và
 
 ![](https://betterexplained.com/wp-content/plugins/wp-latexrender/pictures/faeb9c5bf2e60add63ae4a70b293c7b4.png)
 
-Rather than jumping into the symbols, let's experience the key idea firsthand. Here's a plain-English metaphor:
+Thay vì nhảy vào các biểu tượng, hãy trải nghiệm ý tưởng chính trực tiếp. Dưới đây là một phép phép dụng ngôn ngữ bằng tiếng Anh:
 
-- _What does the Fourier Transform do?_ Given a smoothie, it finds the recipe.
-- _How?_ Run the smoothie through filters to extract each ingredient.
-- _Why?_ Recipes are easier to analyze, compare, and modify than the smoothie itself.
-- _How do we get the smoothie back?_ Blend the ingredients.
+- _Phép Biến Đổi Fourier làm gì?_ Cho một smoothie, nó tìm ra công thức.
+- _Làm thế nào?_ Chạy smoothie qua bộ lọc để trích xuất mỗi thành phần.
+- _Tại sao?_ Công thức dễ phân tích, so sánh và sửa đổi hơn smoothie.
+- _Làm sao để có smoothie trở lại?_ Trộn các thành phần.
 
-**Think With Circles, Not Just Sinusoids**
+**Hãy Suy Nghĩ Với Hình Tròn, Không Chỉ Các Hàm Sin**
 
-The Fourier Transform is about circular paths (not 1-d sinusoids) and Euler's
-formula is a clever way to generate one:
+Phép Biến Đổi Fourier liên quan đến các đường tròn (không chỉ là các hàm sin 1 chiều) và công thức Euler là một cách thông minh để tạo ra chúng:
 
 ![](https://betterexplained.com/wp-content/uploads/euler/equal_paths.png)
 
-Must we use imaginary exponents to move in a circle? Nope. But it's convenient
-and compact. And sure, we can describe our path as coordinated motion in two
-dimensions (real and imaginary), but don't forget the big picture: we're just
-moving in a circle.
+Chúng ta phải sử dụng số mũ ảo để di chuyển trong một vòng tròn không? Không cần. Nhưng nó tiện lợi và gọn gàng. Và đương nhiên, chúng ta có thể mô tả quỹ đạo của mình như là sự di chuyển đồng tọa độ trong hai chiều (thực và ảo), nhưng đừng quên cái nhìn tổng thể: chúng ta chỉ đang di chuyển trong một vòng tròn.
 
-**Discovering The Full Transform**
+**Khám Phá Toàn Bộ Biến Đổi**
 
-The big insight: our signal is just a bunch of time spikes! If we merge the
-recipes for each time spike, we should get the recipe for the full signal.
+Ý tưởng lớn: tín hiệu của chúng ta chỉ là một loạt các tín hiệu spike thời gian! Nếu chúng ta kết hợp các công thức cho mỗi tín hiệu spike thời gian, chúng ta sẽ có công thức cho tín hiệu đầy đủ.
 
-The Fourier Transform builds the recipe frequency-by-frequency:
+Phép Biến Đổi Fourier xây dựng công thức theo tần số:
 
 ![](https://betterexplained.com/wp-content/uploads/images/fourier-explained-20121219-224649.png)
 
-A few notes:
+Một vài ghi chú:
 
-- N = number of time samples we have
-- n = current sample we're considering (0 ... N-1)
-- x<sub>n</sub> = value of the signal at time n
-- k = current frequency we're considering (0 Hertz up to N-1 Hertz)
-- X<sub>k</sub> = amount of frequency k in the signal (amplitude and phase, a complex number)
-- The 1/N factor is usually moved to the reverse transform (going from frequencies back to time). This is allowed, though I prefer 1/N in the forward transform since it gives the actual sizes for the time spikes. You can get wild and even use 1/sqrt(N) on both transforms (going forward and back creates the 1/N factor).
-- n/N is the percent of the time we've gone through. 2 _ pi _ k is our speed in radians / sec. e^-ix is our backwards-moving circular path. The combination is how far we've moved, for this speed and time.
-- The raw equations for the Fourier Transform just say "add the complex numbers". Many programming languages cannot handle complex numbers directly, so you convert everything to rectangular coordinates and add those.
+- N = số lượng mẫu thời gian chúng ta có
+- n = mẫu hiện tại chúng ta đang xem xét (0 ... N-1)
+- x<sub>n</sub> = giá trị của tín hiệu tại thời gian n
+- k = tần số hiện tại chúng ta đang xem xét (0 Hertz lên tới N-1 Hertz)
+- X<sub>k</sub> = lượng tần số k trong tín hiệu (biên độ và pha, một số phức)
+- Yếu tố 1/N thường được di chuyển sang biến đổi nghịch đảo (đi từ tần số trở lại thời gian). Điều này được cho phép, mặc dù tôi thích 1/N trong biến đổi xuất phát vì nó cung cấp các kích thước thực sự cho các tín hiệu spike thời gian. Bạn có thể trở nên hoang đường và thậm chí sử dụng 1/sqrt(N) trên cả hai biến đổi (đi từ trước và đi lại tạo ra yếu tố 1/N).
 
-Stuart Riffle has a great interpretation of the Fourier Transform:
+- n/N là phần trăm thời gian chúng ta đã đi qua. 2 _ pi _ k là tốc độ của chúng ta theo radian / giây. e^-ix là quỹ đạo tròn di chuyển ngược của chúng ta. Sự kết hợp là chúng ta đã di chuyển bao xa, cho tốc độ và thời gian này.
+- Các phương trình gốc cho Biến Đổi Fourier chỉ đơn giản nói "thêm các số phức". Nhiều ngôn ngữ lập trình không thể xử lý trực tiếp các số phức, vì vậy bạn chuyển tất cả mọi thứ sang tọa độ hình chữ nhật và thêm chúng.
+
+Stuart Riffle có một cách giải thích tuyệt vời về Phép Biến Đổi Fourier:
 
 ![](https://betterexplained.com/wp-content/uploads/images/DerivedDFT.png)
 
-## References
+## Tài Liệu Tham Khảo
 
-- [An Interactive Guide To The Fourier Transform](https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/)
-- [DFT on YouTube by Better Explained](https://www.youtube.com/watch?v=iN0VG9N2q0U&t=0s&index=77&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [FT on YouTube by 3Blue1Brown](https://www.youtube.com/watch?v=spUNpyF58BY&t=0s&index=76&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [FFT on YouTube by Simon Xu](https://www.youtube.com/watch?v=htCj9exbGo0&index=78&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&t=0s)
+- [Hướng dẫn tương tác về Biến Đổi Fourier](https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/)
+- [DFT trên YouTube bởi Better Explained](https://www.youtube.com/watch?v=iN0VG9N2q0U&t=0s&index=77&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [FT trên YouTube bởi 3Blue1Brown](https://www.youtube.com/watch?v=spUNpyF58BY&t=0s&index=76&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [FFT trên YouTube bởi Simon Xu](https://www.youtube.com/watch?v=htCj9exbGo0&index=78&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&t=0s)
 - Wikipedia
   - [FT](https://en.wikipedia.org/wiki/Fourier_transform)
   - [DFT](https://www.wikiwand.com/en/Discrete_Fourier_transform)
