@@ -1,113 +1,100 @@
-# Doubly Linked List
+# Doubly Linked List - Danh Sách Liên Kết Hai Chiều
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, a **doubly linked list** is a linked data structure that
-consists of a set of sequentially linked records called nodes. Each node contains
-two fields, called links, that are references to the previous and to the next
-node in the sequence of nodes. The beginning and ending nodes' previous and next
-links, respectively, point to some kind of terminator, typically a sentinel
-node or null, to facilitate the traversal of the list. If there is only one
-sentinel node, then the list is circularly linked via the sentinel node. It can
-be conceptualized as two singly linked lists formed from the same data items,
-but in opposite sequential orders.
+Trong khoa học máy tính, **doubly linked list** là một cấu trúc dữ liệu liên kết bao gồm một tập hợp các bản ghi liên kết tuần tự gọi là các nút. Mỗi nút chứa hai trường, được gọi là liên kết, đó là các tham chiếu đến nút trước đó và nút tiếp theo trong chuỗi các nút. Các liên kết trước đó và tiếp theo của các nút đầu và cuối, tương ứng, trỏ đến một loại kết thúc, thường là một nút báo hiệu hoặc null, để dễ dàng đi qua danh sách. Nếu chỉ có một nút báo hiệu, thì danh sách được liên kết vòng qua nút báo hiệu. Nó có thể được tưởng tượng như là hai danh sách liên kết đơn được hình thành từ các mục dữ liệu giống nhau, nhưng theo thứ tự tuần tự ngược lại.
 
-![Doubly Linked List](./images/doubly-linked-list.jpeg)
+![Danh Sách Liên Kết Hai Chiều](./images/doubly-linked-list.jpeg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo với [okso.app](https://okso.app)_
 
-The two node links allow traversal of the list in either direction. While adding
-or removing a node in a doubly linked list requires changing more links than the
-same operations on a singly linked list, the operations are simpler and
-potentially more efficient (for nodes other than first nodes) because there
-is no need to keep track of the previous node during traversal or no need
-to traverse the list to find the previous node, so that its link can be modified.
+Hai liên kết nút cho phép đi qua danh sách theo cả hai hướng. Trong khi thêm hoặc xóa một nút trong danh sách liên kết hai chiều đòi hỏi thay đổi nhiều liên kết hơn so với các hoạt động tương tự trên danh sách liên kết đơn, các hoạt động này lại đơn giản hơn và tiềm năng hiệu quả hơn (đối với các nút không phải là nút đầu) vì không cần theo dõi nút trước đó trong quá trình đi qua hoặc không cần phải đi qua danh sách để tìm nút trước đó, để liên kết của nó có thể được sửa đổi.
 
-## Pseudocode for Basic Operations
+## Mã Giả cho Các Hoạt Động Cơ Bản
 
-### Insert
+### Thêm
 
 ```text
-Add(value)
-  Pre: value is the value to add to the list
-  Post: value has been placed at the tail of the list
-  n ← node(value)
-  if head = ø
-    head ← n
-    tail ← n
-  else
-    n.previous ← tail
-    tail.next ← n
-    tail ← n
-  end if
-end Add
+Thêm(giá_trị)
+  Tiền: giá_trị là giá trị để thêm vào danh sách
+  Sau: giá_trị đã được đặt ở cuối danh sách
+  n ← nút(giá_trị)
+  nếu đầu = ø
+    đầu ← n
+    cuối ← n
+  ngược lại
+    n.trước ← cuối
+    cuối.sau ← n
+    cuối ← n
+  kết thúc nếu
+end Thêm
 ```
 
-### Delete
+### Xóa
 
 ```text
-Remove(head, value)
-  Pre: head is the head node in the list
-       value is the value to remove from the list
-  Post: value is removed from the list, true; otherwise false
-  if head = ø
-    return false
-  end if
-  if value = head.value
-    if head = tail
-      head ← ø
-      tail ← ø
-    else
-      head ← head.next
-      head.previous ← ø
-    end if
-    return true
-  end if
-  n ← head.next
-  while n != ø and value !== n.value
-    n ← n.next
-  end while
-  if n = tail
-    tail ← tail.previous
-    tail.next ← ø
-    return true
-  else if n != ø
-    n.previous.next ← n.next
-    n.next.previous ← n.previous
-    return true
-  end if
-  return false
-end Remove
+Xóa(đầu, giá_trị)
+  Tiền: đầu là nút đầu trong danh sách
+        giá_trị là giá trị để xóa khỏi danh sách
+  Sau: giá_trị được xóa khỏi danh sách, true; nếu không, là false
+  nếu đầu = ø
+    trả về false
+  kết thúc nếu
+  nếu giá_trị = giá_trị_đầu
+    nếu đầu = cuối
+      đầu ← ø
+      cuối ← ø
+    ngược lại
+      đầu ← đầu.sau
+      đầu.trước ← ø
+    kết thúc nếu
+    trả về true
+  kết thúc nếu
+  n ← đầu.sau
+  trong khi n != ø và giá_trị !== giá_trị của n
+    n ← n.sau
+  kết thúc trong khi
+  nếu n = cuối
+    cuối ← cuối.trước
+    cuối.sau ← ø
+    trả về true
+  ngược lại nếu n != ø
+    n.trước.sau ← n.sau
+    n.sau.trước ← n.trước
+    trả về true
+  kết thúc nếu
+  trả về false
+end Xóa
 ```
 
-### Reverse Traversal
+### Điều Hướng Ngược
 
 ```text
-ReverseTraversal(tail)
-  Pre: tail is the node of the list to traverse
-  Post: the list has been traversed in reverse order
-  n ← tail
-  while n != ø
-    yield n.value
-    n ← n.previous
-  end while
-end Reverse Traversal
+ĐiềuHướngNgược(cuối)
+  Tiền: cuối là nút của danh sách cần đi qua
+  Sau: danh sách đã được đi qua theo thứ tự ngược lại
+  n ← cuối
+  trong khi n != ø
+    cho nút giá_trị
+    n ← n.trước
+  kết thúc trong khi
+end Điều Hướng Ngược
 ```
 
-## Complexities
+## Độ Phức Tạp
 
-## Time Complexity
+## Độ Phức Tạp Thời Gian
 
-| Access | Search | Insertion | Deletion |
-| :----: | :----: | :-------: | :------: |
-|  O(n)  |  O(n)  |   O(1)    |   O(n)   |
+| Truy Cập | Tìm Kiếm | Thêm | Xóa  |
+| :------: | :------: | :--: | :--: |
+|   O(n)   |   O(n)   | O(1) | O(n) |
 
-### Space Complexity
+### Độ Phức Tạp Không Gian
 
 O(n)
 
-## References
+## Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Doubly_linked_list)
 - [YouTube](https://www.youtube.com/watch?v=JdQeNxWCguQ&t=7s&index=72&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

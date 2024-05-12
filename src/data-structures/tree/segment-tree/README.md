@@ -1,52 +1,23 @@
-# Segment Tree
+# Cây Đoạn
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, a **segment tree** also known as a statistic tree
-is a tree data structure used for storing information about intervals,
-or segments. It allows querying which of the stored segments contain
-a given point. It is, in principle, a static structure; that is,
-it's a structure that cannot be modified once it's built. A similar
-data structure is the interval tree.
+Trong khoa học máy tính, một **cây đoạn** còn được gọi là cây thống kê là một cấu trúc dữ liệu cây được sử dụng để lưu trữ thông tin về các đoạn hoặc khoảng. Nó cho phép truy vấn xem đoạn được lưu trữ nào chứa một điểm cụ thể. Nó, về cơ bản, là một cấu trúc tĩnh; có nghĩa là, đó là một cấu trúc không thể được sửa đổi sau khi được xây dựng. Một cấu trúc dữ liệu tương tự là cây khoảng.
 
-A segment tree is a binary tree. The root of the tree represents the
-whole array. The two children of the root represent the
-first and second halves of the array. Similarly, the
-children of each node corresponds to the two halves of
-the array corresponding to the node.
+Một cây đoạn là một cây nhị phân. Gốc của cây đại diện cho toàn bộ mảng. Hai con của gốc đại diện cho nửa đầu tiên và nửa thứ hai của mảng. Tương tự, các con của mỗi nút tương ứng với hai nửa của mảng tương ứng với nút đó.
 
-We build the tree bottom up, with the value of each node
-being the "minimum" (or any other function) of its children's values. This will
-take `O(n log n)` time. The number
-of operations done is the height of the tree, which
-is `O(log n)`. To do range queries, each node splits the
-query into two parts, one sub-query for each child.
-If a query contains the whole subarray of a node, we
-can use the precomputed value at the node. Using this
-optimisation, we can prove that only `O(log n)` minimum
-operations are done.
+Chúng ta xây dựng cây từ dưới lên, với giá trị của mỗi nút là "tối thiểu" (hoặc bất kỳ hàm khác) của giá trị của các con của nó. Điều này sẽ mất thời gian `O(n log n)`. Số lượng thao tác được thực hiện là chiều cao của cây, là `O(log n)`. Để thực hiện truy vấn phạm vi, mỗi nút chia truy vấn thành hai phần, một phần con cho mỗi con. Nếu một truy vấn chứa toàn bộ mảng con của một nút, chúng ta có thể sử dụng giá trị được tính toán trước ở nút. Sử dụng tối ưu hóa này, chúng ta có thể chứng minh rằng chỉ có `O(log n)` thao tác tối thiểu được thực hiện.
 
-![Min Segment Tree](https://www.geeksforgeeks.org/wp-content/uploads/RangeMinimumQuery.png)
+## Ứng dụng
 
-![Sum Segment Tree](https://www.geeksforgeeks.org/wp-content/uploads/segment-tree1.png)
+Một cây đoạn là một cấu trúc dữ liệu được thiết kế để thực hiện một số phép toán mảng cụ thể một cách hiệu quả - đặc biệt là những phép toán liên quan đến truy vấn phạm vi.
 
-## Application
+Các ứng dụng của cây đoạn nằm trong các lĩnh vực của hình học tính toán và hệ thống thông tin địa lý.
 
-A segment tree is a data structure designed to perform
-certain array operations efficiently - especially those
-involving range queries.
+Hiện tại, cài đặt của Cây Đoạn ngụ ý rằng bạn có thể truyền bất kỳ hàm nhị phân nào (với hai tham số đầu vào) vào và do đó bạn có thể thực hiện truy vấn phạm vi cho nhiều loại hàm khác nhau. Trong các bài kiểm tra, bạn có thể tìm thấy ví dụ về việc thực hiện truy vấn phạm vi `min`, `max` và `sum` trên Cây Đoạn.
 
-Applications of the segment tree are in the areas of computational geometry,
-and geographic information systems.
-
-Current implementation of Segment Tree implies that you may
-pass any binary (with two input params) function to it and
-thus you're able to do range query for variety of functions.
-In tests you may find examples of doing `min`, `max` and `sum` range
-queries on SegmentTree.
-
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Segment_tree)
 - [YouTube](https://www.youtube.com/watch?v=ZBHKZF5w4YU&index=65&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

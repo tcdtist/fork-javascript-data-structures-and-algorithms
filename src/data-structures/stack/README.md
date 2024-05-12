@@ -1,30 +1,22 @@
-# Stack
+# Ngăn Xếp
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, a **stack** is an abstract data type that serves
-as a collection of elements, with two principal operations:
+Trong khoa học máy tính, một **ngăn xếp** là một loại dữ liệu trừu tượng dùng như một bộ sưu tập các phần tử, với hai thao tác chính:
 
-- **push**, which adds an element to the collection, and
-- **pop**, which removes the most recently added element that was not yet removed.
+- **đẩy (push)**, thêm một phần tử vào bộ sưu tập, và
+- **lấy ra (pop)**, loại bỏ phần tử được thêm vào gần đây nhất mà chưa bị loại bỏ.
 
-The order in which elements come off a stack gives rise to its
-alternative name, LIFO (last in, first out). Additionally, a
-peek operation may give access to the top without modifying
-the stack. The name "stack" for this type of structure comes
-from the analogy to a set of physical items stacked on top of
-each other, which makes it easy to take an item off the top
-of the stack, while getting to an item deeper in the stack
-may require taking off multiple other items first.
+Thứ tự mà các phần tử được lấy ra từ một ngăn xếp tạo ra tên gọi thay thế, LIFO (last in, first out - sau vào, trước ra). Ngoài ra, một thao tác nhìn trước (peek) có thể cho phép truy cập vào phần đỉnh mà không làm thay đổi ngăn xếp. Tên "ngăn xếp" cho loại cấu trúc này được lấy từ sự tương đồng với một tập hợp các vật phẩm vật lý được xếp lên nhau, điều này khiến việc lấy một mục ra khỏi đỉnh của ngăn xếp dễ dàng, trong khi việc đạt được một mục sâu hơn trong ngăn xếp có thể yêu cầu loại bỏ nhiều mục khác trước đó.
 
-Simple representation of a stack runtime with push and pop operations.
+Biểu diễn đơn giản của một ngăn xếp thời gian chạy với các hoạt động đẩy và lấy ra.
 
-![Stack](./images/stack.jpeg)
+![Ngăn xếp](./images/stack.jpeg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo bởi [okso.app](https://okso.app)_
 
-## References
+## Tham khảo
 
 - [Wikipedia](<https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>)
 - [YouTube](https://www.youtube.com/watch?v=wjI1WNcIntg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=3&)

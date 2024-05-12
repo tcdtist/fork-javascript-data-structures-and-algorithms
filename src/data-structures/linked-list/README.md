@@ -1,163 +1,148 @@
-# Linked List
+# Danh Sách Liên Kết
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Tìm hiểu bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, a **linked list** is a linear collection
-of data elements, in which linear order is not given by
-their physical placement in memory. Instead, each
-element points to the next. It is a data structure
-consisting of a group of nodes which together represent
-a sequence. Under the simplest form, each node is
-composed of data and a reference (in other words,
-a link) to the next node in the sequence. This structure
-allows for efficient insertion or removal of elements
-from any position in the sequence during iteration.
-More complex variants add additional links, allowing
-efficient insertion or removal from arbitrary element
-references. A drawback of linked lists is that access
-time is linear (and difficult to pipeline). Faster
-access, such as random access, is not feasible. Arrays
-have better cache locality as compared to linked lists.
+Trong khoa học máy tính, một **danh sách liên kết** là một tập hợp tuyến tính các phần tử dữ liệu, trong đó thứ tự tuyến tính không được xác định bởi vị trí vật lý trong bộ nhớ. Thay vào đó, mỗi phần tử trỏ đến phần tử tiếp theo. Đó là một cấu trúc dữ liệu bao gồm một nhóm các nút cùng đại diện cho một chuỗi. Dưới dạng đơn giản nhất, mỗi nút bao gồm dữ liệu và một tham chiếu (nói cách khác, một liên kết) đến nút tiếp theo trong chuỗi. Cấu trúc này cho phép việc chèn hoặc xóa hiệu quả các phần tử từ bất kỳ vị trí nào trong chuỗi trong quá trình lặp. Các biến thể phức tạp hơn thêm các liên kết bổ sung, cho phép việc chèn hoặc xóa hiệu quả từ các tham chiếu phần tử tùy ý. Một hạn chế của danh sách liên kết là thời gian truy cập tuyến tính (và khó xử lý). Truy cập nhanh, như truy cập ngẫu nhiên, không khả thi. Mảng có sự tương đồng bộ hơn so với danh sách liên kết.
 
 ![Linked List](./images/linked-list.jpeg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo với [okso.app](https://okso.app)_
 
-## Pseudocode for Basic Operations
+## Mã Giả Cho Các Hoạt Động Cơ Bản
 
-### Insert
+### Chèn
 
 ```text
-Add(value)
-  Pre: value is the value to add to the list
-  Post: value has been placed at the tail of the list
-  n ← node(value)
-  if head = ø
-    head ← n
-    tail ← n
-  else
-    tail.next ← n
-    tail ← n
-  end if
-end Add
+Thêm(giá_trị)
+  Tiền: giá_trị là giá trị để thêm vào danh sách
+  Sau: giá_trị đã được đặt ở cuối danh sách
+  n ← nút(giá_trị)
+  nếu đầu = ø
+    đầu ← n
+    cuối ← n
+  nếu không
+    cuối.kế_tiếp ← n
+    cuối ← n
+  kết thúc nếu
+end Thêm
 ```
 
 ```text
-Prepend(value)
- Pre: value is the value to add to the list
- Post: value has been placed at the head of the list
- n ← node(value)
- n.next ← head
- head ← n
- if tail = ø
-   tail ← n
- end
-end Prepend
+ChènTrước(giá_trị)
+ Tiền: giá_trị là giá trị để thêm vào danh sách
+ Sau: giá_trị đã được đặt ở đầu danh sách
+ n ← nút(giá_trị)
+ n.kế_tiếp ← đầu
+ đầu ← n
+ nếu cuối = ø
+   cuối ← n
+ kết thúc
+end ChènTrước
 ```
 
-### Search
+### Tìm Kiếm
 
 ```text
-Contains(head, value)
-  Pre: head is the head node in the list
-       value is the value to search for
-  Post: the item is either in the linked list, true; otherwise false
-  n ← head
-  while n != ø and n.value != value
-    n ← n.next
-  end while
-  if n = ø
-    return false
-  end if
-  return true
-end Contains
+Chứa(đầu, giá_trị)
+  Tiền: đầu là nút đầu trong danh sách
+       giá_trị là giá trị để tìm kiếm
+  Sau: phần tử có thể có trong danh sách liên kết, true; nếu không, là false
+  n ← đầu
+  khi n != ø và n.giá_trị != giá_trị
+    n ← n.kế_tiếp
+  kết thúc khi
+  nếu n = ø
+    trả về false
+  kết thúc nếu
+  trả về true
+end Chứa
 ```
 
-### Delete
+### Xóa
 
 ```text
-Remove(head, value)
-  Pre: head is the head node in the list
-       value is the value to remove from the list
-  Post: value is removed from the list, true, otherwise false
-  if head = ø
-    return false
-  end if
-  n ← head
-  if n.value = value
-    if head = tail
-      head ← ø
-      tail ← ø
-    else
-      head ← head.next
-    end if
-    return true
-  end if
-  while n.next != ø and n.next.value != value
-    n ← n.next
-  end while
-  if n.next != ø
-    if n.next = tail
-      tail ← n
-      tail.next = null
-    else
-      n.next ← n.next.next
-    end if
-    return true
-  end if
-  return false
-end Remove
+Xóa(đầu, giá_trị)
+  Tiền: đầu là nút đầu trong danh sách
+       giá_trị là giá trị để loại bỏ khỏi danh sách
+  Sau: giá_trị được loại bỏ khỏi danh sách, true; nếu không, là false
+  nếu đầu = ø
+    trả về false
+  kết thúc nếu
+  n ← đầu
+  nếu n.giá_trị = giá_trị
+    nếu đầu = cuối
+      đầu ← ø
+      cuối ← ø
+    nếu không
+      đầu ← đầu.kế_tiếp
+    kết thúc nếu
+    trả về true
+  kết thúc nếu
+  khi n.kế_tiếp != ø và n.kế_tiếp.giá_trị != giá_trị
+    n ← n.kế_tiếp
+  kết thúc khi
+  nếu n.kế_tiếp != ø
+    nếu n.kế_tiếp = cuối
+      cuối ← n
+      cuối.kế_tiếp = null
+    nếu không
+      n.kế_tiếp ← n.kế_tiếp.kế_tiếp
+    kết thúc nếu
+    trả về true
+  kết thúc nếu
+  trả về false
+end Xóa
 ```
 
-### Traverse
+### Duyệt
 
 ```text
-Traverse(head)
-  Pre: head is the head node in the list
-  Post: the items in the list have been traversed
-  n ← head
-  while n != ø
-    yield n.value
-    n ← n.next
-  end while
-end Traverse
+Duyệt(đầu)
+  Tiền: đầu là nút đầu trong danh sách
+  Sau: các mục trong danh sách đã được duyệt
+  n ← đầu
+  khi n != ø
+    xuất n.giá_trị
+    n ← n.kế_tiếp
+  kết thúc khi
+end Duyệt
 ```
 
-### Traverse in Reverse
+### Duyệt Ngược
 
 ```text
-ReverseTraversal(head, tail)
-  Pre: head and tail belong to the same list
-  Post: the items in the list have been traversed in reverse order
-  if tail != ø
-    curr ← tail
-    while curr != head
-      prev ← head
-      while prev.next != curr
-        prev ← prev.next
-      end while
-      yield curr.value
-      curr ← prev
-    end while
-   yield curr.value
-  end if
-end ReverseTraversal
+DuyệtNgược(đầu, cuối)
+  Tiền: đầu và cuối thuộc cùng một danh sách
+  Sau: các mục trong danh sách đã được duyệt theo thứ tự ngược lại
+  nếu cuối != ø
+    hiện_tại ← cuối
+    khi hiện_tại != đầu
+      trước ← đầu
+      khi trước.kế_tiếp != hiện_tại
+        trước ← trước.kế_tiếp
+      kết thúc khi
+      xuất hiện_tại.giá_trị
+      hiện_tại ← trước
+    kết thúc khi
+   xuất hiện_tại.giá_trị
+  kết thúc nếu
+end DuyệtNgược
 ```
 
-## Complexities
+## Phức Tạp
 
-### Time Complexity
+### Phức Tạp Thời Gian
 
-| Access | Search | Insertion | Deletion |
-| :----: | :----: | :-------: | :------: |
-|  O(n)  |  O(n)  |   O(1)    |   O(n)   |
+| Truy Cập | Tìm Kiếm | Chèn | Xóa  |
+| :------: | :------: | :--: | :--: |
+|   O(n)   |   O(n)   | O(1) | O(n) |
 
-### Space Complexity
+### Phức Tạp Không Gian
 
 O(n)
 
-## References
+## Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Linked_list)
 - [YouTube](https://www.youtube.com/watch?v=njTh_OwMljA&index=2&t=1s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

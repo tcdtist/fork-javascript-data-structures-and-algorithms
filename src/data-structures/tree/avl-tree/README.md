@@ -1,51 +1,40 @@
-# AVL Tree
+# Cây AVL
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, an **AVL tree** (named after inventors
-Adelson-Velsky and Landis) is a self-balancing binary search
-tree. It was the first such data structure to be invented.
-In an AVL tree, the heights of the two child subtrees of any
-node differ by at most one; if at any time they differ by
-more than one, rebalancing is done to restore this property.
-Lookup, insertion, and deletion all take `O(log n)` time in
-both the average and worst cases, where n is the number of
-nodes in the tree prior to the operation. Insertions and
-deletions may require the tree to be rebalanced by one or
-more tree rotations.
+Trong khoa học máy tính, một **cây AVL** (được đặt theo tên của các nhà phát minh Adelson-Velsky và Landis) là một cây tìm kiếm nhị phân tự cân bằng. Đây là cấu trúc dữ liệu đầu tiên được phát minh trong số đó. Trong một cây AVL, độ cao của hai cây con của bất kỳ nút nào cũng chỉ khác nhau tối đa một; nếu vào bất kỳ thời điểm nào chúng khác nhau hơn một, sẽ được thực hiện cân bằng lại để khôi phục tính chất này. Tìm kiếm, chèn và xóa đều mất `O(log n)` thời gian trong cả trường hợp trung bình và trường hợp xấu nhất, trong đó n là số nút trong cây trước khi thực hiện thao tác. Việc chèn và xóa có thể yêu cầu cây phải được cân bằng lại bằng một hoặc nhiều phép xoay cây.
 
-Animation showing the insertion of several elements into an AVL
-tree. It includes left, right, left-right and right-left rotations.
+Hình ảnh động hiển thị việc chèn một số phần tử vào một cây AVL. Nó bao gồm các phép quay trái, phải, trái-phải và phải-trái.
 
-![AVL Tree](https://upload.wikimedia.org/wikipedia/commons/f/fd/AVL_Tree_Example.gif)
+![Cây AVL](https://upload.wikimedia.org/wikipedia/commons/f/fd/AVL_Tree_Example.gif)
 
-AVL tree with balance factors (green)
+Cây AVL với các yếu tố cân bằng (màu xanh lá cây)
 
-![AVL Tree](https://upload.wikimedia.org/wikipedia/commons/a/ad/AVL-tree-wBalance_K.svg)
+![Cây AVL](https://upload.wikimedia.org/wikipedia/commons/a/ad/AVL-tree-wBalance_K.svg)
 
-### AVL Tree Rotations
+### Phép Xoay Cây AVL
 
-**Left-Left Rotation**
+**Xoay Trái-Trái**
 
-![Left-Left Rotation](http://btechsmartclass.com/data_structures/ds_images/LL%20Rotation.png)
+![Xoay Trái-Trái](http://btechsmartclass.com/data_structures/ds_images/LL%20Rotation.png)
 
-**Right-Right Rotation**
+**Xoay Phải-Phải**
 
-![Right-Right Rotation](http://btechsmartclass.com/data_structures/ds_images/RR%20Rotation.png)
+![Xoay Phải-Phải](http://btechsmartclass.com/data_structures/ds_images/RR%20Rotation.png)
 
-**Left-Right Rotation**
+**Xoay Trái-Phải**
 
-![Left-Right Rotation](http://btechsmartclass.com/data_structures/ds_images/LR%20Rotation.png)
+![Xoay Trái-Phải](http://btechsmartclass.com/data_structures/ds_images/LR%20Rotation.png)
 
-**Right-Left Rotation**
+**Xoay Phải-Trái**
 
-![Right-Right Rotation](http://btechsmartclass.com/data_structures/ds_images/RL%20Rotation.png)
+![Xoay Phải-Phải](http://btechsmartclass.com/data_structures/ds_images/RL%20Rotation.png)
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/AVL_tree)
 - [Tutorials Point](https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm)
 - [BTech](http://btechsmartclass.com/data_structures/avl-trees.html)
-- [AVL Tree Insertion on YouTube](https://www.youtube.com/watch?v=rbg7Qf8GkQ4&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=12&)
-- [AVL Tree Interactive Visualisations](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)
+- [Chèn Cây AVL trên YouTube](https://www.youtube.com/watch?v=rbg7Qf8GkQ4&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=12&)
+- [Các Trực Quan Hóa Tương Tác của Cây AVL](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html)

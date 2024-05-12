@@ -1,40 +1,21 @@
-# Binary Search Tree
+# Cây Tìm Kiếm Nhị Phân
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, **binary search trees** (BST), sometimes called
-ordered or sorted binary trees, are a particular type of container:
-data structures that store "items" (such as numbers, names etc.)
-in memory. They allow fast lookup, addition and removal of
-items, and can be used to implement either dynamic sets of
-items, or lookup tables that allow finding an item by its key
-(e.g., finding the phone number of a person by name).
+Trong khoa học máy tính, **cây tìm kiếm nhị phân** (BST), đôi khi được gọi là cây nhị phân được sắp xếp, là một loại đặc biệt của bộ chứa: các cấu trúc dữ liệu lưu trữ "mục" (như số, tên, v.v.) trong bộ nhớ. Chúng cho phép tìm kiếm, thêm và xóa mục một cách nhanh chóng, và có thể được sử dụng để triển khai cả tập hợp động của các mục hoặc bảng tra cứu cho phép tìm một mục bằng khóa của nó (ví dụ, tìm số điện thoại của một người bằng tên).
 
-Binary search trees keep their keys in sorted order, so that lookup
-and other operations can use the principle of binary search:
-when looking for a key in a tree (or a place to insert a new key),
-they traverse the tree from root to leaf, making comparisons to
-keys stored in the nodes of the tree and deciding, on the basis
-of the comparison, to continue searching in the left or right
-subtrees. On average, this means that each comparison allows
-the operations to skip about half of the tree, so that each
-lookup, insertion or deletion takes time proportional to the
-logarithm of the number of items stored in the tree. This is
-much better than the linear time required to find items by key
-in an (unsorted) array, but slower than the corresponding
-operations on hash tables.
+Cây tìm kiếm nhị phân giữ các khóa của chúng theo thứ tự sắp xếp, để tìm kiếm và các thao tác khác có thể sử dụng nguyên lý của tìm kiếm nhị phân: khi tìm kiếm một khóa trong một cây (hoặc một vị trí để chèn một khóa mới), chúng đi qua cây từ gốc đến lá, so sánh với các khóa được lưu trữ trong các nút của cây và quyết định, dựa trên sự so sánh, để tiếp tục tìm kiếm trong cây con bên trái hoặc bên phải. Trong trung bình, điều này có nghĩa là mỗi sự so sánh cho phép các thao tác bỏ qua khoảng một nửa cây, sao cho mỗi tìm kiếm, chèn hoặc xóa mất thời gian tỷ lệ với logarit của số lượng mục được lưu trữ trong cây. Điều này tốt hơn nhiều so với thời gian tuyến tính cần thiết để tìm các mục theo khóa trong một mảng (chưa được sắp xếp), nhưng chậm hơn so với các thao tác tương ứng trên bảng băm.
 
-A binary search tree of size 9 and depth 3, with 8 at the root.
-The leaves are not drawn.
+Một cây tìm kiếm nhị phân có kích thước 9 và độ sâu 3, với 8 ở gốc. Những lá không được vẽ.
 
 ![Trie](./images/binary-search-tree.jpg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo bởi [okso.app](https://okso.app)_
 
-## Pseudocode for Basic Operations
+## Mã Giả cho Các Thao Tác Cơ Bản
 
-### Insertion
+### Chèn
 
 ```text
 insert(value)
@@ -68,7 +49,7 @@ insertNode(current, value)
 end insertNode
 ```
 
-### Searching
+### Tìm Kiếm
 
 ```text
 contains(root, value)
@@ -87,7 +68,7 @@ contains(root, value)
 end contains
 ```
 
-### Deletion
+### Xóa
 
 ```text
 remove(value)
@@ -138,7 +119,7 @@ remove(value)
 end remove
 ```
 
-### Find Parent of Node
+### Tìm Cha của Nút
 
 ```text
 findParent(value, root)
@@ -168,7 +149,7 @@ findParent(value, root)
 end findParent
 ```
 
-### Find Node
+### Tìm Nút
 
 ```text
 findNode(root, value)
@@ -188,7 +169,7 @@ findNode(root, value)
 end findNode
 ```
 
-### Find Minimum
+### Tìm Giá Trị Nhỏ Nhất
 
 ```text
 findMin(root)
@@ -202,7 +183,7 @@ findMin(root)
 end findMin
 ```
 
-### Find Maximum
+### Tìm Giá Trị Lớn Nhất
 
 ```text
 findMax(root)
@@ -216,9 +197,9 @@ findMax(root)
 end findMax
 ```
 
-### Traversal
+### Duyệt
 
-#### InOrder Traversal
+#### Duyệt theo Trình Tự Trung Tự
 
 ```text
 inorder(root)
@@ -232,7 +213,7 @@ inorder(root)
 end inorder
 ```
 
-#### PreOrder Traversal
+#### Duyệt theo Trình Tự Trước
 
 ```text
 preorder(root)
@@ -246,7 +227,7 @@ preorder(root)
 end preorder
 ```
 
-#### PostOrder Traversal
+#### Duyệt theo Trình Tự Sau
 
 ```text
 postorder(root)
@@ -260,20 +241,20 @@ postorder(root)
 end postorder
 ```
 
-## Complexities
+## Độ Phức Tạp
 
-### Time Complexity
+### Độ Phức Tạp Thời Gian
 
-|  Access   |  Search   | Insertion | Deletion  |
+| Truy Cập  | Tìm Kiếm  |   Chèn    |    Xóa    |
 | :-------: | :-------: | :-------: | :-------: |
 | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) |
 
-### Space Complexity
+### Độ Phức Tạp Không Gian
 
 O(n)
 
-## References
+## Tài Liệu Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Binary_search_tree)
-- [Inserting to BST on YouTube](https://www.youtube.com/watch?v=wcIRPqTR3Kc&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=9&t=0s)
-- [BST Interactive Visualisations](https://www.cs.usfca.edu/~galles/visualization/BST.html)
+- [Chèn vào BST trên YouTube](https://www.youtube.com/watch?v=wcIRPqTR3Kc&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=9&t=0s)
+- [Trực Quan Hóa BST](https://www.cs.usfca.edu/~galles/visualization/BST.html)

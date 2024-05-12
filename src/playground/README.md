@@ -1,10 +1,13 @@
-# Playground
+# Playground - Sân chơi
 
-You may use `playground.js` file to play with data
-structures and algorithms. The code from `playground.js` may
-be tested in `./__test__/playground.test.js` file.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-To run tests simply run:
+Bạn có thể sử dụng tệp `playground.js` để chơi với các cấu trúc
+dữ liệu và thuật toán. Mã từ tệp `playground.js` có thể
+được kiểm tra trong tệp `./__test__/playground.test.js`.
+
+Để chạy các bài kiểm tra, chỉ cần chạy:
 
 ```
 npm test -- -t 'playground'

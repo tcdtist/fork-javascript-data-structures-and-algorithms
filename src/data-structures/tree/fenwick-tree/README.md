@@ -1,39 +1,23 @@
-# Fenwick Tree / Binary Indexed Tree
+# Cây Fenwick / Cây Nhị Phân Đánh Dấu
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-A **Fenwick tree** or **binary indexed tree** is a data
-structure that can efficiently update elements and
-calculate prefix sums in a table of numbers.
+Cây Fenwick hoặc cây nhị phân đánh dấu là một cấu trúc dữ liệu có thể cập nhật các phần tử và tính tổng tiền tố một cách hiệu quả trong một bảng số.
 
-When compared with a flat array of numbers, the Fenwick tree achieves a
-much better balance between two operations: element update and prefix sum
-calculation. In a flat array of `n` numbers, you can either store the elements,
-or the prefix sums. In the first case, computing prefix sums requires linear
-time; in the second case, updating the array elements requires linear time
-(in both cases, the other operation can be performed in constant time).
-Fenwick trees allow both operations to be performed in `O(log n)` time.
-This is achieved by representing the numbers as a tree, where the value of
-each node is the sum of the numbers in that subtree. The tree structure allows
-operations to be performed using only `O(log n)` node accesses.
+So với một mảng phẳng của các số, cây Fenwick đạt được sự cân bằng tốt hơn giữa hai thao tác: cập nhật phần tử và tính tổng tiền tố. Trong một mảng phẳng của `n` số, bạn có thể lưu trữ các phần tử hoặc tổng tiền tố. Trong trường hợp đầu tiên, việc tính toán tổng tiền tố đòi hỏi thời gian tuyến tính; trong trường hợp thứ hai, việc cập nhật các phần tử mảng đòi hỏi thời gian tuyến tính (trong cả hai trường hợp, thao tác còn lại có thể được thực hiện trong thời gian hằng số). Cây Fenwick cho phép cả hai thao tác được thực hiện trong thời gian `O(log n)`. Điều này được đạt được bằng cách đại diện cho các số như một cây, trong đó giá trị của mỗi nút là tổng của các số trong cây con đó. Cấu trúc cây cho phép các thao tác được thực hiện chỉ bằng cách truy cập vào các nút `O(log n)`.
 
-## Implementation Notes
+## Ghi chú về Triển khai
 
-Binary Indexed Tree is represented as an array. Each node of Binary Indexed Tree
-stores sum of some elements of given array. Size of Binary Indexed Tree is equal
-to `n` where `n` is size of input array. In current implementation we have used
-size as `n+1` for ease of implementation. All the indexes are 1-based.
+Cây Nhị Phân Đánh Dấu được đại diện dưới dạng một mảng. Mỗi nút của Cây Nhị Phân Đánh Dấu lưu trữ tổng của một số phần tử của mảng được cho. Kích thước của Cây Nhị Phân Đánh Dấu bằng với `n` nơi `n` là kích thước của mảng đầu vào. Trong triển khai hiện tại, chúng ta đã sử dụng kích thước là `n+1` để dễ triển khai. Tất cả các chỉ số được đánh số từ 1.
 
-![Binary Indexed Tree](https://www.geeksforgeeks.org/wp-content/uploads/BITSum.png)
+![Cây Nhị Phân Đánh Dấu](https://www.geeksforgeeks.org/wp-content/uploads/BITSum.png)
 
-On the picture below you may see animated example of
-creation of binary indexed tree for the
-array `[1, 2, 3, 4, 5]` by inserting one by one.
+Trên hình dưới đây, bạn có thể thấy ví dụ minh họa động về việc tạo cây nhị phân đánh dấu cho mảng `[1, 2, 3, 4, 5]` bằng cách chèn từng phần tử một.
 
-![Fenwick Tree](https://upload.wikimedia.org/wikipedia/commons/d/dc/BITDemo.gif)
+![Cây Fenwick](https://upload.wikimedia.org/wikipedia/commons/d/dc/BITDemo.gif)
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Fenwick_tree)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/)

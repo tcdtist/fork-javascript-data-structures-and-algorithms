@@ -1,131 +1,70 @@
-# Bloom Filter
+# Bloom Filter - Bộ lọc Bloom
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-A **bloom filter** is a space-efficient probabilistic
-data structure designed to test whether an element
-is present in a set. It is designed to be blazingly
-fast and use minimal memory at the cost of potential
-false positives. False positive matches are possible,
-but false negatives are not – in other words, a query
-returns either "possibly in set" or "definitely not in set".
+**Bộ lọc Bloom** là một cấu trúc dữ liệu xác suất hiệu quả về không gian, được thiết kế để kiểm tra xem một phần tử có tồn tại trong một tập hợp hay không. Nó được thiết kế để hoạt động với tốc độ nhanh chóng và sử dụng bộ nhớ tối thiểu với chi phí có thể là các dương tính giả. Các dương tính giả có thể xảy ra, nhưng các âm tính giả không thể - nói cách khác, một truy vấn sẽ trả về một trong hai kết quả "có thể có trong tập hợp" hoặc "chắc chắn không trong tập hợp".
 
-Bloom proposed the technique for applications where the
-amount of source data would require an impractically large
-amount of memory if "conventional" error-free hashing
-techniques were applied.
+Bloom đề xuất phương pháp này cho các ứng dụng mà lượng dữ liệu nguồn sẽ đòi hỏi một lượng bộ nhớ không thể áp dụng được nếu các kỹ thuật băm không lỗi được áp dụng.
 
-## Algorithm description
+## Mô tả thuật toán
 
-An empty Bloom filter is a bit array of `m` bits, all
-set to `0`. There must also be `k` different hash functions
-defined, each of which maps or hashes some set element to
-one of the `m` array positions, generating a uniform random
-distribution. Typically, `k` is a constant, much smaller
-than `m`, which is proportional to the number of elements
-to be added; the precise choice of `k` and the constant of
-proportionality of `m` are determined by the intended
-false positive rate of the filter.
+Một bộ lọc Bloom trống là một mảng bit có `m` bit, tất cả đều được đặt thành `0`. Cũng cần phải xác định `k` hàm băm khác nhau, mỗi hàm băm sẽ ánh xạ hoặc băm một phần tử của tập hợp sang một trong `m` vị trí mảng, tạo ra một phân phối ngẫu nhiên đồng đều. Thông thường, `k` là một hằng số, nhỏ hơn rất nhiều so với `m`, tỷ lệ này tương tự với số phần tử được thêm vào; việc chọn chính xác của `k` và hằng số tỷ lệ của `m` được xác định bởi tỷ lệ dương tính giả mong muốn của bộ lọc.
 
-Here is an example of a Bloom filter, representing the
-set `{x, y, z}`. The colored arrows show the positions
-in the bit array that each set element is mapped to. The
-element `w` is not in the set `{x, y, z}`, because it
-hashes to one bit-array position containing `0`. For
-this figure, `m = 18` and `k = 3`.
+Dưới đây là một ví dụ về bộ lọc Bloom, đại diện cho tập hợp `{x, y, z}`. Các mũi tên màu chỉ ra các vị trí trong mảng bit mà mỗi phần tử của tập hợp được ánh xạ đến. Phần tử `w` không thuộc tập hợp `{x, y, z}`, vì nó băm tới một vị trí mảng bit chứa `0`. Đối với hình này, `m = 18` và `k = 3`.
 
-![Bloom Filter](https://upload.wikimedia.org/wikipedia/commons/a/ac/Bloom_filter.svg)
+![Bộ lọc Bloom](https://upload.wikimedia.org/wikipedia/commons/a/ac/Bloom_filter.svg)
 
-## Operations
+## Các hoạt động
 
-There are two main operations a bloom filter can
-perform: _insertion_ and _search_. Search may result in
-false positives. Deletion is not possible.
+Có hai hoạt động chính mà một bộ lọc Bloom có thể thực hiện: _chèn_ và _tìm kiếm_. Tìm kiếm có thể dẫn đến các dương tính giả. Không thể xóa.
 
-In other words, the filter can take in items. When
-we go to check if an item has previously been
-inserted, it can tell us either "no" or "maybe".
+Nói cách khác, bộ lọc có thể nhận vào các mục. Khi chúng ta kiểm tra xem một mục đã được chèn trước đó hay chưa, nó có thể cho chúng ta biết "không" hoặc "có thể".
 
-Both insertion and search are `O(1)` operations.
+Cả hai hoạt động chèn và tìm kiếm đều là các hoạt động `O(1)`.
 
-## Making the filter
+## Tạo bộ lọc
 
-A bloom filter is created by allotting a certain size.
-In our example, we use `100` as a default length. All
-locations are initialized to `false`.
+Một bộ lọc Bloom được tạo bằng cách phân bổ một kích thước nhất định. Trong ví dụ của chúng tôi, chúng tôi sử dụng `100` làm chiều dài mặc định. Tất cả các vị trí được khởi tạo thành `false`.
 
-### Insertion
+### Chèn
 
-During insertion, a number of hash functions,
-in our case `3` hash functions, are used to create
-hashes of the input. These hash functions output
-indexes. At every index received, we simply change
-the value in our bloom filter to `true`.
+Trong quá trình chèn, một số lượng hàm băm, trong trường hợp của chúng tôi là `3` hàm băm, được sử dụng để tạo các băm của đầu vào. Các hàm băm này xuất các chỉ mục. Tại mỗi chỉ mục nhận được, chúng ta đơn giản thay đổi giá trị trong bộ lọc Bloom của chúng ta thành `true`.
 
-### Search
+### Tìm kiếm
 
-During a search, the same hash functions are called
-and used to hash the input. We then check if the
-indexes received _all_ have a value of `true` inside
-our bloom filter. If they _all_ have a value of
-`true`, we know that the bloom filter may have had
-the value previously inserted.
+Trong một tìm kiếm, các hàm băm giống nhau được gọi và được sử dụng để băm đầu vào. Sau đó, chúng ta kiểm tra xem các chỉ mục nhận được _tất cả_ có một giá trị `true` bên trong bộ lọc Bloom của chúng ta không. Nếu _tất cả_ đều có giá trị `true`, chúng ta biết rằng bộ lọc Bloom có thể đã có giá trị được chèn trước đó.
 
-However, it's not certain, because it's possible
-that other values previously inserted flipped the
-values to `true`. The values aren't necessarily
-`true` due to the item currently being searched for.
-Absolute certainty is impossible unless only a single
-item has previously been inserted.
+Tuy nhiên, không chắc chắn, vì có thể các giá trị khác được chèn trước đó đã làm cho các giá trị thành `true`. Các giá trị không nhất thiết là `true` do mục đang được tìm kiếm. Sự chắc chắn tuyệt đối là không thể trừ khi chỉ một mục đã được chèn trước đó.
 
-While checking the bloom filter for the indexes
-returned by our hash functions, if even one of them
-has a value of `false`, we definitively know that the
-item was not previously inserted.
+Trong khi kiểm tra bộ lọc Bloom cho các chỉ mục được trả về bởi các hàm băm của chúng ta, nếu ngay cả một trong số chúng có giá trị `false`, chúng ta chắc chắn biết rằng mục đó không được chèn trước đó.
 
-## False Positives
+## Dương tính giả
 
-The probability of false positives is determined by
-three factors: the size of the bloom filter, the
-number of hash functions we use, and the number
-of items that have been inserted into the filter.
+Xác suất của các dương tính giả được xác định bởi ba yếu tố: kích thước của bộ lọc Bloom, số lượng hàm băm mà chúng ta sử dụng và số lượng các mục đã được chèn vào bộ lọc.
 
-The formula to calculate probablity of a false positive is:
+Công thức để tính xác suất của dương tính giả là:
 
 ( 1 - e <sup>-kn/m</sup> ) <sup>k</sup>
 
-`k` = number of hash functions
+`k` = số lượng hàm băm
 
-`m` = filter size
+`m` = kích thước của bộ lọc
 
-`n` = number of items inserted
+`n` = số lượng các mục đã chèn
 
-These variables, `k`, `m`, and `n`, should be picked based
-on how acceptable false positives are. If the values
-are picked and the resulting probability is too high,
-the values should be tweaked and the probability
-re-calculated.
+Các biến này, `k`, `m`, và `n`, nên được chọn dựa trên mức độ chấp nhận của dương tính giả. Nếu các giá trị được chọn và xác suất kết quả quá cao, các giá trị nên được điều chỉnh và xác suất được tính toán lại.
 
-## Applications
+## Ứng dụng
 
-A bloom filter can be used on a blogging website. If
-the goal is to show readers only articles that they
-have never seen before, a bloom filter is perfect.
-It can store hashed values based on the articles. After
-a user reads a few articles, they can be inserted into
-the filter. The next time the user visits the site,
-those articles can be filtered out of the results.
+Một bộ lọc Bloom có thể được sử dụng trên một trang web blog. Nếu mục tiêu là chỉ hiển thị bài viết cho người đọc mà họ chưa bao giờ thấy trước đó, một bộ lọc Bloom là lựa chọn hoàn hảo. Nó có thể lưu trữ các giá trị băm dựa trên các bài viết. Sau khi một người dùng đọc một vài bài viết, chúng có thể được chèn vào bộ lọc. Lần sau khi người dùng truy cập trang web, những bài viết đó có thể được lọc ra khỏi kết quả.
 
-Some articles will inevitably be filtered out by mistake,
-but the cost is acceptable. It's ok if a user never sees
-a few articles as long as they have other, brand new ones
-to see every time they visit the site.
+Một số bài viết sẽ tất nhiên bị lọc ra một cách nhầm lẫn, nhưng chi phí là chấp nhận được. Không sao nếu một người dùng không bao giờ xem một số bài viết miễn là họ có những bài viết mới hoàn toàn khác mỗi lần họ truy cập trang web.
 
-## References
+## Tài liệu tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Bloom_filter)
-- [Bloom Filters by Example](http://llimllib.github.io/bloomfilter-tutorial/)
-- [Calculating False Positive Probability](https://hur.st/bloomfilter/?n=4&p=&m=18&k=3)
-- [Bloom Filters on Medium](https://blog.medium.com/what-are-bloom-filters-1ec2a50c68ff)
-- [Bloom Filters on YouTube](https://www.youtube.com/watch?v=bEmBh1HtYrw)
+- [Bộ Lọc Bloom qua Ví Dụ](http://llimllib.github.io/bloomfilter-tutorial/)
+- [Tính Xác Suất Dương Tính Giả](https://hur.st/bloomfilter/?n=4&p=&m=18&k=3)
+- [Bộ Lọc Bloom trên Medium](https://blog.medium.com/what-are-bloom-filters-1ec2a50c68ff)
+- [Bộ Lọc Bloom trên YouTube](https://www.youtube.com/watch?v=bEmBh1HtYrw)

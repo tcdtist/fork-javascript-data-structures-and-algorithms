@@ -1,30 +1,18 @@
-# Graph
+# Đồ Thị
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, a **graph** is an abstract data type
-that is meant to implement the undirected graph and
-directed graph concepts from mathematics, specifically
-the field of graph theory
+Trong khoa học máy tính, **đồ thị** là một loại dữ liệu trừu tượng được thiết kế để thực hiện các khái niệm về đồ thị vô hướng và đồ thị có hướng từ toán học, cụ thể là lĩnh vực lý thuyết đồ thị.
 
-A graph data structure consists of a finite (and possibly
-mutable) set of vertices or nodes or points, together
-with a set of unordered pairs of these vertices for an
-undirected graph or a set of ordered pairs for a
-directed graph. These pairs are known as edges, arcs,
-or lines for an undirected graph and as arrows,
-directed edges, directed arcs, or directed lines
-for a directed graph. The vertices may be part of
-the graph structure, or may be external entities
-represented by integer indices or references.
+Một cấu trúc dữ liệu đồ thị bao gồm một tập hợp hữu hạn (và có thể thay đổi) các đỉnh hoặc nút hoặc điểm, cùng với một tập hợp các cặp không thứ tự của các đỉnh này cho một đồ thị vô hướng hoặc một tập hợp các cặp có thứ tự cho một đồ thị có hướng. Các cặp này được gọi là cạnh, cung, hoặc đường cho một đồ thị vô hướng và là mũi tên, cạnh có hướng, cung có hướng, hoặc đường có hướng cho một đồ thị có hướng. Các đỉnh có thể là phần của cấu trúc đồ thị, hoặc có thể là các thực thể bên ngoài được biểu diễn bằng các chỉ số số nguyên hoặc tham chiếu.
 
-![Graph](./images/graph.jpeg)
+![Đồ Thị](./images/graph.jpeg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo với [okso.app](https://okso.app)_
 
-## References
+## Tham Khảo
 
 - [Wikipedia](<https://en.wikipedia.org/wiki/Graph_(abstract_data_type)>)
-- [Introduction to Graphs on YouTube](https://www.youtube.com/watch?v=gXgEDyodOJU&index=9&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [Graphs representation on YouTube](https://www.youtube.com/watch?v=k1wraWzqtvQ&index=10&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Giới Thiệu về Đồ Thị trên YouTube](https://www.youtube.com/watch?v=gXgEDyodOJU&index=9&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Biểu Diễn Đồ Thị trên YouTube](https://www.youtube.com/watch?v=k1wraWzqtvQ&index=10&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

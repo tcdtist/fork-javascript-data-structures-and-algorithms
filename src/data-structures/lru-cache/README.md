@@ -1,51 +1,54 @@
-# Least Recently Used (LRU) Cache
+# Bộ nhớ cache Least Recently Used (LRU)
 
-A **Least Recently Used (LRU) Cache** organizes items in order of use, allowing you to quickly identify which item hasn't been used for the longest amount of time.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Picture a clothes rack, where clothes are always hung up on one side. To find the least-recently used item, look at the item on the other end of the rack.
+Bộ nhớ cache Least Recently Used (LRU) sắp xếp các mục theo thứ tự sử dụng, cho phép bạn nhanh chóng xác định mục nào chưa được sử dụng trong thời gian dài nhất.
 
-## The problem statement
+Hãy tưởng tượng một cái gác áo, nơi quần áo luôn được treo ở một bên. Để tìm mục ít được sử dụng nhất, hãy nhìn vào mục ở đầu kia của gác áo.
 
-Implement the LRUCache class:
+## Tuyên bố vấn đề
 
-- `LRUCache(int capacity)` Initialize the LRU cache with **positive** size `capacity`.
-- `int get(int key)` Return the value of the `key` if the `key` exists, otherwise return `undefined`.
-- `void set(int key, int value)` Update the value of the `key` if the `key` exists. Otherwise, add the `key-value` pair to the cache. If the number of keys exceeds the `capacity` from this operation, **evict** the least recently used key.
+Thực hiện lớp LRUCache:
 
-The functions `get()` and `set()` must each run in `O(1)` average time complexity.
+- `LRUCache(int capacity)` Khởi tạo bộ nhớ cache LRU với kích thước dương `capacity`.
+- `int get(int key)` Trả về giá trị của `key` nếu `key` tồn tại, nếu không trả về `undefined`.
+- `void set(int key, int value)` Cập nhật giá trị của `key` nếu `key` tồn tại. Nếu không, thêm cặp `key-value` vào bộ nhớ cache. Nếu số lượng key vượt quá `capacity` từ hoạt động này, **loại bỏ** key ít được sử dụng nhất.
 
-## Implementation
+Các hàm `get()` và `set()` phải chạy trong thời gian trung bình `O(1)`.
 
-### Version 1: Doubly Linked List + Hash Map
+## Thực hiện
 
-See the `LRUCache` implementation example in [LRUCache.js](./LRUCache.js). The solution uses a `HashMap` for fast `O(1)` (in average) cache items access, and a `DoublyLinkedList` for fast `O(1)` (in average) cache items promotions and eviction (to keep the maximum allowed cache capacity).
+### Phiên bản 1: Danh sách liên kết hai chiều + Bản đồ băm
 
-![Linked List](./images/lru-cache.jpg)
+Xem ví dụ cài đặt `LRUCache` trong tệp [LRUCache.js](./LRUCache.js). Giải pháp sử dụng `HashMap` để truy cập nhanh chóng các mục cache với `O(1)` (trong trường hợp trung bình), và `DoublyLinkedList` để thúc đẩy và loại bỏ mục cache nhanh chóng với `O(1)` (trong trường hợp trung bình) (để giữ cho dung lượng bộ nhớ cache tối đa được phép).
 
-*Made with [okso.app](https://okso.app)*
+![Danh sách liên kết](./images/lru-cache.jpg)
 
-You may also find more test-case examples of how the LRU Cache works in [LRUCache.test.js](./__test__/LRUCache.test.js) file.
+_Tạo với [okso.app](https://okso.app)_
 
-### Version 2: Ordered Map
+Bạn cũng có thể tìm thấy nhiều ví dụ về trường hợp thử nghiệm về cách bộ nhớ cache LRU hoạt động trong tệp [LRUCache.test.js](./__test__/LRUCache.test.js).
 
-The first implementation that uses doubly linked list is good for learning purposes and for better understanding of how the average `O(1)` time complexity is achievable while doing `set()` and `get()`.
+### Phiên bản 2: Bản đồ có thứ tự
 
-However, the simpler approach might be to use a JavaScript [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) object. The `Map` object holds key-value pairs and **remembers the original insertion order** of the keys. We can use this fact in order to keep the recently-used items in the "end" of the map by removing and re-adding items. The item at the beginning of the `Map` is the first one to be evicted if cache capacity overflows. The order of the items may checked by using the `IterableIterator` like `map.keys()`.
+Cài đặt đầu tiên sử dụng danh sách liên kết hai chiều là tốt cho mục đích học và để hiểu rõ hơn về cách độ phức tạp thời gian trung bình `O(1)` có thể đạt được trong khi thực hiện `set()` và `get()`.
 
-See the `LRUCacheOnMap` implementation example in [LRUCacheOnMap.js](./LRUCacheOnMap.js).
+Tuy nhiên, phương pháp đơn giản hơn có thể là sử dụng một đối tượng [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) JavaScript. Đối tượng `Map` giữ các cặp khóa-giá trị và **nhớ thứ tự chèn ban đầu** của các khóa. Chúng ta có thể sử dụng sự thật này để giữ các mục đã sử dụng gần đây ở "cuối" của bản đồ bằng cách loại bỏ và thêm lại các mục. Mục ở đầu của `Map` sẽ là mục đầu tiên bị loại bỏ nếu dung lượng bộ nhớ cache vượt quá. Thứ tự của các mục có thể được kiểm tra bằng cách sử dụng `IterableIterator` như `map.keys()`.
 
-You may also find more test-case examples of how the LRU Cache works in [LRUCacheOnMap.test.js](./__test__/LRUCacheOnMap.test.js) file.
+Xem ví dụ cài đặt `LRUCacheOnMap` trong tệp [LRUCacheOnMap.js](./LRUCacheOnMap.js).
 
-## Complexities
+Bạn cũng có thể tìm thấy nhiều ví dụ về trường hợp thử nghiệm về cách bộ nhớ cache LRU hoạt động trong tệp [LRUCacheOnMap.test.js](./__test__/LRUCacheOnMap.test.js).
 
-|   | Average |
-|---|---|
-| Space |`O(n)`|
-| Get item | `O(1)` |
-| Set item | `O(1)` |
+## Độ phức tạp
 
-## References
+|            | Trung bình |
+| ---------- | ---------- |
+| Dung lượng | `O(n)`     |
+| Lấy mục    | `O(1)`     |
+| Đặt mục    | `O(1)`     |
 
-- [LRU Cache on LeetCode](https://leetcode.com/problems/lru-cache/solutions/244744/lru-cache/)
-- [LRU Cache on InterviewCake](https://www.interviewcake.com/concept/java/lru-cache)
-- [LRU Cache on Wiki](https://en.wikipedia.org/wiki/Cache_replacement_policies)
+## Tham khảo
+
+- [Bộ nhớ cache LRU trên LeetCode](https://leetcode.com/problems/lru-cache/solutions/244744/lru-cache/)
+- [Bộ nhớ cache LRU trên InterviewCake](https://www.interviewcake.com/concept/java/lru-cache)
+- [Bộ nhớ cache LRU trên Wiki](https://en.wikipedia.org/wiki/Cache_replacement_policies)

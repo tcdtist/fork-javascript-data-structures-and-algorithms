@@ -1,31 +1,21 @@
-# Hash Table
+# Bảng Băm
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computing, a **hash table** (hash map) is a data
-structure which implements an _associative array_
-abstract data type, a structure that can _map keys
-to values_. A hash table uses a _hash function_ to
-compute an index into an array of buckets or slots,
-from which the desired value can be found
+Trong lĩnh vực máy tính, **bảng băm** (hash map) là một cấu trúc dữ liệu mà triển khai một loại dữ liệu trừu tượng gọi là _mảng kết hợp_, một cấu trúc có thể _ánh xạ các khóa sang các giá trị_. Một bảng băm sử dụng một _hàm băm_ để tính toán một chỉ số vào một mảng các ô hoặc khe, từ đó giá trị mong muốn có thể được tìm thấy.
 
-Ideally, the hash function will assign each key to a
-unique bucket, but most hash table designs employ an
-imperfect hash function, which might cause hash
-collisions where the hash function generates the same
-index for more than one key. Such collisions must be
-accommodated in some way.
+Lý tưởng, hàm băm sẽ gán mỗi khóa vào một khe duy nhất, nhưng hầu hết các thiết kế bảng băm sử dụng một hàm băm không hoàn hảo, có thể gây ra _xung đột băm_ khi hàm băm tạo ra cùng một chỉ số cho nhiều hơn một khóa. Những xung đột như vậy phải được xử lý một cách nào đó.
 
-![Hash Table](./images/hash-table.jpeg)
+![Bảng Băm](./images/hash-table.jpeg)
 
-Hash collision resolved by separate chaining.
+Xung đột băm được giải quyết bằng phương pháp chuỗi riêng.
 
-![Hash Collision](./images/collision-resolution.jpeg)
+![Xung Đột Băm](./images/collision-resolution.jpeg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo với [okso.app](https://okso.app)_
 
-## References
+## Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Hash_table)
 - [YouTube](https://www.youtube.com/watch?v=shs0KM3wKv8&index=4&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

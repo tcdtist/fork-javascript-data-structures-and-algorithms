@@ -1,28 +1,25 @@
-# Disjoint Set
+# Disjoint Set - Cấu Trúc Dữ Liệu Tách Biệt
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-**Disjoint-set** data structure (also called a union–find data structure or merge–find set) is a data
-structure that tracks a set of elements partitioned into a number of disjoint (non-overlapping) subsets.
-It provides near-constant-time operations (bounded by the inverse Ackermann function) to _add new sets_,
-to _merge existing sets_, and to _determine whether elements are in the same set_.
-In addition to many other uses (see the Applications section), disjoint-sets play a key role in Kruskal's algorithm for finding the minimum spanning tree of a graph.
+**Disjoint-set** (cũng được gọi là cấu trúc dữ liệu hợp nhất-tìm hoặc cấu trúc dữ liệu hợp nhất-tìm-ghép) là một cấu trúc dữ liệu theo dõi một tập hợp các phần tử được phân chia thành một số tập hợp tách biệt (không giao nhau). Nó cung cấp các hoạt động gần như độ phức tạp hằng số (bị chặn bởi hàm Ackermann nghịch đảo) để _thêm các tập hợp mới_, _gộp các tập hợp hiện có_, và _xác định xem các phần tử có trong cùng một tập hợp không_.
+Ngoài việc được sử dụng trong nhiều mục đích khác nhau (xem phần Ứng dụng), các tập hợp không giao nhau còn đóng vai trò quan trọng trong thuật toán Kruskal để tìm cây khung tối thiểu của một đồ thị.
 
 ![disjoint set](https://upload.wikimedia.org/wikipedia/commons/6/67/Dsu_disjoint_sets_init.svg)
 
-_MakeSet_ creates 8 singletons.
+_MakeSet_ tạo ra 8 tập hợp đơn lẻ.
 
 ![disjoint set](https://upload.wikimedia.org/wikipedia/commons/a/ac/Dsu_disjoint_sets_final.svg)
 
-After some operations of _Union_, some sets are grouped together.
+Sau một số hoạt động _Union_, một số tập hợp được nhóm lại.
 
-## Implementation
+## Thực hiện
 
 - [DisjointSet.js](./DisjointSet.js)
-- [DisjointSetAdhoc.js](./DisjointSetAdhoc.js) - The minimalistic (ad hoc) version of a DisjointSet (or a UnionFind) data structure that doesn't have external dependencies and that is easy to copy-paste and use during the coding interview if allowed by the interviewer (since many data structures in JS are missing).
+- [DisjointSetAdhoc.js](./DisjointSetAdhoc.js) - Phiên bản tối thiểu (tạm thời) của cấu trúc dữ liệu DisjointSet (hoặc UnionFind) không có các phụ thuộc bên ngoài và dễ dàng sao chép-và-dán và sử dụng trong cuộc phỏng vấn lập trình nếu được phép bởi người phỏng vấn (vì nhiều cấu trúc dữ liệu trong JS thiếu).
 
-## References
+## Tài liệu tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Disjoint-set_data_structure)
 - [By Abdul Bari on YouTube](https://www.youtube.com/watch?v=wU6udHRIkcc&index=14&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

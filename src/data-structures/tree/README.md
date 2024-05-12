@@ -1,36 +1,25 @@
-# Tree
+# Cây
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-- [Binary Search Tree](binary-search-tree)
-- [AVL Tree](avl-tree)
-- [Red-Black Tree](red-black-tree)
-- [Segment Tree](segment-tree) - with min/max/sum range queries examples
-- [Fenwick Tree](fenwick-tree) (Binary Indexed Tree)
+- [Cây Tìm Kiếm Nhị Phân](binary-search-tree)
+- [Cây AVL](avl-tree)
+- [Cây Đỏ-Đen](red-black-tree)
+- [Cây Đoạn](segment-tree) - với các ví dụ về truy vấn phạm vi min/max/sum
+- [Cây Fenwick](fenwick-tree) (Cây Chỉ Mục Nhị Phân)
 
-In computer science, a **tree** is a widely used abstract data
-type (ADT) — or data structure implementing this ADT—that
-simulates a hierarchical tree structure, with a root value
-and subtrees of children with a parent node, represented as
-a set of linked nodes.
+Trong khoa học máy tính, một **cây** là một loại cấu trúc dữ liệu trừu tượng (ADT) phổ biến — hoặc cấu trúc dữ liệu thực thi ADT này — mô phỏng một cấu trúc cây phân cấp, với một giá trị gốc và các cây con có một nút cha, được đại diện dưới dạng một tập hợp các nút liên kết.
 
-A tree data structure can be defined recursively (locally)
-as a collection of nodes (starting at a root node), where
-each node is a data structure consisting of a value,
-together with a list of references to nodes (the "children"),
-with the constraints that no reference is duplicated, and none
-points to the root.
+Một cấu trúc dữ liệu cây có thể được định nghĩa đệ quy (cục bộ) như một tập hợp các nút (bắt đầu từ một nút gốc), trong đó mỗi nút là một cấu trúc dữ liệu bao gồm một giá trị, cùng với một danh sách các tham chiếu đến các nút (các "con"), với ràng buộc là không có tham chiếu nào bị trùng lặp và không có tham chiếu nào chỉ vào gốc.
 
-A simple unordered tree; in this diagram, the node labeled 3 has
-two children, labeled 2 and 6, and one parent, labeled 2. The
-root node, at the top, has no parent.
+Một cây không thứ tự đơn giản; trong biểu đồ này, nút được gán nhãn 3 có hai nút con, được gán nhãn 2 và 6, và một nút cha, được gán nhãn 2. Nút gốc, ở trên cùng, không có nút cha.
 
-![Tree](./images/tree.jpeg)
+![Cây](./images/tree.jpeg)
 
-_Made with [okso.app](https://okso.app)_
+_Tạo bởi [okso.app](https://okso.app)_
 
-## References
+## Tham khảo
 
 - [Wikipedia](<https://en.wikipedia.org/wiki/Tree_(data_structure)>)
 - [YouTube](https://www.youtube.com/watch?v=oSWTXtMglKE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=8)
