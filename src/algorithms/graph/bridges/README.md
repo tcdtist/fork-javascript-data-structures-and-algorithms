@@ -1,26 +1,29 @@
-# Bridges in Graph
+# Cầu trong Đồ thị
 
-In graph theory, a **bridge**, **isthmus**, **cut-edge**, or **cut arc** is an edge 
-of a graph whose deletion increases its number of connected components. Equivalently, 
-an edge is a bridge if and only if it is not contained in any cycle. A graph is said 
-to be bridgeless or isthmus-free if it contains no bridges.
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-![Bridges in graph](https://upload.wikimedia.org/wikipedia/commons/d/df/Graph_cut_edges.svg)
+Trong lý thuyết đồ thị, một **cầu**, **isthmus**, **cut-edge**, hoặc **cut arc** là một cạnh
+của đồ thị mà việc xóa nó làm tăng số lượng thành phần liên thông của đồ thị. Tương đương,
+một cạnh là một cầu nếu và chỉ nếu nó không nằm trong bất kỳ chu trình nào. Một đồ thị được gọi
+là không có cầu hoặc không có isthmus nếu nó không chứa bất kỳ cầu nào.
 
-A graph with 16 vertices and 6 bridges (highlighted in red)
+![Cầu trong đồ thị](https://upload.wikimedia.org/wikipedia/commons/d/df/Graph_cut_edges.svg)
 
-![Bridgeless](https://upload.wikimedia.org/wikipedia/commons/b/bf/Undirected.svg)
+Một đồ thị với 16 đỉnh và 6 cầu (được tô sáng bằng màu đỏ)
 
-An undirected connected graph with no cut edges
+![Không có cầu](https://upload.wikimedia.org/wikipedia/commons/b/bf/Undirected.svg)
 
-![Bridges in graph](https://www.geeksforgeeks.org/wp-content/uploads/Bridge1.png)
+Một đồ thị không hướng liên thông không có cạnh cắt
 
-![Bridges in graph](https://www.geeksforgeeks.org/wp-content/uploads/Bridge2.png)
+![Cầu trong đồ thị](https://www.geeksforgeeks.org/wp-content/uploads/Bridge1.png)
 
-![Bridges in graph](https://www.geeksforgeeks.org/wp-content/uploads/Bridge3.png)
+![Cầu trong đồ thị](https://www.geeksforgeeks.org/wp-content/uploads/Bridge2.png)
 
-## References
+![Cầu trong đồ thị](https://www.geeksforgeeks.org/wp-content/uploads/Bridge3.png)
 
-- [GeeksForGeeks on YouTube](https://www.youtube.com/watch?v=thLQYBlz2DM&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [Wikipedia](https://en.wikipedia.org/wiki/Bridge_%28graph_theory%29#Tarjan.27s_Bridge-finding_algorithm)
+## Tham khảo
+
+- [GeeksForGeeks trên YouTube](https://www.youtube.com/watch?v=thLQYBlz2DM&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Wikipedia](<https://vi.wikipedia.org/wiki/C%E1%BA%A7u_(l%C3%BD_thuy%E1%BA%BFt_%C4%91%E1%BB%93_th%E1%BB%8B)>)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/bridge-in-a-graph/)

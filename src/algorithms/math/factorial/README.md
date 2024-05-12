@@ -1,7 +1,7 @@
 # Factorial
 
 _Read this in other languages:_
-[_简体中文_](README.zh-CN.md), [_Français_](README.fr-FR.md), [_Türkçe_](README.tr-TR.md), [_ქართული_](README.ka-GE.md), [_Українська_](README.uk-UA.md).
+[_Tiếng Việt_](README.md)
 
 In mathematics, the factorial of a non-negative integer `n`,
 denoted by `n!`, is the product of all positive integers less

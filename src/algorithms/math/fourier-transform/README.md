@@ -1,7 +1,7 @@
 # Fourier Transform
 
 _Read this in other languages:_
-[français](README.fr-FR.md).
+[_Tiếng Việt_](README.md)
 
 ## Definitions
 

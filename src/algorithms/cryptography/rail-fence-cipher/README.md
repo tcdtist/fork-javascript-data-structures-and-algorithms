@@ -1,8 +1,11 @@
-# Rail Fence Cipher
+# Mật mã Hàng rào Zigzag
 
-The **rail fence cipher** (also called a **zigzag cipher**) is a [transposition cipher](https://en.wikipedia.org/wiki/Transposition_cipher) in which the message is split across a set of rails on a fence for encoding. The fence is populated with the message's characters, starting at the top left and adding a character on each position, traversing them diagonally to the bottom. Upon reaching the last rail, the direction should then turn diagonal and upwards up to the very first rail in a zig-zag motion. Rinse and repeat until the message is fully disposed across the fence. The encoded message is the result of concatenating the text in each rail, from top to bottom.
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-From [wikipedia](https://en.wikipedia.org/wiki/Rail_fence_cipher), this is what the message `WE ARE DISCOVERED. FLEE AT ONCE` looks like on a `3`-rail fence:
+**Mật mã hàng rào Zigzag** (còn gọi là **mật mã zigzag**) là một [mật mã hoán vị](https://en.wikipedia.org/wiki/Transposition_cipher) trong đó thông điệp được phân tách trên một tập hợp các hàng rào để mã hóa. Hàng rào được lấp đầy bằng các ký tự của thông điệp, bắt đầu từ góc trên bên trái và thêm một ký tự vào mỗi vị trí, di chuyển chéo xuống dưới. Khi đến hàng cuối cùng, hướng di chuyển sẽ chuyển thành chéo lên trên đến hàng đầu tiên theo một chuyển động zig-zag. Lặp lại quá trình này cho đến khi thông điệp được phân bổ hoàn toàn trên hàng rào. Thông điệp được mã hóa là kết quả của việc nối liền văn bản trên mỗi hàng rào, từ trên xuống dưới.
+
+Từ [wikipedia](https://en.wikipedia.org/wiki/Rail_fence_cipher), đây là cách thông điệp `WE ARE DISCOVERED. FLEE AT ONCE` trông như thế nào trên hàng rào `3`-rail:
 
 ```
 W . . . E . . . C . . . R . . . L . . . T . . . E
@@ -12,7 +15,7 @@ W . . . E . . . C . . . R . . . L . . . T . . . E
              WECRLTEERDSOEEFEAOCAIVDEN
 ```
 
-The message can then be decoded by re-creating the encoded fence, with the same traversal pattern, except characters should only be added on one rail at a time. To illustrate that, a dash can be added on the rails that are not supposed to be populated yet. This is what the fence would look like after populating the first rail, the dashes represent positions that were visited but not populated.
+Thông điệp sau đó có thể được giải mã bằng cách tạo lại hàng rào đã mã hóa, với cùng một mô hình di chuyển, ngoại trừ việc các ký tự chỉ được thêm vào một hàng rào mỗi lần. Để minh họa điều đó, dấu gạch ngang có thể được thêm vào các hàng rào chưa được lấp đầy. Đây là cách hàng rào trông sau khi lấp đầy hàng đầu tiên, các dấu gạch ngang đại diện cho các vị trí đã được thăm nhưng chưa được lấp đầy.
 
 ```
 W . . . E . . . C . . . R . . . L . . . T . . . E
@@ -20,9 +23,9 @@ W . . . E . . . C . . . R . . . L . . . T . . . E
 . . - . . . - . . . - . . . - . . . - . . . - . .
 ```
 
-It's time to start populating the next rail once the number of visited fence positions is equal to the number of characters in the message.
+Đã đến lúc bắt đầu lấp đầy hàng rào tiếp theo khi số vị trí hàng rào đã thăm bằng với số lượng ký tự trong thông điệp.
 
-## References
+## Tài liệu tham khảo
 
-- [Rail Fence Cipher on Wikipedia](https://en.wikipedia.org/wiki/Rail_fence_cipher)
-- [Rail Fence Cipher Calculator](https://crypto.interactive-maths.com/rail-fence-cipher.html)
+- [Mật mã Hàng rào Zigzag trên Wikipedia](https://en.wikipedia.org/wiki/Rail_fence_cipher)
+- [Máy tính Mật mã Hàng rào Zigzag](https://crypto.interactive-maths.com/rail-fence-cipher.html)

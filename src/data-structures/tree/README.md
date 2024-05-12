@@ -1,14 +1,13 @@
 # Tree
 
 _Read this in other languages:_
-[_简体中文_](README.zh-CN.md),
-[_Português_](README.pt-BR.md)
+[_Tiếng Việt_](README.md)
 
-* [Binary Search Tree](binary-search-tree)
-* [AVL Tree](avl-tree)
-* [Red-Black Tree](red-black-tree)
-* [Segment Tree](segment-tree) - with min/max/sum range queries examples
-* [Fenwick Tree](fenwick-tree) (Binary Indexed Tree)
+- [Binary Search Tree](binary-search-tree)
+- [AVL Tree](avl-tree)
+- [Red-Black Tree](red-black-tree)
+- [Segment Tree](segment-tree) - with min/max/sum range queries examples
+- [Fenwick Tree](fenwick-tree) (Binary Indexed Tree)
 
 In computer science, a **tree** is a widely used abstract data
 type (ADT) — or data structure implementing this ADT—that
@@ -29,9 +28,9 @@ root node, at the top, has no parent.
 
 ![Tree](./images/tree.jpeg)
 
-*Made with [okso.app](https://okso.app)*
+_Made with [okso.app](https://okso.app)_
 
 ## References
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Tree_(data_structure))
+- [Wikipedia](<https://en.wikipedia.org/wiki/Tree_(data_structure)>)
 - [YouTube](https://www.youtube.com/watch?v=oSWTXtMglKE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=8)

@@ -1,20 +1,23 @@
-# Hill Cipher
+# Thuật toán Mật mã Hill
 
-The **Hill cipher** is a [polygraphic substitution](https://en.wikipedia.org/wiki/Polygraphic_substitution) cipher based on linear algebra.
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Each letter is represented by a number [modulo](https://en.wikipedia.org/wiki/Modular_arithmetic) `26`. Though this is not an essential feature of the cipher, this simple scheme is often used:
+Mật mã Hill là một loại [mật mã thay thế đa ký tự](https://en.wikipedia.org/wiki/Polygraphic_substitution) dựa trên đại số tuyến tính.
 
-| **Letter** | A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z |
-| ------ | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **Number** | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 |
+Mỗi chữ cái được biểu diễn bằng một số [theo modulo](https://en.wikipedia.org/wiki/Modular_arithmetic) `26`. Mặc dù đây không phải là tính năng thiết yếu của thuật toán, nhưng đây là một phương án đơn giản thường được sử dụng:
 
-## Encryption
+| **Chữ cái** | A   | B   | C   | D   | E   | F   | G   | H   | I   | J   | K   | L   | M   | N   | O   | P   | Q   | R   | S   | T   | U   | V   | W   | X   | Y   | Z   |
+| ----------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Số**      | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  | 20  | 21  | 22  | 23  | 24  | 25  |
 
-To encrypt a message, each block of `n` letters (considered as an `n`-component vector) is multiplied by an invertible `n × n` matrix, against modulus `26`.
+## Mã hóa
 
-The matrix used for encryption is the _cipher key_, and it should be chosen randomly from the set of invertible `n × n` matrices (modulo `26`). The cipher can, of course, be adapted to an alphabet with any number of letters; all arithmetic just needs to be done modulo the number of letters instead of modulo `26`.
+Để mã hóa một thông điệp, mỗi khối `n` chữ cái (xem như một vector `n` thành phần) được nhân với một ma trận `n × n` khả nghịch, với modulo `26`.
 
-Consider the message `ACT`, and the key below (or `GYB/NQK/URP` in letters):
+Ma trận được sử dụng để mã hóa là _khóa mật mã_, và nó nên được chọn ngẫu nhiên từ tập hợp các ma trận `n × n` khả nghịch (theo modulo `26`). Mật mã có thể được điều chỉnh cho bảng chữ cái với bất kỳ số lượng chữ cái nào; tất cả các phép tính chỉ cần được thực hiện theo modulo số lượng chữ cái thay vì modulo `26`.
+
+Xét thông điệp `ACT`, và khóa dưới đây (hoặc `GYB/NQK/URP` bằng chữ):
 
 ```
 | 6   24   1  |
@@ -22,7 +25,7 @@ Consider the message `ACT`, and the key below (or `GYB/NQK/URP` in letters):
 | 20  17   15 |
 ```
 
-Since `A` is`0`, `C` is `2` and `T` is `19`, the message is the vector:
+Vì `A` là `0`, `C` là `2` và `T` là `19`, thông điệp là vector:
 
 ```
 |  0  |
@@ -30,7 +33,7 @@ Since `A` is`0`, `C` is `2` and `T` is `19`, the message is the vector:
 |  19 |
 ```
 
-Thus, the enciphered vector is given by:
+Do đó, vector được mã hóa là:
 
 ```
 | 6   24   1  |  |  0  |   |  67  |   |  15 |
@@ -38,9 +41,9 @@ Thus, the enciphered vector is given by:
 | 20  17   15 |  |  19 |   |  319 |   |  7  |
 ```
 
-which corresponds to a ciphertext of `POH`.
+tương ứng với văn bản mã hóa là `POH`.
 
-Now, suppose that our message is instead `CAT` (notice how we're using the same letters as in `ACT` here), or:
+Bây giờ, giả sử rằng thông điệp của chúng ta là `CAT` (lưu ý là chúng ta đang sử dụng cùng các chữ cái như trong `ACT` ở đây), hoặc:
 
 ```
 |  2  |
@@ -48,7 +51,7 @@ Now, suppose that our message is instead `CAT` (notice how we're using the same 
 |  19 |
 ```
 
-This time, the enciphered vector is given by:
+Lần này, vector được mã hóa là:
 
 ```
 | 6   24   1  |  |  2  |   |  31  |   |  5  |
@@ -56,11 +59,11 @@ This time, the enciphered vector is given by:
 | 20  17   15 |  |  19 |   |  325 |   |  13 |
 ```
 
-which corresponds to a ciphertext of `FIN`. Every letter has changed.
+tương ứng với văn bản mã hóa là `FIN`. Mỗi chữ cái đã thay đổi.
 
-## Decryption
+## Giải mã
 
-To decrypt the message, each block is multiplied by the inverse of the matrix used for encryption. We turn the ciphertext back into a vector, then simply multiply by the inverse matrix of the key matrix (`IFK/VIV/VMI` in letters). (See [matrix inversion](https://en.wikipedia.org/wiki/Matrix_inversion) for methods to calculate the inverse matrix.) We find that, modulo 26, the inverse of the matrix used in the previous example is:
+Để giải mã thông điệp, mỗi khối được nhân với nghịch đảo của ma trận được sử dụng để mã hóa. Chúng ta chuyển văn bản mã hóa trở lại thành vector, sau đó chỉ đơn giản nhân với ma trận nghịch đảo của ma trận khóa (`IFK/VIV/VMI` bằng chữ). (Xem [nghịch đảo ma trận](https://en.wikipedia.org/wiki/Matrix_inversion) để biết các phương pháp tính ma trận nghịch đảo.) Chúng ta thấy rằng, theo modulo 26, ma trận nghịch đảo của ma trận được sử dụng trong ví dụ trước là:
 
 ```
                 -1
@@ -69,7 +72,7 @@ To decrypt the message, each block is multiplied by the inverse of the matrix us
 | 20  17   15 |                | 21  12   8  |
 ```
 
-Taking the previous example ciphertext of `POH`, we get:
+Lấy ví dụ văn bản mã hóa trước là `POH`, chúng ta có:
 
 ```
 | 8   5    10 |  |  15 |   |  260 |   |  0  |
@@ -77,20 +80,19 @@ Taking the previous example ciphertext of `POH`, we get:
 | 21  12   8  |  |  7  |   |  539 |   |  19 |
 ```
 
-which gets us back to `ACT`, as expected.
+đưa chúng ta trở lại `ACT`, như mong đợi.
 
-## Defining the encrypting matrix
+## Định nghĩa ma trận mã hóa
 
-Two complications exist in picking the encrypting matrix:
+Có hai vấn đề tồn tại trong việc chọn ma trận mã hóa:
 
-1. Not all matrices have an inverse. The matrix will have an inverse if and only if its [determinant](https://en.wikipedia.org/wiki/Determinant) is not zero.
-2. The determinant of the encrypting matrix must not have any common factors with the modular base.
+1. Không phải tất cả các ma trận đều có nghịch đảo. Ma trận sẽ có nghịch đảo nếu và chỉ nếu [định thức](https://en.wikipedia.org/wiki/Determinant) của nó không phải là không.
+2. Định thức của ma trận mã hóa không được có các yếu tố chung với cơ số modulo.
 
-Thus, if we work modulo `26` as above, the determinant must be nonzero, and must not be divisible by `2` or `13`. If the determinant is `0`, or has common factors with the modular base, then the matrix cannot be used in the Hill cipher, and another matrix must be chosen (otherwise it will not be possible to decrypt). Fortunately, matrices which satisfy the conditions to be used in the Hill cipher are fairly common.
+Do đó, nếu chúng ta làm việc theo modulo `26` như trên, định thức phải khác không và không được chia hết cho `2` hoặc `13`. Nếu định thức là `0` hoặc có các yếu tố chung với cơ sở modulo, thì ma trận đó không thể được sử dụng trong mật mã Hill, và một ma trận khác phải được chọn (nếu không sẽ không thể giải mã). May mắn thay, các ma trận đáp ứng điều kiện để sử dụng trong mật mã Hill khá phổ biến.
 
-## References
+## Tài liệu tham khảo
 
-- [Hill cipher on Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)
-- [Matrix inversion on MathIsFun](https://www.mathsisfun.com/algebra/matrix-inverse.html)
+- [Mật mã Hill trên Wikipedia](https://en.wikipedia.org/wiki/Hill_cipher)
+- [Nghịch đảo ma trận trên MathIsFun](https://www.mathsisfun.com/algebra/matrix-inverse.html)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/hill-cipher/)
-

@@ -1,12 +1,7 @@
 # Graph
 
 _Read this in other languages:_
-[_简体中文_](README.zh-CN.md),
-[_Русский_](README.ru-RU.md),
-[_Français_](README.fr-FR.md),
-[_Português_](README.pt-BR.md),
-[_Українська_](README.uk-UA.md)
-
+[_Tiếng Việt_](README.md)
 
 In computer science, a **graph** is an abstract data type
 that is meant to implement the undirected graph and
@@ -26,10 +21,10 @@ represented by integer indices or references.
 
 ![Graph](./images/graph.jpeg)
 
-*Made with [okso.app](https://okso.app)*
+_Made with [okso.app](https://okso.app)_
 
 ## References
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))
+- [Wikipedia](<https://en.wikipedia.org/wiki/Graph_(abstract_data_type)>)
 - [Introduction to Graphs on YouTube](https://www.youtube.com/watch?v=gXgEDyodOJU&index=9&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
 - [Graphs representation on YouTube](https://www.youtube.com/watch?v=k1wraWzqtvQ&index=10&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

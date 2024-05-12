@@ -1,52 +1,31 @@
-# Kruskal's Algorithm
+# Thuật toán Kruskal - Kruskal's Algorithm
 
-_Read this in other languages:_
-[_한국어_](README.ko-KR.md)
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-Kruskal's algorithm is a minimum-spanning-tree algorithm which 
-finds an edge of the least possible weight that connects any two 
-trees in the forest. It is a greedy algorithm in graph theory 
-as it finds a minimum spanning tree for a connected weighted 
-graph adding increasing cost arcs at each step. This means it 
-finds a subset of the edges that forms a tree that includes every
-vertex, where the total weight of all the edges in the tree is 
-minimized. If the graph is not connected, then it finds a 
-minimum spanning forest (a minimum spanning tree for each 
-connected component).
+Thuật toán Kruskal là một thuật toán cây khung nhỏ nhất, tìm cạnh có trọng số nhỏ nhất có thể nối hai cây trong rừng. Đây là một thuật toán tham lam trong lý thuyết đồ thị khi nó tìm một cây khung nhỏ nhất cho một đồ thị có trọng số và liên thông, thêm các cung có chi phí tăng dần ở mỗi bước. Điều này có nghĩa là nó tìm một tập hợp các cạnh tạo thành một cây bao gồm mọi đỉnh, nơi tổng trọng số của tất cả các cạnh trong cây được tối thiểu hóa. Nếu đồ thị không liên thông, thì nó tìm một rừng khung nhỏ nhất (một cây khung nhỏ nhất cho mỗi thành phần liên thông).
 
 ![Kruskal Algorithm](https://upload.wikimedia.org/wikipedia/commons/5/5c/MST_kruskal_en.gif)
 
 ![Kruskal Demo](https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo.gif)
 
-A demo for Kruskal's algorithm based on Euclidean distance.
+Một mô phỏng cho thuật toán Kruskal dựa trên khoảng cách Euclid.
 
-## Minimum Spanning Tree
+## Cây Khung Nhỏ Nhất - Minimum Spanning Tree
 
-A **minimum spanning tree** (MST) or minimum weight spanning tree 
-is a subset of the edges of a connected, edge-weighted 
-(un)directed graph that connects all the vertices together, 
-without any cycles and with the minimum possible total edge 
-weight. That is, it is a spanning tree whose sum of edge weights 
-is as small as possible. More generally, any edge-weighted 
-undirected graph (not necessarily connected) has a minimum 
-spanning forest, which is a union of the minimum spanning 
-trees for its connected components.
+Một **cây khung nhỏ nhất** (MST) hay cây khung có trọng số nhỏ nhất là một tập hợp các cạnh của một đồ thị liên thông, có trọng số cạnh, (không) có hướng nối tất cả các đỉnh lại với nhau, không có chu trình và có tổng trọng số cạnh nhỏ nhất có thể. Nói cách khác, đó là một cây khung mà tổng trọng số của các cạnh là nhỏ nhất có thể. Một cách tổng quát hơn, bất kỳ đồ thị có trọng số cạnh không có hướng (không nhất thiết phải liên thông) đều có một rừng khung nhỏ nhất, là sự kết hợp của các cây khung nhỏ nhất cho các thành phần liên thông của nó.
 
 ![Minimum Spanning Tree](https://upload.wikimedia.org/wikipedia/commons/d/d2/Minimum_spanning_tree.svg)
 
-A planar graph and its minimum spanning tree. Each edge is 
-labeled with its weight, which here is roughly proportional 
-to its length.
+Một đồ thị phẳng và cây khung nhỏ nhất của nó. Mỗi cạnh được gắn nhãn với trọng số của nó, ở đây tương đương với chiều dài của nó.
 
 ![Minimum Spanning Tree](https://upload.wikimedia.org/wikipedia/commons/c/c9/Multiple_minimum_spanning_trees.svg)
 
-This figure shows there may be more than one minimum spanning 
-tree in a graph. In the figure, the two trees below the graph 
-are two possibilities of minimum spanning tree of the given graph.
+Hình này cho thấy có thể có nhiều hơn một cây khung nhỏ nhất trong một đồ thị. Trong hình, hai cây dưới đồ thị là hai khả năng của cây khung nhỏ nhất của đồ thị đã cho.
 
-## References
+## Tài liệu tham khảo
 
-- [Minimum Spanning Tree on Wikipedia](https://en.wikipedia.org/wiki/Minimum_spanning_tree)
-- [Kruskal's Algorithm on Wikipedia](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)
-- [Kruskal's Algorithm on YouTube by Tushar Roy](https://www.youtube.com/watch?v=fAuF0EuZVCk&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [Kruskal's Algorithm on YouTube by Michael Sambol](https://www.youtube.com/watch?v=71UQH7Pr9kU&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Cây Khung Nhỏ Nhất trên Wikipedia](https://en.wikipedia.org/wiki/Minimum_spanning_tree)
+- [Thuật toán Kruskal trên Wikipedia](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)
+- [Thuật toán Kruskal trên YouTube bởi Tushar Roy](https://www.youtube.com/watch?v=fAuF0EuZVCk&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Thuật toán Kruskal trên YouTube bởi Michael Sambol](https://www.youtube.com/watch?v=71UQH7Pr9kU&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

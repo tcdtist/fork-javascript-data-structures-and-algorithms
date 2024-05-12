@@ -1,7 +1,7 @@
 # Binary Search Tree
 
 _Read this in other languages:_
-[_Português_](README.pt-BR.md)
+[_Tiếng Việt_](README.md)
 
 In computer science, **binary search trees** (BST), sometimes called
 ordered or sorted binary trees, are a particular type of container:
@@ -30,7 +30,7 @@ The leaves are not drawn.
 
 ![Trie](./images/binary-search-tree.jpg)
 
-*Made with [okso.app](https://okso.app)*
+_Made with [okso.app](https://okso.app)_
 
 ## Pseudocode for Basic Operations
 
@@ -86,7 +86,6 @@ contains(root, value)
   end if
 end contains
 ```
-
 
 ### Deletion
 
@@ -265,7 +264,7 @@ end postorder
 
 ### Time Complexity
 
-| Access    | Search    | Insertion | Deletion  |
+|  Access   |  Search   | Insertion | Deletion  |
 | :-------: | :-------: | :-------: | :-------: |
 | O(log(n)) | O(log(n)) | O(log(n)) | O(log(n)) |
 

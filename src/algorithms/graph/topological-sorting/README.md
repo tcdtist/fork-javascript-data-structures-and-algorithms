@@ -1,55 +1,38 @@
-# Topological Sorting
+# Sắp xếp Topo - Topological Sorting
 
-In the field of computer science, a topological sort or 
-topological ordering of a directed graph is a linear ordering 
-of its vertices such that for every directed edge `uv` from 
-vertex `u` to vertex `v`, `u` comes before `v` in the ordering.
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-For instance, the vertices of the graph may represent tasks to 
-be performed, and the edges may represent constraints that one 
-task must be performed before another; in this application, a 
-topological ordering is just a valid sequence for the tasks.
+Trong lĩnh vực khoa học máy tính, sắp xếp topo hoặc sắp xếp topo của một đồ thị có hướng là một thứ tự tuyến tính của các đỉnh sao cho đối với mỗi cạnh có hướng `uv` từ đỉnh `u` đến đỉnh `v`, `u` đến trước `v` trong thứ tự.
 
-A topological ordering is possible if and only if the graph has
-no directed cycles, that is, if it is a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) 
-(DAG). Any DAG has at least one topological ordering, and algorithms are 
-known for constructing a topological ordering of any DAG in linear time.
+Ví dụ, các đỉnh của đồ thị có thể đại diện cho các nhiệm vụ cần thực hiện, và các cạnh có thể đại diện cho các ràng buộc rằng một nhiệm vụ phải được thực hiện trước nhiệm vụ khác; trong ứng dụng này, một thứ tự topo chỉ là một chuỗi hợp lệ cho các nhiệm vụ.
+
+Một thứ tự topo chỉ có thể có nếu đồ thị không có chu trình có hướng, tức là nếu nó là một [đồ thị không chu trình có hướng](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG). Mọi DAG đều có ít nhất một thứ tự topo, và có các thuật toán để xây dựng thứ tự topo của bất kỳ DAG nào trong thời gian tuyến tính.
 
 ![Directed Acyclic Graph](https://upload.wikimedia.org/wikipedia/commons/c/c6/Topological_Ordering.svg)
 
-A topological ordering of a directed acyclic graph: every edge goes from 
-earlier in the ordering (upper left) to later in the ordering (lower right). 
-A directed graph is acyclic if and only if it has a topological ordering.
+Một thứ tự topo của một đồ thị không chu trình có hướng: mỗi cạnh đi từ trước trong thứ tự (trên cùng bên trái) đến sau trong thứ tự (dưới cùng bên phải). Một đồ thị có hướng là không chu trình khi và chỉ khi nó có một thứ tự topo.
 
-## Example
+## Ví dụ
 
 ![Topologic Sorting](https://upload.wikimedia.org/wikipedia/commons/0/03/Directed_acyclic_graph_2.svg)
 
-The graph shown above has many valid topological sorts, including:
+Đồ thị được hiển thị ở trên có nhiều thứ tự topo hợp lệ, bao gồm:
 
-- `5, 7, 3, 11, 8, 2, 9, 10` (visual left-to-right, top-to-bottom)
-- `3, 5, 7, 8, 11, 2, 9, 10` (smallest-numbered available vertex first)
-- `5, 7, 3, 8, 11, 10, 9, 2` (fewest edges first)
-- `7, 5, 11, 3, 10, 8, 9, 2` (largest-numbered available vertex first)
-- `5, 7, 11, 2, 3, 8, 9, 10` (attempting top-to-bottom, left-to-right)
-- `3, 7, 8, 5, 11, 10, 2, 9` (arbitrary)
+- `5, 7, 3, 11, 8, 2, 9, 10` (trực quan từ trái sang phải, từ trên xuống dưới)
+- `3, 5, 7, 8, 11, 2, 9, 10` (đỉnh có số nhỏ nhất có sẵn đầu tiên)
+- `5, 7, 3, 8, 11, 10, 9, 2` (ít cạnh nhất đầu tiên)
+- `7, 5, 11, 3, 10, 8, 9, 2` (đỉnh có số lớn nhất có sẵn đầu tiên)
+- `5, 7, 11, 2, 3, 8, 9, 10` (cố gắng từ trên xuống dưới, từ trái sang phải)
+- `3, 7, 8, 5, 11, 10, 2, 9` (tùy ý)
 
-## Application
+## Ứng dụng
 
-The canonical application of topological sorting is in 
-**scheduling a sequence of jobs** or tasks based on their dependencies. The jobs 
-are represented by vertices, and there is an edge from `x` to `y` if 
-job `x` must be completed before job `y` can be started (for 
-example, when washing clothes, the washing machine must finish 
-before we put the clothes in the dryer). Then, a topological sort 
-gives an order in which to perform the jobs.
+Ứng dụng chuẩn của sắp xếp topo là trong **lập lịch một chuỗi công việc** hoặc nhiệm vụ dựa trên sự phụ thuộc của chúng. Các công việc được đại diện bởi các đỉnh, và có một cạnh từ `x` đến `y` nếu công việc `x` phải hoàn thành trước khi công việc `y` có thể bắt đầu (ví dụ, khi giặt quần áo, máy giặt phải hoàn thành trước khi chúng ta cho quần áo vào máy sấy). Sau đó, một thứ tự topo cung cấp một thứ tự để thực hiện các công việc.
 
-Other application is **dependency resolution**. Each vertex is a package
-and each edge is a dependency of package `a` on package 'b'. Then topological
-sorting will provide a sequence of installing dependencies in a way that every
-next dependency has its dependent packages to be installed in prior.
+Ứng dụng khác là **giải quyết phụ thuộc**. Mỗi đỉnh là một gói và mỗi cạnh là một sự phụ thuộc của gói `a` vào gói 'b'. Sau đó, sắp xếp topo sẽ cung cấp một chuỗi cài đặt các phụ thuộc một cách mà mỗi phụ thuộc tiếp theo đã có các gói phụ thuộc của nó được cài đặt trước.
 
-## References
+## Tài liệu tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Topological_sorting)
-- [Topological Sorting on YouTube by Tushar Roy](https://www.youtube.com/watch?v=ddTC4Zovtbc&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Sắp xếp Topo trên YouTube bởi Tushar Roy](https://www.youtube.com/watch?v=ddTC4Zovtbc&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

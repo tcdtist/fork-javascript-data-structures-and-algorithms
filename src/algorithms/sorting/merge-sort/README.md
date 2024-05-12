@@ -1,8 +1,7 @@
 # Merge Sort
 
 _Read this in other languages:_
-[_한국어_](README.ko-KR.md),
-[_Português_](README.pt-BR.md)
+[_Tiếng Việt_](README.md)
 
 In computer science, merge sort (also commonly spelled
 mergesort) is an efficient, general-purpose,
@@ -28,9 +27,9 @@ emulate merge sort (top-down).
 
 ## Complexity
 
-| Name                  | Best            | Average             | Worst               | Memory    | Stable    | Comments  |
-| --------------------- | :-------------: | :-----------------: | :-----------------: | :-------: | :-------: | :-------- |
-| **Merge sort**        | n&nbsp;log(n)   | n&nbsp;log(n)       | n&nbsp;log(n)       | n         | Yes       |           |
+| Name           |     Best      |    Average    |     Worst     | Memory | Stable | Comments |
+| -------------- | :-----------: | :-----------: | :-----------: | :----: | :----: | :------- |
+| **Merge sort** | n&nbsp;log(n) | n&nbsp;log(n) | n&nbsp;log(n) |   n    |  Yes   |          |
 
 ## References
 

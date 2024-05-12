@@ -1,16 +1,19 @@
-# Breadth-First Search (BFS)
+# Tìm kiếm theo chiều rộng - Breadth-First Search (BFS)
 
-Breadth-first search (BFS) is an algorithm for traversing, 
-searching tree, or graph data structures. It starts at
-the tree root (or some arbitrary node of a graph, sometimes 
-referred to as a 'search key') and explores the neighbor
-nodes first, before moving to the next level neighbors.
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-![Algorithm Visualization](https://upload.wikimedia.org/wikipedia/commons/5/5d/Breadth-First-Search-Algorithm.gif)
+Tìm kiếm theo chiều rộng (BFS) là một thuật toán dùng để duyệt,
+tìm kiếm trong cấu trúc dữ liệu cây hoặc đồ thị. Thuật toán bắt đầu từ
+gốc của cây (hoặc một nút tùy ý của đồ thị, đôi khi
+được gọi là 'khóa tìm kiếm') và khám phá các nút lân cận
+đầu tiên, trước khi chuyển sang các nút lân cận ở cấp độ tiếp theo.
 
-## References
+![Minh họa thuật toán](https://upload.wikimedia.org/wikipedia/commons/5/5d/Breadth-First-Search-Algorithm.gif)
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Breadth-first_search)
-- [Tree Traversals (Inorder, Preorder and Postorder)](https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/)
-- [BFS vs DFS](https://www.geeksforgeeks.org/bfs-vs-dfs-binary-tree/)
-- [BFS Visualization](https://www.cs.usfca.edu/~galles/visualization/BFS.html)
+## Tham khảo
+
+- [Wikipedia](https://vi.wikipedia.org/wiki/T%C3%ACm_ki%E1%BA%BFm_theo_chi%E1%BB%81u_r%E1%BB%99ng)
+- [Duyệt cây (Inorder, Preorder và Postorder)](https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/)
+- [So sánh BFS và DFS](https://www.geeksforgeeks.org/bfs-vs-dfs-binary-tree/)
+- [Minh họa BFS](https://www.cs.usfca.edu/~galles/visualization/BFS.html)

@@ -1,33 +1,33 @@
-# Caesar Cipher Algorithm
+# Thuật toán Mật mã Caesar
 
-_Read this in other languages:_
-[_Русский_](README.ru-RU.md)
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In cryptography, a **Caesar cipher**, also known as **Caesar's cipher**, the **shift cipher**, **Caesar's code** or **Caesar shift**, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a left shift of `3`, `D` would be replaced by `A`, `E` would become `B`, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
+Trong mật mã học, **Mật mã Caesar**, còn được gọi là **mã của Caesar**, **mật mã dịch chuyển**, **mã Caesar** hoặc **dịch chuyển Caesar**, là một trong những kỹ thuật mã hóa đơn giản và được biết đến rộng rãi nhất. Đây là một dạng của mật mã thay thế, trong đó mỗi chữ cái trong văn bản gốc được thay thế bởi một chữ cái cách đó một số vị trí nhất định trong bảng chữ cái. Ví dụ, với một dịch chuyển sang trái `3`, `D` sẽ được thay thế bởi `A`, `E` sẽ trở thành `B`, v.v. Phương pháp này được đặt theo tên Julius Caesar, người đã sử dụng nó trong thư từ cá nhân của mình.
 
-![Caesar Cipher Algorithm](https://upload.wikimedia.org/wikipedia/commons/4/4a/Caesar_cipher_left_shift_of_3.svg)
+![Thuật toán Mật mã Caesar](https://upload.wikimedia.org/wikipedia/commons/4/4a/Caesar_cipher_left_shift_of_3.svg)
 
-## Example
+## Ví dụ
 
-The transformation can be represented by aligning two alphabets; the cipher alphabet is the plain alphabet rotated left or right by some number of positions. For instance, here is a Caesar cipher using a left rotation of three places, equivalent to a right shift of 23 (the shift parameter is used as the key):
-
-```text
-Plain:    ABCDEFGHIJKLMNOPQRSTUVWXYZ
-Cipher:   XYZABCDEFGHIJKLMNOPQRSTUVW
-```
-
-When encrypting, a person looks up each letter of the message in the "plain" line and writes down the corresponding letter in the "cipher" line.
+Sự biến đổi này có thể được thể hiện bằng cách căn chỉnh hai bảng chữ cái; bảng chữ cái mã là bảng chữ cái gốc xoay trái hoặc phải một số vị trí nhất định. Ví dụ, đây là một mật mã Caesar sử dụng một xoay trái ba vị trí, tương đương với một dịch chuyển phải 23 (tham số dịch chuyển được sử dụng như là khóa):
 
 ```text
-Plaintext:  THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
-Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+Bảng chữ cái gốc:  ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Bảng chữ cái mã:   XYZABCDEFGHIJKLMNOPQRSTUVW
 ```
 
-## Complexity
+Khi mã hóa, người ta tìm từng chữ cái của tin nhắn trong dòng "bảng chữ cái gốc" và viết ra chữ cái tương ứng trong dòng "bảng chữ cái mã".
 
-- Time: `O(|n|)`
-- Space: `O(|n|)`
+```text
+Văn bản gốc:  THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+Văn bản mã:   QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+```
 
-## References
+## Độ phức tạp
 
-- [Caesar cipher on Wikipedia](https://en.wikipedia.org/wiki/Caesar_cipher)
+- Thời gian: `O(|n|)`
+- Không gian: `O(|n|)`
+
+## Tài liệu tham khảo
+
+- [Mật mã Caesar trên Wikipedia](https://en.wikipedia.org/wiki/Caesar_cipher)

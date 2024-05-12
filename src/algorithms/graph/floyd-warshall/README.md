@@ -1,94 +1,92 @@
-# Floyd–Warshall Algorithm
+# Thuật toán Floyd–Warshall
 
-In computer science, the **Floyd–Warshall algorithm** is an algorithm for finding
-shortest paths in a weighted graph with positive or negative edge weights (but
-with no negative cycles). A single execution of the algorithm will find the 
-lengths (summed weights) of shortest paths between all pairs of vertices. Although 
-it does not return details of the paths themselves, it is possible to reconstruct 
-the paths with simple modifications to the algorithm.
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-## Algorithm
+Trong khoa học máy tính, **thuật toán Floyd–Warshall** là một thuật toán dùng để tìm
+đường đi ngắn nhất trong một đồ thị có trọng số dương hoặc âm (nhưng
+không có chu trình âm). Một lần thực hiện thuật toán sẽ tìm ra
+độ dài (tổng trọng số) của đường đi ngắn nhất giữa tất cả các cặp đỉnh. Mặc dù
+nó không trả về chi tiết của các đường đi, nhưng có thể tái tạo
+các đường đi với các thay đổi đơn giản cho thuật toán.
 
-The Floyd–Warshall algorithm compares all possible paths through the graph between 
-each pair of vertices. It is able to do this with `O(|V|^3)` comparisons in a graph.
-This is remarkable considering that there may be up to `|V|^2` edges in the graph, 
-and every combination of edges is tested. It does so by incrementally improving an 
-estimate on the shortest path between two vertices, until the estimate is optimal.
+## Thuật toán
 
-Consider a graph `G` with vertices `V` numbered `1` through `N`. Further consider 
-a function `shortestPath(i, j, k)` that returns the shortest possible path 
-from `i` to `j` using vertices only from the set `{1, 2, ..., k}` as 
-intermediate points along the way. Now, given this function, our goal is to 
-find the shortest path from each `i` to each `j` using only vertices 
-in `{1, 2, ..., N}`.
+Thuật toán Floyd–Warshall so sánh tất cả các đường đi có thể qua đồ thị giữa
+mỗi cặp đỉnh. Nó có thể làm điều này với `O(|V|^3)` so sánh trong một đồ thị.
+Điều này đáng chú ý khi xét rằng có thể có tới `|V|^2` cạnh trong đồ thị,
+và mọi tổ hợp cạnh đều được kiểm tra. Nó làm như vậy bằng cách cải thiện dần dần một
+ước lượng về đường đi ngắn nhất giữa hai đỉnh, cho đến khi ước lượng là tối ưu.
 
-![Recursive Formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/f9b75e25063384ccca499c56f9a279abf661ad3b)
+Xem xét một đồ thị `G` với các đỉnh `V` được đánh số từ `1` đến `N`. Xem xét thêm
+một hàm `shortestPath(i, j, k)` trả về đường đi ngắn nhất có thể
+từ `i` đến `j` sử dụng chỉ các đỉnh từ tập `{1, 2, ..., k}` như
+các điểm trung gian dọc theo đường đi. Bây giờ, với hàm này, mục tiêu của chúng ta là
+tìm đường đi ngắn nhất từ mỗi `i` đến mỗi `j` sử dụng chỉ các đỉnh
+trong `{1, 2, ..., N}`.
 
-![Recursive Formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/34ac7c89bbb18df3fd660225fd38997079e5e513)
-![Recursive Formula](https://wikimedia.org/api/rest_v1/media/math/render/svg/0326d6c14def89269c029da59eba012d0f2edc9d)
+![Công thức đệ quy](https://wikimedia.org/api/rest_v1/media/math/render/svg/f9b75e25063384ccca499c56f9a279abf661ad3b)
 
-This formula is the heart of the Floyd–Warshall algorithm.
+![Công thức đệ quy](https://wikimedia.org/api/rest_v1/media/math/render/svg/34ac7c89bbb18df3fd660225fd38997079e5e513)
+![Công thức đệ quy](https://wikimedia.org/api/rest_v1/media/math/render/svg/0326d6c14def89269c029da59eba012d0f2edc9d)
 
-## Example
+Công thức này là trái tim của thuật toán Floyd–Warshall.
 
-The algorithm above is executed on the graph on the left below:
+## Ví dụ
 
-![Example](https://upload.wikimedia.org/wikipedia/commons/2/2e/Floyd-Warshall_example.svg)
+Thuật toán trên được thực hiện trên đồ thị bên trái dưới đây:
 
-In the tables below `i` is row numbers and `j` is column numbers.
+![Ví dụ](https://upload.wikimedia.org/wikipedia/commons/2/2e/Floyd-Warshall_example.svg)
 
+Trong các bảng dưới đây `i` là số hàng và `j` là số cột.
 
 **k = 0**
 
-|       | 1   | 2   | 3   | 4   |
-|:-----:|:---:|:---:|:---:|:---:|
-| **1** |	0   |	∞   |	−2  | ∞   |
-| **2** |	4   |	0   |	3	  | ∞   |
-| **3** |	∞   |	∞   |	0	  | 2   |
-| **4** |	∞   |	−1  | ∞   | 0   |
-
+|       |  1  |  2  |  3  |  4  |
+| :---: | :-: | :-: | :-: | :-: |
+| **1** |  0  |  ∞  | −2  |  ∞  |
+| **2** |  4  |  0  |  3  |  ∞  |
+| **3** |  ∞  |  ∞  |  0  |  2  |
+| **4** |  ∞  | −1  |  ∞  |  0  |
 
 **k = 1**
 
-|       | 1   | 2   | 3   | 4   |
-|:-----:|:---:|:---:|:---:|:---:|
-| **1** | 0   | ∞   | −2  | ∞   |
-| **2** | 4   | 0   |  2  | ∞   |
-| **3** | ∞   | ∞   |  0  | 2   |
-| **4** | ∞   | −   |  ∞  | 0   |
-
+|       |  1  |  2  |  3  |  4  |
+| :---: | :-: | :-: | :-: | :-: |
+| **1** |  0  |  ∞  | −2  |  ∞  |
+| **2** |  4  |  0  |  2  |  ∞  |
+| **3** |  ∞  |  ∞  |  0  |  2  |
+| **4** |  ∞  |  −  |  ∞  |  0  |
 
 **k = 2**
 
-|       | 1   | 2   | 3   | 4   |
-|:-----:|:---:|:---:|:---:|:---:|
-| **1** |	0   |	∞   |	−2  | ∞   |
-| **2** |	4   |	0   | 2	  | ∞   |
-| **3** |	∞   |	∞	  | 0	  | 2   |
-| **4** |	3   |	−1  | 1   | 0   |
-
+|       |  1  |  2  |  3  |  4  |
+| :---: | :-: | :-: | :-: | :-: |
+| **1** |  0  |  ∞  | −2  |  ∞  |
+| **2** |  4  |  0  |  2  |  ∞  |
+| **3** |  ∞  |  ∞  |  0  |  2  |
+| **4** |  3  | −1  |  1  |  0  |
 
 **k = 3**
 
-|       | 1   | 2   | 3   | 4   |
-|:-----:|:---:|:---:|:---:|:---:|
-| **1** |	0   |	∞   |	−2  | 0   |
-| **2** |	4   |	0   |	2	  | 4   |
-| **3** |	∞   |	∞   |	0	  | 2   |
-| **4** |	3   |	−1  | 1   | 0   |
-
+|       |  1  |  2  |  3  |  4  |
+| :---: | :-: | :-: | :-: | :-: |
+| **1** |  0  |  ∞  | −2  |  0  |
+| **2** |  4  |  0  |  2  |  4  |
+| **3** |  ∞  |  ∞  |  0  |  2  |
+| **4** |  3  | −1  |  1  |  0  |
 
 **k = 4**
 
-|       | 1   | 2   | 3   | 4   |
-|:-----:|:---:|:---:|:---:|:---:|
-| **1** |	0   |	−1  | −2  | 0   |
-| **2** |	4   |	0	  | 2	  | 4   |
-| **3** |	5   |	1	  | 0	  | 2   |
-| **4** |	3   |	−1  | 1   | 0   |
+|       |  1  |  2  |  3  |  4  |
+| :---: | :-: | :-: | :-: | :-: |
+| **1** |  0  | −1  | −2  |  0  |
+| **2** |  4  |  0  |  2  |  4  |
+| **3** |  5  |  1  |  0  |  2  |
+| **4** |  3  | −1  |  1  |  0  |
 
-## References
+## Tham khảo
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm)
-- [YouTube (by Abdul Bari)](https://www.youtube.com/watch?v=oNI0rf2P9gE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=74)
-- [YouTube (by Tushar Roy)](https://www.youtube.com/watch?v=LwJdNfdLF9s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=75)
+- [Wikipedia](https://vi.wikipedia.org/wiki/Thu%E1%BA%ADt_to%C3%A1n_Floyd%E2%80%93Warshall)
+- [YouTube (bởi Abdul Bari)](https://www.youtube.com/watch?v=oNI0rf2P9gE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=74)
+- [YouTube (bởi Tushar Roy)](https://www.youtube.com/watch?v=LwJdNfdLF9s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=75)

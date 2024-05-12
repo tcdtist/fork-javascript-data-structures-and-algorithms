@@ -1,28 +1,27 @@
-# Dijkstra's Algorithm
+# Thuật toán Dijkstra
 
-_Read this in other languages:_
-[_한국어_](README.ko-KR.md)
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-Dijkstra's algorithm is an algorithm for finding the shortest 
-paths between nodes in a graph, which may represent, for example, 
-road networks. 
+Thuật toán Dijkstra là một thuật toán dùng để tìm đường đi ngắn nhất
+giữa các nút trong một đồ thị, ví dụ như mạng lưới đường bộ.
 
-The algorithm exists in many variants; Dijkstra's original variant 
-found the shortest path between two nodes, but a more common 
-variant fixes a single node as the "source" node and finds 
-shortest paths from the source to all other nodes in the graph, 
-producing a shortest-path tree.
+Thuật toán này có nhiều biến thể; biến thể gốc của Dijkstra
+tìm đường đi ngắn nhất giữa hai nút, nhưng một biến thể phổ biến hơn
+đặt một nút duy nhất là nút "nguồn" và tìm
+đường đi ngắn nhất từ nút nguồn đến tất cả các nút khác trong đồ thị,
+tạo ra một cây đường đi ngắn nhất.
 
 ![Dijkstra](https://upload.wikimedia.org/wikipedia/commons/5/57/Dijkstra_Animation.gif)
 
-Dijkstra's algorithm to find the shortest path between `a` and `b`.
-It picks the unvisited vertex with the lowest distance, 
-calculates the distance through it to each unvisited neighbor, 
-and updates the neighbor's distance if smaller. Mark visited
-(set to red) when done with neighbors.
+Thuật toán Dijkstra để tìm đường đi ngắn nhất giữa `a` và `b`.
+Nó chọn nút chưa được thăm có khoảng cách thấp nhất,
+tính toán khoảng cách thông qua nó đến mỗi láng giềng chưa được thăm,
+và cập nhật khoảng cách của láng giềng nếu nhỏ hơn. Đánh dấu đã thăm
+(đặt thành màu đỏ) khi hoàn thành với các láng giềng.
 
-## References
+## Tham khảo
 
-- [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
-- [On YouTube by Nathaniel Fan](https://www.youtube.com/watch?v=gdmfOwyQlcI&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [On YouTube by Tushar Roy](https://www.youtube.com/watch?v=lAXZGERcDf4&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Wikipedia](https://vi.wikipedia.org/wiki/Thu%E1%BA%ADt_to%C3%A1n_Dijkstra)
+- [Trên YouTube bởi Nathaniel Fan](https://www.youtube.com/watch?v=gdmfOwyQlcI&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Trên YouTube bởi Tushar Roy](https://www.youtube.com/watch?v=lAXZGERcDf4&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

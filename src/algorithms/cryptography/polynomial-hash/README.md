@@ -1,63 +1,47 @@
-# Polynomial Rolling Hash
+# Băm Đa Thức Cuộn
 
-## Hash Function
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-**Hash functions** are used to map large data sets of elements of an arbitrary 
-length (*the keys*) to smaller data sets of elements of a fixed length
-(*the fingerprints*).
+## Hàm Băm
 
-The basic application of hashing is efficient testing of equality of keys by
-comparing their fingerprints.
+**Hàm băm** được sử dụng để ánh xạ các tập dữ liệu lớn các phần tử có chiều dài tùy ý (_các khóa_) thành các tập dữ liệu nhỏ hơn các phần tử có chiều dài cố định (_các dấu vân tay_).
 
-A *collision* happens when two different keys have the same fingerprint. The way 
-in which collisions are handled is crucial in most applications of hashing. 
-Hashing is particularly useful in construction of efficient practical algorithms.
+Ứng dụng cơ bản của băm là kiểm tra hiệu quả sự bằng nhau của các khóa bằng cách so sánh các dấu vân tay của chúng.
 
-## Rolling Hash
+Một _xung đột_ xảy ra khi hai khóa khác nhau có cùng một dấu vân tay. Cách xử lý các xung đột là rất quan trọng trong hầu hết các ứng dụng của băm. Băm đặc biệt hữu ích trong việc xây dựng các thuật toán thực tiễn hiệu quả.
 
-A **rolling hash** (also known as recursive hashing or rolling checksum) is a hash
-function where the input is hashed in a window that moves through the input.
+## Băm Cuộn
 
-A few hash functions allow a rolling hash to be computed very quickly — the new 
-hash value is rapidly calculated given only the following data:
+**Băm cuộn** (còn được gọi là băm đệ quy hoặc checksum cuộn) là một hàm băm nơi đầu vào được băm trong một cửa sổ di chuyển qua đầu vào.
 
-- old hash value,
-- the old value removed from the window,
-- and the new value added to the window.
+Một số hàm băm cho phép băm cuộn được tính toán rất nhanh — giá trị băm mới được tính nhanh chóng chỉ với dữ liệu sau:
 
-## Polynomial String Hashing
+- giá trị băm cũ,
+- giá trị cũ được loại bỏ khỏi cửa sổ,
+- và giá trị mới được thêm vào cửa sổ.
 
-An ideal hash function for strings should obviously depend both on the *multiset* of
-the symbols present in the key and on the *order* of the symbols. The most common 
-family of such hash functions treats the symbols of a string as coefficients of 
-a *polynomial* with an integer variable `p` and computes its value modulo an 
-integer constant `M`:
+## Băm Chuỗi Đa Thức
 
-The *Rabin–Karp string search algorithm* is often explained using a very simple
-rolling hash function that only uses multiplications and 
-additions - **polynomial rolling hash**:
+Một hàm băm lý tưởng cho chuỗi nên phụ thuộc vào cả _multiset_ của các ký tự có trong khóa và _thứ tự_ của các ký tự. Họ hàm băm phổ biến nhất xử lý các ký tự của một chuỗi như các hệ số của một _đa thức_ với biến số nguyên `p` và tính giá trị của nó theo mô-đun hằng số nguyên `M`:
 
-> H(s<sub>0</sub>, s<sub>1</sub>, ..., s<sub>k</sub>) = s<sub>0</sub> * p<sup>k-1</sup> + s<sub>1</sub> * p<sup>k-2</sup> + ... + s<sub>k</sub> * p<sup>0</sup>
+_Thuật toán tìm kiếm chuỗi Rabin–Karp_ thường được giải thích sử dụng một hàm băm cuộn rất đơn giản chỉ sử dụng phép nhân và phép cộng — **băm đa thức cuộn**:
 
-where `p` is a constant, and *(s<sub>1</sub>, ... , s<sub>k</sub>)* are the input
-characters.
+> H(s<sub>0</sub>, s<sub>1</sub>, ..., s<sub>k</sub>) = s<sub>0</sub> _ p<sup>k-1</sup> + s<sub>1</sub> _ p<sup>k-2</sup> + ... + s<sub>k</sub> \* p<sup>0</sup>
 
-For example we can convert short strings to key numbers by multiplying digit codes by 
-powers of a constant. The three letter word `ace` could turn into a number 
-by calculating:
+trong đó `p` là hằng số, và _(s<sub>1</sub>, ..., s<sub>k</sub>)_ là các ký tự đầu vào.
 
-> key = 1 * 26<sup>2</sup> + 3 * 26<sup>1</sup> + 5 * 26<sup>0</sup>
+Ví dụ, chúng ta có thể chuyển đổi chuỗi ngắn thành số khóa bằng cách nhân các mã số ký tự với lũy thừa của một hằng số. Từ ba chữ cái `ace` có thể được chuyển thành một số bằng cách tính:
 
-In order to avoid manipulating huge `H` values, all math is done modulo `M`.
+> khóa = 1 _ 26<sup>2</sup> + 3 _ 26<sup>1</sup> + 5 \* 26<sup>0</sup>
 
-> H(s<sub>0</sub>, s<sub>1</sub>, ..., s<sub>k</sub>) = (s<sub>0</sub> * p<sup>k-1</sup> + s<sub>1</sub> * p<sup>k-2</sup> + ... + s<sub>k</sub> * p<sup>0</sup>) mod M
+Để tránh xử lý các giá trị `H` quá lớn, tất cả các phép toán đều được thực hiện theo mô-đun `M`.
 
-A careful choice of the parameters `M`, `p` is important to obtain “good”
-properties of the hash function, i.e., low collision rate.
+> H(s<sub>0</sub>, s<sub>1</sub>, ..., s<sub>k</sub>) = (s<sub>0</sub> _ p<sup>k-1</sup> + s<sub>1</sub> _ p<sup>k-2</sup> + ... + s<sub>k</sub> \* p<sup>0</sup>) mod M
 
-This approach has the desirable attribute of involving all the characters in the 
-input string. The calculated key value can then be hashed into an array index in
-the usual way:
+Việc lựa chọn cẩn thận các tham số `M`, `p` là quan trọng để có được các thuộc tính "tốt" của hàm băm, tức là tỷ lệ xung đột thấp.
+
+Cách tiếp cận này có đặc điểm mong muốn là liên quan đến tất cả các ký tự trong chuỗi đầu vào. Giá trị khóa tính toán sau đó có thể được băm thành chỉ số mảng theo cách thông thường:
 
 ```javascript
 function hash(key, arraySize) {
@@ -66,28 +50,22 @@ function hash(key, arraySize) {
   let hash = 0;
   for (let charIndex = 0; charIndex < key.length; charIndex += 1) {
     const charCode = key.charCodeAt(charIndex);
-    hash += charCode * (base ** (key.length - charIndex - 1));
+    hash += charCode * base ** (key.length - charIndex - 1);
   }
 
   return hash % arraySize;
 }
 ```
 
-The `hash()` method is not as efficient as it might be. Other than the 
-character conversion, there are two multiplications and an addition inside 
-the loop. We can eliminate one multiplication by using **Horner's method*:
- 
-> a<sub>4</sub> * x<sup>4</sup> + a<sub>3</sub> * x<sup>3</sup> + a<sub>2</sub> * x<sup>2</sup> + a<sub>1</sub> * x<sup>1</sup> + a<sub>0</sub> = (((a<sub>4</sub> * x + a<sub>3</sub>) * x + a<sub>2</sub>) * x + a<sub>1</sub>) * x + a<sub>0</sub>
+Phương thức `hash()` không hiệu quả như nó có thể. Ngoài việc chuyển đổi ký tự, có hai phép nhân và một phép cộng bên trong vòng lặp. Chúng ta có thể loại bỏ một phép nhân bằng cách sử dụng **phương pháp Horner**:
 
-In other words:
+> a<sub>4</sub> _ x<sup>4</sup> + a<sub>3</sub> _ x<sup>3</sup> + a<sub>2</sub> _ x<sup>2</sup> + a<sub>1</sub> _ x<sup>1</sup> + a<sub>0</sub> = (((a<sub>4</sub> _ x + a<sub>3</sub>) _ x + a<sub>2</sub>) _ x + a<sub>1</sub>) _ x + a<sub>0</sub>
 
-> H<sub>i</sub> = (P * H<sub>i-1</sub> + S<sub>i</sub>) mod M
+Nói cách khác:
 
-The `hash()` cannot handle long strings because the hashVal exceeds the size of 
-int. Notice that the key always ends up being less than the array size. 
-In Horner's method we can apply the modulo (%) operator at each step in the 
-calculation. This gives the same result as applying the modulo operator once at 
-the end, but avoids the overflow.
+> H<sub>i</sub> = (P \* H<sub>i-1</sub> + S<sub>i</sub>) mod M
+
+Phương thức `hash()` không thể xử lý chuỗi dài vì hashVal vượt quá kích thước của int. Lưu ý rằng khóa luôn nhỏ hơn kích thước mảng. Trong phương pháp Horner, chúng ta có thể áp dụng toán tử modulo (%) tại mỗi bước trong tính toán. Điều này cho kết quả giống như áp dụng toán tử modulo một lần ở cuối, nhưng tránh được tràn số.
 
 ```javascript
 function hash(key, arraySize) {
@@ -103,14 +81,11 @@ function hash(key, arraySize) {
 }
 ```
 
-Polynomial hashing has a rolling property: the fingerprints can be updated 
-efficiently when symbols are added or removed at the ends of the string
-(provided that an array of powers of p modulo M of sufficient length is stored).
-The popular Rabin–Karp pattern matching algorithm is based on this property
+Băm đa thức có một tính năng cuộn: các dấu vân tay có thể được cập nhật hiệu quả khi các ký tự được thêm vào hoặc loại bỏ ở các đầu của chuỗi (miễn là một mảng của các lũy thừa của p modulo M có độ dài đủ được lưu trữ). Thuật toán tìm kiếm mẫu Rabin–Karp phổ biến dựa trên tính năng này.
 
-## References
+## Tài liệu tham khảo
 
-- [Where to Use Polynomial String Hashing](https://www.mii.lt/olympiads_in_informatics/pdf/INFOL119.pdf)
-- [Hashing on uTexas](https://www.cs.utexas.edu/~mitra/csSpring2017/cs313/lectures/hash.html)
-- [Hash Function on Wikipedia](https://en.wikipedia.org/wiki/Hash_function)
-- [Rolling Hash on Wikipedia](https://en.wikipedia.org/wiki/Rolling_hash)
+- [Nơi sử dụng Băm Chuỗi Đa Thức](https://www.mii.lt/olympiads_in_informatics/pdf/INFOL119.pdf)
+- [Băm trên uTexas](https://www.cs.utexas.edu/~mitra/csSpring2017/cs313/lectures/hash.html)
+- [Hàm Băm trên Wikipedia](https://en.wikipedia.org/wiki/Hash_function)
+- [Băm Cuộn trên Wikipedia](https://en.wikipedia.org/wiki/Rolling_hash)

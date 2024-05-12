@@ -1,23 +1,22 @@
-# Reversed Linked List Traversal
+# Duyệt danh sách liên kết theo thứ tự ngược lại
 
-_Read this in other languages:_
-[_中文_](README.zh-CN.md),
-[_Português_](README.pt-BR.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-The task is to traverse the given linked list in reversed order.
+Nhiệm vụ là duyệt danh sách liên kết đã cho theo thứ tự ngược lại.
 
-For example for the following linked list: 
+Ví dụ cho danh sách liên kết sau:
 
 ![](https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg)
 
-The order of traversal should be:
+Thứ tự duyệt sẽ là:
 
 ```text
 37 → 99 → 12
 ```
 
-The time complexity is `O(n)` because we visit every node only once.
+Độ phức tạp về thời gian là `O(n)` vì chúng ta chỉ duyệt qua mỗi nút một lần.
 
-## Reference
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Linked_list)

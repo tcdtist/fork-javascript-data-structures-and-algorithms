@@ -1,9 +1,7 @@
 # Linked List Traversal
 
-_Read this in other languages:_
-[_Русский_](README.ru-RU.md),
-[_中文_](README.zh-CN.md),
-[_Português_](README.pt-BR.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
 The task is to traverse the given linked list in straight order.
 

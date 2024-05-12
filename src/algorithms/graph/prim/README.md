@@ -1,47 +1,31 @@
-# Prim's Algorithm
+# Thuật toán Prim - Prim's Algorithm
 
-In computer science, **Prim's algorithm** is a greedy algorithm that 
-finds a minimum spanning tree for a weighted undirected graph. 
+_Đọc tài liệu này bằng ngôn ngữ khác:_
+[_Tiếng Anh_](README.en-EN.md)
 
-The algorithm operates by building this tree one vertex at a 
-time, from an arbitrary starting vertex, at each step adding 
-the cheapest possible connection from the tree to another vertex.
+Trong khoa học máy tính, **Thuật toán Prim** là một thuật toán tham lam tìm cây khung nhỏ nhất cho một đồ thị vô hướng có trọng số.
+
+Thuật toán hoạt động bằng cách xây dựng cây này từng đỉnh một lần, bắt đầu từ một đỉnh bất kỳ, và tại mỗi bước thêm vào kết nối có chi phí thấp nhất có thể từ cây tới một đỉnh khác.
 
 ![Prim's Algorithm](https://upload.wikimedia.org/wikipedia/commons/f/f7/Prim%27s_algorithm.svg)
 
-Prim's algorithm starting at vertex `A`. In the third step, edges 
-`BD` and `AB` both have weight `2`, so `BD` is chosen arbitrarily. 
-After that step, `AB` is no longer a candidate for addition 
-to the tree because it links two nodes that are already 
-in the tree.
+Thuật toán Prim bắt đầu tại đỉnh `A`. Ở bước thứ ba, cạnh `BD` và `AB` đều có trọng số `2`, do đó `BD` được chọn một cách ngẫu nhiên. Sau bước đó, `AB` không còn là ứng viên để được thêm vào cây vì nó nối hai nút đã có trong cây.
 
-## Minimum Spanning Tree
+## Cây Khung Nhỏ Nhất - Minimum Spanning Tree
 
-A **minimum spanning tree** (MST) or minimum weight spanning tree 
-is a subset of the edges of a connected, edge-weighted 
-(un)directed graph that connects all the vertices together, 
-without any cycles and with the minimum possible total edge 
-weight. That is, it is a spanning tree whose sum of edge weights 
-is as small as possible. More generally, any edge-weighted 
-undirected graph (not necessarily connected) has a minimum 
-spanning forest, which is a union of the minimum spanning 
-trees for its connected components.
+Một **cây khung nhỏ nhất** (MST) hay cây khung có trọng số nhỏ nhất là một tập hợp các cạnh của một đồ thị liên thông, có trọng số cạnh, (không) có hướng nối tất cả các đỉnh lại với nhau, không có chu trình và có tổng trọng số cạnh nhỏ nhất có thể. Nói cách khác, đó là một cây khung mà tổng trọng số của các cạnh là nhỏ nhất có thể. Một cách tổng quát hơn, bất kỳ đồ thị có trọng số cạnh không có hướng (không nhất thiết phải liên thông) đều có một rừng khung nhỏ nhất, là sự kết hợp của các cây khung nhỏ nhất cho các thành phần liên thông của nó.
 
 ![Minimum Spanning Tree](https://upload.wikimedia.org/wikipedia/commons/d/d2/Minimum_spanning_tree.svg)
 
-A planar graph and its minimum spanning tree. Each edge is 
-labeled with its weight, which here is roughly proportional 
-to its length.
+Một đồ thị phẳng và cây khung nhỏ nhất của nó. Mỗi cạnh được gắn nhãn với trọng số của nó, ở đây tương đương với chiều dài của nó.
 
 ![Minimum Spanning Tree](https://upload.wikimedia.org/wikipedia/commons/c/c9/Multiple_minimum_spanning_trees.svg)
 
-This figure shows there may be more than one minimum spanning 
-tree in a graph. In the figure, the two trees below the graph 
-are two possibilities of minimum spanning tree of the given graph.
+Hình này cho thấy có thể có nhiều hơn một cây khung nhỏ nhất trong một đồ thị. Trong hình, hai cây dưới đồ thị là hai khả năng của cây khung nhỏ nhất của đồ thị đã cho.
 
-## References
+## Tài liệu tham khảo
 
-- [Minimum Spanning Tree on Wikipedia](https://en.wikipedia.org/wiki/Minimum_spanning_tree)
-- [Prim's Algorithm on Wikipedia](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
-- [Prim's Algorithm on YouTube by Tushar Roy](https://www.youtube.com/watch?v=oP2-8ysT3QQ&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [Prim's Algorithm on YouTube by Michael Sambol](https://www.youtube.com/watch?v=cplfcGZmX7I&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Cây Khung Nhỏ Nhất trên Wikipedia](https://en.wikipedia.org/wiki/Minimum_spanning_tree)
+- [Thuật toán Prim trên Wikipedia](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
+- [Thuật toán Prim trên YouTube bởi Tushar Roy](https://www.youtube.com/watch?v=oP2-8ysT3QQ&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Thuật toán Prim trên YouTube bởi Michael Sambol](https://www.youtube.com/watch?v=cplfcGZmX7I&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

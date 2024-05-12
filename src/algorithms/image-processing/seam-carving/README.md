@@ -1,305 +1,320 @@
-# Content-aware image resizing in JavaScript
+# Thay Đổi Kích Thước Hình Ảnh Có Ý Thức Về Nội Dung Trong JavaScript
 
-![Content-aware image resizing in JavaScript](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/01-cover-02.png)
+_Xem bằng các ngôn ngữ khác:_
+[_Tiếng Anh_](README.en.md)
 
-> There is an [interactive version of this post](https://trekhleb.dev/blog/2021/content-aware-image-resizing-in-javascript/) available where you can upload and resize your custom images.
+![Thay Đổi Kích Thước Hình Ảnh Có Ý Thức Về Nội Dung Trong JavaScript](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/01-cover-02.png)
 
-## TL;DR
+> Có một [phiên bản tương tác của bài viết này](https://trekhleb.dev/blog/2021/content-aware-image-resizing-in-javascript/) nơi bạn có thể tải lên và thay đổi kích thước hình ảnh tùy chỉnh của mình.
 
-There are many great articles written about the *Seam Carving algorithm* already, but I couldn't resist the temptation to explore this elegant, powerful, and *yet simple* algorithm on my own, and to write about my personal experience with it. Another point that drew my attention (as a creator of [javascript-algorithms](https://github.com/trekhleb/javascript-algorithms) repo) was the fact that *Dynamic Programming (DP)* approach might be smoothly applied to solve it. And, if you're like me and still on your "learning algorithms" journey, this algorithmic solution may enrich your personal DP arsenal.
+## Tóm Tắt
 
-So, with this article I want to do three things:
+Đã có nhiều bài viết tuyệt vời viết về _Thuật toán Carving Seam_, nhưng tôi không thể kiềm chế được sự hứng thú để khám phá thuật toán thanh lịch, mạnh mẽ và _vẫn đơn giản_ này một cách riêng của mình, và viết về kinh nghiệm cá nhân của tôi với nó. Một điểm khác thu hút sự chú ý của tôi (như một người tạo ra [javascript-algorithms](https://github.com/trekhleb/javascript-algorithms)) là sự thật rằng phương pháp _Lập trình Động (DP)_ có thể được áp dụng một cách mượt mà để giải quyết nó. Và, nếu bạn giống như tôi và vẫn đang trên hành trình "học thuật toán" của mình, giải pháp thuật toán này có thể làm phong phú thêm bộ công cụ DP cá nhân của bạn.
 
-1. Provide you with an interactive **content-aware resizer** so that you could play around with resizing your own images
-2. Explain the idea behind the **Seam Carving algorithm**
-3. Explain the **dynamic programming approach** to implement the algorithm (we'll be using TypeScript for it)
+Vì vậy, với bài viết này tôi muốn làm ba điều:
 
-### Content-aware image resizing
+1. Cung cấp cho bạn một **công cụ thay đổi kích thước có ý thức về nội dung** tương tác để bạn có thể chơi với việc thay đổi kích thước hình ảnh của riêng bạn
+2. Giải thích ý tưởng đằng sau **Thuật toán Carving Seam**
+3. Giải thích phương pháp **lập trình động** để thực hiện thuật toán (chúng tôi sẽ sử dụng TypeScript cho nó)
 
-*Content-aware image resizing* might be applied when it comes to changing the image proportions (i.e. reducing the width while keeping the height) and when losing some parts of the image is not desirable. Doing the straightforward image scaling in this case would distort the objects in it. To preserve the proportions of the objects while changing the image proportions we may use the [Seam Carving algorithm](https://perso.crans.org/frenoy/matlab2012/seamcarving.pdf) that was introduced by *Shai Avidan* and *Ariel Shamir*.
+### Thay Đổi Kích Thước Hình Ảnh Có Ý Thức Về Nội Dung
 
-The example below shows how the original image width was reduced by 50% using *content-aware resizing* (left image) and *straightforward scaling* (right image). In this particular case, the left image looks more natural since the proportions of the balloons were preserved.
+_Thay đổi kích thước hình ảnh có ý thức về nội dung_ có thể được áp dụng khi cần thay đổi tỷ lệ hình ảnh (tức là giảm chiều rộng trong khi giữ chiều cao) và khi việc mất một số phần của hình ảnh không mong muốn. Thực hiện việc co giãn hình ảnh một cách trực tiếp trong trường hợp này sẽ làm méo mó các đối tượng trong đó. Để bảo tồn tỷ lệ của các đối tượng trong khi thay đổi tỷ lệ hình ảnh, chúng ta có thể sử dụng [Thuật toán Carving Seam](https://perso.crans.org/frenoy/matlab2012/seamcarving.pdf) được giới thiệu bởi _Shai Avidan_ và _Ariel Shamir_.
 
-![Content-aware image resizing](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/01-resizing-options.png)
+Ví dụ dưới đây cho thấy cách chiều rộng hình ảnh gốc đã giảm đi 50% bằng cách sử dụng _thay đổi kích thước có ý thức về nội dung_ (hình ảnh bên trái) và _co giãn trực tiếp_ (hình ảnh bên phải). Trong trường hợp cụ thể này, hình ảnh bên trái trông tự nhiên hơn vì tỷ lệ của các quả bóng bay đã được bảo tồn.
 
-The Seam Carving algorithm's idea is to find the *seam* (continuous sequence of pixels) with the lowest contribution to the image content and then *carve* (remove) it. This process repeats over and over again until we get the required image width or height. In the example below you may see that the hot air balloon pixels contribute more to the content of the image than the sky pixels. Thus, the sky pixels are being removed first.
+![Thay Đổi Kích Thước Hình Ảnh Có Ý Thức Về Nội Dung](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/01-resizing-options.png)
+
+Ý tưởng của thuật toán Carving Seam là tìm ra _đường cắt_ (chuỗi liên tục các điểm ảnh) có đóng góp thấp nhất vào nội dung hình ảnh và sau đó _chạm_ (xóa) nó đi. Quá trình này lặp lại điều này cho đến khi chúng ta có được chiều rộng hoặc chiều cao hình ảnh yêu cầu. Trong ví dụ dưới đây, bạn có thể thấy rằng các điểm ảnh của quả bóng bay nóng hơn nhiều so với các điểm ảnh của bầu trời. Do đó, các điểm ảnh của bầu trời được loại bỏ trước.
 
 ![JS IMAGE CARVER DEMO](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/10-demo-01.gif)
 
-Finding the seam with the lowest energy is a computationally expensive task (especially for large images). To make the seam search faster the *dynamic programming* approach might be applied (we will go through the implementation details below).
+Tìm ra đường cắt có năng lượng thấp nhất là một nhiệm vụ tốn công suất tính toán (đặc biệt là đối với các hình ảnh lớn). Để làm cho việc tìm kiếm đường cắt nhanh hơn, phương pháp _lập trình động_ có thể được áp dụng (chúng tôi sẽ đi qua chi tiết triển khai bên dưới).
 
-### Objects removal
+### Loại Bỏ Đối Tượng
 
-The importance of each pixel (so-called pixel's energy) is being calculated based on its color (`R`, `G`, `B`, `A`) difference between two neighbor pixels. Now, if we set the pixel energy to some really low level artificially (i.e. by drawing a mask on top of them), the Seam Carving algorithm would perform an **object removal** for us for free.
+Mức quan trọng của mỗi điểm ảnh (còn được gọi là năng lượng của điểm ảnh) được tính dựa trên sự khác biệt về màu sắc (`R`, `G`, `B`, `A`) giữa hai điểm ảnh kề nhau. Bây giờ, nếu chúng ta đặt năng lượng của điểm ảnh ở mức thấp thật sự (tức là bằng cách vẽ một mặt nạ lên đỉnh của chúng), thuật toán Carving Seam sẽ thực hiện việc **loại bỏ đối tượng** cho chúng ta một cách miễn phí.
 
 ![JS IMAGE CARVER OBJECT REMOVAL DEMO](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/10-demo-02.gif)
 
-### JS IMAGE CARVER demo
+### Demo JS IMAGE CARVER
 
-I've created the [JS IMAGE CARVER](https://trekhleb.dev/js-image-carver/) web-app (and also [open-sourced it on GitHub](https://github.com/trekhleb/js-image-carver)) that you may use to play around with resizing of your custom images.
+Tôi đã tạo ra ứng dụng web [JS IMAGE CARVER](https://trekhleb.dev/js-image-carver/) (và cũng [được công bố mở trên GitHub](https://github.com/trekhleb/js-image-carver)) mà bạn có thể sử dụng để chơi với việc thay đổi kích thước của hình ảnh tùy chỉnh của bạn.
 
-### More examples
+### Thêm ví dụ
 
-Here are some more examples of how the algorithm copes with more complex backgrounds.
+Dưới đây là một số ví dụ khác về cách thuật toán xử lý với các nền phức tạp hơn.
 
-Mountains on the background are being shrunk smoothly without visible seams.
+Núi trên nền đẹp được thu nhỏ mà không có đường cắt rõ ràng.
 
-![Resizing demo with more complex backgrounds](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/11-demo-01.png)
+![Demo thay đổi kích thước với nền phức tạp hơn](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/11-demo-01.png)
 
-The same goes for the ocean waves. The algorithm preserved the wave structure without distorting the surfers.
+Tương tự, với sóng biển. Thuật toán bảo tồn cấu trúc sóng mà không làm méo mó các vận động viên lướt sóng.
 
-![Resizing demo with more complex backgrounds](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/11-demo-02.png)
+![Demo thay đổi kích thước với nền phức tạp hơn](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/11-demo-02.png)
 
-We need to keep in mind that the Seam Carving algorithm is not a silver bullet, and it may fail to resize the images where *most of the pixels are edges* (look important to the algorithm). In this case, it starts distorting even the important parts of the image. In the example below the content-aware image resizing looks pretty similar to a straightforward scaling since for the algorithm all the pixels look important, and it is hard for it to distinguish Van Gogh's face from the background.
+Chúng ta cần nhớ rằng thuật toán Carving Seam không phải là một giải pháp toàn diện, và nó có thể không hoạt động cho việc thay đổi kích thước hình ảnh nơi _hầu hết các điểm ảnh là cạnh_ (trông quan trọng với thuật toán). Trong trường hợp này, nó bắt đầu làm méo mó cả các phần quan trọng của hình ảnh. Trong ví dụ dưới đây, việc thay đổi kích thước hình ảnh có ý thức về nội dung trông khá giống với một việc co giãn trực tiếp vì đối với thuật toán, tất cả các điểm ảnh đều trông quan trọng, và nó khó phân biệt được khuôn mặt của Van Gogh với nền.
 
-![Example when the algorithm does not work as expected](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/12-demo-01.png)
+![Ví dụ khi thuật toán không hoạt động như mong đợi](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/12-demo-01.png)
 
-## How Seam Carving algorithms works
+## Cách Thức Hoạt Động của Thuật Toán Carving Seam
 
-Imagine we have a `1000 x 500 px` picture, and we want to change its size to `500 x 500 px` to make it square (let's say the square ratio would better fit the Instagram feed). We might want to set up several **requirements to the resizing process** in this case:
+Hãy tưởng tượng chúng ta có một bức ảnh kích thước `1000 x 500 px`, và chúng ta muốn thay đổi kích thước của nó thành `500 x 500 px` để biến nó thành hình vuông (hãy nói tỷ lệ hình vuông sẽ phù hợp hơn với dòng thời gian Instagram). Trong trường hợp này, chúng ta có thể muốn đặt một số **yêu cầu cho quá trình thay đổi kích thước** như sau:
 
-- *Preserve the important parts of the image* (i.e. if there were 5 trees before the resizing we want to have 5 trees after resizing as well).
-- *Preserve the proportions* of the important parts of the image (i.e. circle car wheels should not be squeezed to the ellipse wheels)
+- _Bảo tồn các phần quan trọng của hình ảnh_ (tức là nếu trước khi thay đổi kích thước có 5 cái cây thì chúng ta muốn có 5 cái cây sau khi thay đổi kích thước).
+- _Bảo tồn tỷ lệ_ của các phần quan trọng của hình ảnh (tức là bánh xe xe hơi hình tròn không nên bị ép vào hình bánh xe hình ellipse)
 
-To avoid changing the important parts of the image we may find the **continuous sequence of pixels (the seam)**, that goes from top to bottom and has *the lowest contribution to the content* of the image (avoids important parts) and then remove it. The seam removal will shrink the image by 1 pixel. We will then repeat this step until the image will get the desired width.
+Để tránh thay đổi các phần quan trọng của hình ảnh, chúng ta có thể tìm ra **chuỗi liên tục các điểm ảnh (đường cắt)**, đi từ trên xuống và có _đóng góp thấp nhất vào nội dung_ của hình ảnh (tránh các phần quan trọng) và sau đó loại bỏ nó. Việc loại bỏ đường cắt sẽ làm giảm kích thước của hình ảnh đi 1 điểm ảnh. Chúng ta sau đó lặp lại bước này cho đến khi hình ảnh có được chiều rộng mong muốn.
 
-The question is how to define *the importance of the pixel* and its contribution to the content (in the original paper the authors are using the term **energy of the pixel**). One of the ways to do it is to treat all the pixels that form the edges as important ones. In case if a pixel is a part of the edge its color would have a greater difference between the neighbors (left and right pixels) than the pixel that isn't a part of the edge.
+Câu hỏi là làm thế nào để xác định _sự quan trọng của điểm ảnh_ và đóng góp của nó vào nội dung (trong bài báo gốc, các tác giả sử dụng thuật ngữ **năng lượng của điểm ảnh**). Một trong những cách để làm điều này là coi tất cả các điểm ảnh tạo thành các cạnh là quan trọng. Trong trường hợp một điểm ảnh là một phần của cạnh, màu của nó sẽ có sự khác biệt lớn hơn giữa các điểm ảnh láng giềng (trái và phải) so với điểm ảnh không phải là một phần của cạnh.
 
-![Pixels color difference](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/30-pixel-energy-comparison.png)
+![Sự khác biệt màu của các điểm ảnh](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/30-pixel-energy-comparison.png)
 
-Assuming that the color of a pixel is represented by *4* numbers (`R` - red, `G` - green, `B` - blue, `A` - alpha) we may use the following formula to calculate the color difference (the pixel energy):
+Giả sử rằng màu của một điểm ảnh được biểu diễn bởi _4_ số (`R` - đỏ, `G` - xanh lá cây, `B` - xanh lam, `A` - alpha), chúng ta có thể sử dụng công thức sau để tính sự khác biệt màu (năng lượng của điểm ảnh):
 
-![Pixel energy formula](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/20-energy-formula.png)
+![Công thức năng lượng của điểm ảnh](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/20-energy-formula.png)
 
-Where:
+Trong đó:
 
-- `mEnergy` - *Energy* (importance) of the *middle* pixel (`[0..626]` if rounded)
-- `lR` - *Red* channel value for the *left* pixel (`[0..255]`)
-- `mR` - *Red* channel value for the *middle* pixel (`[0..255]`)
-- `rR` - *Red* channel value for the *right* pixel (`[0..255]`)
-- `lG` - *Green* channel value for the *left* pixel (`[0..255]`)
-- and so on...
+- `mEnergy` - _Năng lượng_ (quan trọng) của điểm ảnh _giữa_ (`[0..626]` nếu làm tròn)
+- `lR` - Giá trị kênh _đỏ_ cho điểm ảnh _trái_ (`[0..255]`)
+- `mR` - Giá trị kênh _đỏ_ cho điểm ảnh _giữa_ (`[0..255]`)
+- `rR` - Giá trị kênh _đỏ_ cho điểm ảnh _phải_ (`[0..255]`)
+- `lG` - Giá trị kênh _xanh lá cây_ cho điểm ảnh _trái_ (`[0..255]`)
+- và cetera...
 
-In the formula above we're omitting the alpha (transparency) channel, for now, assuming that there are no transparent pixels in the image. Later we will use the alpha channel for masking and for object removal.
+Trong công thức trên, chúng ta không xem xét kênh alpha (độ trong suốt) tạm thời, giả định rằng không có điểm ảnh trong suốt trong hình ảnh. Sau này, chúng ta sẽ sử dụng kênh alpha để tạo mặt nạ và để loại bỏ đối tượng.
 
-![Example of pixel energy calculation](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/30-pixel-energy-calculation-example.png)
+![Ví dụ về cách tính năng lượng của điểm ảnh](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/30-pixel-energy-calculation-example.png)
 
-Now, since we know how to find the energy of one pixel, we can calculate, so-called, **energy map** which will contain the energies of each pixel of the image. On each resizing step the energy map should be re-calculated (at least partially, more about it below) and would have the same size as the image.
+Bây giờ, khi chúng ta biết cách tìm ra năng lượng của một điểm ảnh, chúng ta có thể tính toán, cái gọi là, **bản đồ năng lượng** mà sẽ chứa các năng lượng của mỗi điểm ảnh của hình ảnh. Trên mỗi bước thay đổi kích thước, bản đồ năng lượng nên được tính toán lại (ít nhất là một phần, chi tiết hơn về điều này ở dưới) và sẽ có kích thước giống như hình ảnh.
 
-For example, on the 1st resizing step we will have a `1000 x 500` image and a `1000 x 500` energy map. On the 2nd resizing step we will remove the seam from the image and re-calculate the energy map based on the new shrunk image. Thus, we will get a `999 x 500` image and a `999 x 500` energy map.
+Ví dụ, trên bước thay đổi kích thước đầu tiên, chúng ta sẽ có một hình ảnh `1000 x 500` và
 
-The higher the energy of the pixel the more likely it is a part of an edge, and it is important for the image content and the less likely that we need to remove it.
+một bản đồ năng lượng `1000 x 500`. Trên bước thay đổi kích thước thứ hai, chúng ta sẽ loại bỏ đường cắt từ hình ảnh và tính toán lại bản đồ năng lượng dựa trên hình ảnh đã bị co lại mới. Do đó, chúng ta sẽ có một hình ảnh `999 x 500` và một bản đồ năng lượng `999 x 500`.
 
-To visualize the energy map we may assign a brighter color to the pixels with the higher energy and darker colors to the pixels with the lower energy. Here is an artificial example of how the random part of the energy map might look like. You may see the bright line which represents the edge and which we want to preserve during the resizing.
+Năng lượng càng cao của điểm ảnh thì khả năng cao hơn là nó là một phần của một cạnh, và nó quan trọng cho nội dung của hình ảnh và khả năng ít có khả năng rằng chúng ta cần phải loại bỏ nó.
 
-![Energy map sketch](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/30-energy-map-padding.png)
+Để minh họa bản đồ năng lượng, chúng ta có thể gán một màu sáng hơn cho các điểm ảnh có năng lượng cao hơn và màu tối cho các điểm ảnh có năng lượng thấp hơn. Dưới đây là một ví dụ giả mạo về cách bản đồ năng lượng có thể trông như thế nào. Bạn có thể thấy đường sáng đại diện cho cạnh và mà chúng ta muốn bảo tồn trong quá trình thay đổi kích thước.
 
-Here is a real example of the energy map for the demo image you saw above (with hot air balloons).
+![Phác thảo bản đồ năng lượng](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/30-energy-map-padding.png)
 
-![Energy map example](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/40-energy-map.png)
+Dưới đây là một ví dụ thực về bản đồ năng lượng cho hình ảnh demo bạn đã thấy ở trên (với các quả bóng bay nóng).
 
-You may play around with your custom images and see how the energy map would look like in the [interactive version of the post](https://trekhleb.dev/blog/2021/content-aware-image-resizing-in-javascript/).
+![Ví dụ về bản đồ năng lượng](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/40-energy-map.png)
 
-We may use the energy map to find the seams (one after another) with the lowest energy and by doing this to decide which pixels should be ultimately deleted.
+Bạn có thể chơi với các hình ảnh tùy chỉnh của mình và xem cách bản đồ năng lượng sẽ trông như thế nào trong [phiên bản tương tác của bài viết](https://trekhleb.dev/blog/2021/content-aware-image-resizing-in-javascript/).
 
-![Searching the seam](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/41-seam-search.png)
+Chúng ta có thể sử dụng bản đồ năng lượng để tìm ra các đường cắt (một sau một) có năng lượng thấp nhất và bằng cách này để quyết định những điểm ảnh nào cuối cùng nên bị xóa đi.
 
-Finding the seam with the lowest energy is not a trivial task and requires exploring many possible pixel combinations before making the decision. We will apply the dynamic programming approach to speed it up.
+![Tìm kiếm đường cắt](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/41-seam-search.png)
 
-In the example below, you may see the energy map with the first lowest energy seam that was found for it.
+Tìm kiếm đường cắt có năng lượng thấp nhất không phải là một nhiệm vụ dễ dàng và đòi hỏi phải khám phá nhiều kết hợp điểm ảnh có thể trước khi đưa ra quyết định. Chúng ta sẽ áp dụng phương pháp lập trình động để tăng tốc độ cho quá trình này.
 
-![Energy map example with seam](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/40-energy-map-with-seam.png)
+Trong ví dụ dưới đây, bạn có thể thấy bản đồ năng lượng với đường cắt năng lượng thấp nhất đầu tiên đã được tìm thấy cho nó.
 
-In the examples above we were reducing the width of the image. A similar approach may be taken to reduce the image height. We need to "rotate" the approach though:
+![Ví dụ về bản đồ năng lượng với đường cắt](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/40-energy-map-with-seam.png)
 
-- start using *top* and *bottom* pixel neighbors (instead of *left* and *right* ones) to calculate the pixel energy
-- when searching for a seam we need to move from *left* to *right* (instead of from *up* to *bottom*)
+Trong các ví dụ trên, chúng ta đã giảm chiều rộng của hình ảnh. Một phương pháp tương tự có thể được sử dụng để giảm chiều cao của hình ảnh. Tuy nhiên, chúng ta cần "xoay" phương pháp:
 
-## Implementation in TypeScript
+- bắt đầu sử dụng điểm ảnh láng giềng _trên_ và _dưới_ (thay vì các điểm ảnh _trái_ và _phải_) để tính năng lượng của điểm ảnh
+- khi tìm kiếm đường cắt, chúng ta cần di chuyển từ _trái_ sang _phải_ (thay vì từ _trên_ xuống _dưới_)
 
-> You may find the source code, and the functions mentioned below in the [js-image-carver](https://github.com/trekhleb/js-image-carver) repository.
+## Cài đặt trong TypeScript
 
-To implement the algorithm we will be using TypeScript. If you want a JavaScript version, you may ignore (remove) type definitions and their usages.
+> Bạn có thể tìm mã nguồn và các hàm được đề cập dưới đây trong kho lưu trữ [js-image-carver](https://github.com/trekhleb/js-image-carver).
 
-For simplicity reasons let's implement the seam carving algorithm only for the image *width* reduction.
+Để triển khai thuật toán, chúng tôi sẽ sử dụng TypeScript. Nếu bạn muốn một phiên bản JavaScript, bạn có thể bỏ qua (xóa) các định nghĩa loại và việc sử dụng chúng.
 
-### Content-aware width resizing (the entry function)
+Vì lý do đơn giản, hãy triển khai thuật toán chỉ cho việc giảm _chiều rộng_ của hình ảnh.
 
-First, let's define some common types that we're going to use while implementing the algorithm.
+### Thay đổi kích thước chiều rộng dựa trên nội dung (hàm nhập)
+
+Đầu tiên, hãy xác định một số loại thông thường mà chúng ta sẽ sử dụng trong quá trình triển khai thuật toán.
 
 ```typescript
-// Type that describes the image size (width and height).
-type ImageSize = { w: number, h: number };
+// Loại mô tả kích thước hình ảnh (chiều rộng và chiều cao).
+type ImageSize = { w: number; h: number };
 
-// The coordinate of the pixel.
-type Coordinate = { x: number, y: number };
+// Tọa độ của điểm ảnh.
+type Coordinate = { x: number; y: number };
 
-// The seam is a sequence of pixels (coordinates).
+// Đường cắt là một chuỗi liên tục của điểm ảnh (tọa độ).
 type Seam = Coordinate[];
 
-// Energy map is a 2D array that has the same width and height
-// as the image the map is being calculated for.
+// Bản đồ năng lượng là một mảng 2D có cùng chiều rộng và chiều cao
+// như hình ảnh mà bản đồ này đang được tính toán cho.
 type EnergyMap = number[][];
 
-// Type that describes the image pixel's RGBA color.
-type Color = [
-  r: number, // Red
-  g: number, // Green
-  b: number, // Blue
-  a: number, // Alpha (transparency)
-] | Uint8ClampedArray;
+// Loại mô tả màu RGBA của điểm ảnh.
+type Color =
+  | [
+      r: number, // Đỏ
+      g: number, // Xanh lá cây
+      b: number, // Xanh dương
+      a: number // Alpha (độ trong suốt)
+    ]
+  | Uint8ClampedArray;
 ```
 
-On the high level the algorithm consists of the following steps:
+Ở mức cao hơn, thuật toán bao gồm các bước sau:
 
-1. Calculate the **energy map** for the current version of the image.
-2. Find the **seam** with the lowest energy based on the energy map (this is where we will apply Dynamic Programming).
-3. **Delete the seam** with the lowest energy seam from the image.
-4. **Repeat** until the image width is reduced to the desired value.
+1. Tính toán **bản đồ năng lượng** cho phiên bản hiện tại của hình ảnh.
+2. Tìm **đường cắt** có năng lượng thấp nhất dựa trên bản đồ năng lượng (đây là nơi chúng tôi sẽ áp dụng Lập trình Động).
+3. **Xóa đường cắt** có đường cắt có năng lượng thấp nhất khỏi hình ảnh.
+4. **Lặp lại** cho đến khi chiều rộng của hình ảnh được giảm xuống giá trị mong muốn.
 
 ```typescript
 type ResizeImageWidthArgs = {
-  img: ImageData, // Image data we want to resize.
-  toWidth: number, // Final image width we want the image to shrink to.
+  img: ImageData; // Dữ liệu hình ảnh chúng ta muốn thay đổi kích thước.
+  toWidth: number; // Chiều rộng cuối cùng mà chúng ta muốn hình ảnh co lại.
 };
 
 type ResizeImageWidthResult = {
-  img: ImageData, // Resized image data.
-  size: ImageSize, // Resized image size (w x h).
+  img: ImageData; // Dữ liệu hình ảnh đã thay đổi kích thước.
+  size: ImageSize; // Kích thước hình ảnh đã thay đổi (w x h).
 };
 
-// Performs the content-aware image width resizing using the seam carving method.
-export const resizeImageWidth = (
-  { img, toWidth }: ResizeImageWidthArgs,
-): ResizeImageWidthResult => {
-  // For performance reasons we want to avoid changing the img data array size.
-  // Instead we'll just keep the record of the resized image width and height separately.
+// Thực hiện việc thay đổi kích thước chiều rộng hình ảnh dựa trên nội dung sử dụng phương pháp seam carving.
+export const resizeImageWidth = ({
+  img,
+  toWidth,
+}: ResizeImageWidthArgs): ResizeImageWidthResult => {
+  // Vì lý do hiệu suất, chúng ta muốn tránh việc thay đổi kích thước mảng dữ liệu hình ảnh.
+  // Thay vào đó, chúng ta chỉ giữ bản ghi về chiều rộng và chiều cao của hình ảnh đã thay đổi.
   const size: ImageSize = { w: img.width, h: img.height };
 
-  // Calculating the number of pixels to remove.
+  // Tính toán số điểm ảnh cần xóa.
   const pxToRemove = img.width - toWidth;
   if (pxToRemove < 0) {
-    throw new Error('Upsizing is not supported for now');
+    throw new Error('Không hỗ trợ phương pháp phóng to cho tới bây giờ');
   }
 
   let energyMap: EnergyMap | null = null;
   let seam: Seam | null = null;
 
-  // Removing the lowest energy seams one by one.
+  // Xóa các đường cắt có năng lượng thấp nhất một cách tuần tự.
   for (let i = 0; i < pxToRemove; i += 1) {
-    // 1. Calculate the energy map for the current version of the image.
+    // 1. Tính toán bản đồ năng lượng cho phiên bản hiện tại của hình ảnh.
     energyMap = calculateEnergyMap(img, size);
+    //
 
-    // 2. Find the seam with the lowest energy based on the energy map.
+2. Tìm đường cắt có năng lượng thấp nhất dựa trên bản đồ năng lượng.
     seam = findLowEnergySeam(energyMap, size);
 
-    // 3. Delete the seam with the lowest energy seam from the image.
+    // 3. Xóa đường cắt có đường cắt có năng lượng thấp nhất từ hình ảnh.
     deleteSeam(img, seam, size);
 
-    // Reduce the image width, and continue iterations.
+    // Giảm chiều rộng của hình ảnh và tiếp tục các lần lặp.
     size.w -= 1;
   }
 
-  // Returning the resized image and its final size.
-  // The img is actually a reference to the ImageData, so technically
-  // the caller of the function already has this pointer. But let's
-  // still return it for better code readability.
+  // Trả về hình ảnh đã thay đổi kích thước và kích thước cuối cùng của nó.
+  // Dữ liệu hình ảnh thực tế là một tham chiếu đến ImageData, vì vậy kỹ thuật
+  // người gọi của hàm đã có con trỏ này. Nhưng hãy vẫn trả về nó để đọc mã dễ hiểu hơn.
   return { img, size };
 };
 ```
 
-The image that needs to be resized is being passed to the function in [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) format. You may draw the image on the canvas and then extract the ImageData from the canvas like this:
+Hình ảnh cần được thay đổi kích thước được chuyển đến hàm dưới dạng [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData). Bạn có thể vẽ hình ảnh lên canvas và sau đó trích xuất ImageData từ canvas như sau:
 
 ```javascript
 const ctx = canvas.getContext('2d');
 const imgData = ctx.getImageData(0, 0, imgWidth, imgHeight);
 ```
 
-> The way of uploading and drawing images in JavaScript is out of scope for this article, but you may find the complete source code of how it may be done using React in [js-image-carver](https://github.com/trekhleb/js-image-carver) repo.
+> Cách tải lên và vẽ hình ảnh trong JavaScript nằm ngoài phạm vi của bài viết này, nhưng bạn có thể tìm mã nguồn đầy đủ về cách thực hiện điều này bằng React trong kho lưu trữ [js-image-carver](https://github.com/trekhleb/js-image-carver).
 
-Let's break down each step ony be one and implement the `calculateEnergyMap()`, `findLowEnergySeam()` and `deleteSeam()` functions.
+Hãy phân rã từng bước một và triển khai các hàm `calculateEnergyMap()`, `findLowEnergySeam()` và `deleteSeam()`.
 
-### Calculating the pixel's energy
+### Tính năng lượng của điểm ảnh
 
-Here we apply the color difference formula described above. For the left and right borders (when there are no left or right neighbors), we ignore the neighbors and don't take them into account during the energy calculation.
+Ở đây, chúng ta áp dụng công thức khác biệt màu sắc đã mô tả ở trên. Đối với các biên trái và phải (khi không có hàng xóm bên trái hoặc bên phải), chúng ta bỏ qua hàng xóm và không tính chúng vào trong quá trình tính toán năng lượng.
 
 ```typescript
-// Calculates the energy of a pixel.
-const getPixelEnergy = (left: Color | null, middle: Color, right: Color | null): number => {
-  // Middle pixel is the pixel we're calculating the energy for.
+// Tính toán năng lượng của một điểm ảnh.
+const getPixelEnergy = (
+  left: Color | null,
+  middle: Color,
+  right: Color | null
+): number => {
+  // Điểm ảnh ở giữa là điểm ảnh mà chúng tôi đang tính toán năng lượng cho.
   const [mR, mG, mB] = middle;
 
-  // Energy from the left pixel (if it exists).
+  // Năng lượng từ điểm ảnh bên trái (nếu tồn tại).
   let lEnergy = 0;
   if (left) {
     const [lR, lG, lB] = left;
     lEnergy = (lR - mR) ** 2 + (lG - mG) ** 2 + (lB - mB) ** 2;
   }
 
-  // Energy from the right pixel (if it exists).
+  // Năng lượng từ điểm ảnh bên phải (nếu tồn tại).
   let rEnergy = 0;
   if (right) {
     const [rR, rG, rB] = right;
     rEnergy = (rR - mR) ** 2 + (rG - mG) ** 2 + (rB - mB) ** 2;
   }
 
-  // Resulting pixel energy.
+  // Năng lượng của điểm ảnh kết quả.
   return Math.sqrt(lEnergy + rEnergy);
 };
 ```
 
-### Calculating the energy map
+### Tính toán bản đồ năng lượng
 
-The image we're working with has the [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) format. It means that all the pixels (and their colors) are stored in a flat (*1D*) [Uint8ClampedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray) array. For readability purposes let's introduce the couple of helper functions that will allow us to work with the Uint8ClampedArray array as with a *2D* matrix instead.
+Hình ảnh mà chúng ta đang làm việc có định dạng [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData). Điều này có nghĩa là tất cả các điểm ảnh (và màu sắc của chúng) được lưu trữ trong một mảng _1D_ [Uint8ClampedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray). Vì mục đích đọc mã dễ hiểu hơn, hãy giới thiệu một cặp hàm trợ giúp để cho phép chúng ta làm việc với mảng Uint8ClampedArray như một ma trận _2D_ thay vì như một mảng _1D_.
 
 ```typescript
-// Helper function that returns the color of the pixel.
+// Hàm trợ giúp trả về màu sắc của điểm ảnh.
 const getPixel = (img: ImageData, { x, y }: Coordinate): Color => {
-  // The ImageData data array is a flat 1D array.
-  // Thus we need to convert x and y coordinates to the linear index.
+  // Mảng dữ liệu ImageData là một mảng 1D phẳng.
+  // Do đó, chúng ta cần chuyển đổi các tọa độ x và y thành chỉ số tuyến tính.
   const i = y * img.width + x;
   const cellsPerColor = 4; // RGBA
-  // For better efficiency, instead of creating a new sub-array we return
-  // a pointer to the part of the ImageData array.
-  return img.data.subarray(i * cellsPerColor, i * cellsPerColor + cellsPerColor);
+  // Để hiệu quả hơn, thay vì tạo một mảng con mới, chúng tôi trả về
+  // một con trỏ đến phần của mảng ImageData.
+  return img.data.subarray(
+    i * cellsPerColor,
+    i * cellsPerColor + cellsPerColor
+  );
 };
 
-// Helper function that sets the color of the pixel.
+// Hàm trợ giúp thiết lập màu sắc của điểm ảnh.
 const setPixel = (img: ImageData, { x, y }: Coordinate, color: Color): void => {
-  // The ImageData data array is a flat 1D array.
-  // Thus we need to convert x and y coordinates to the linear index.
+  // Mảng dữ liệu ImageData là một mảng 1D phẳng.
+  // Do đó, chúng ta cần chuyển đổi các tọa độ x và y thành chỉ số tuyến tính.
   const i = y * img.width + x;
   const cellsPerColor = 4; // RGBA
   img.data.set(color, i * cellsPerColor);
 };
 ```
 
-To calculate the energy map we go through each image pixel and call the previously described `getPixelEnergy()` function against it.
+Để tính toán bản đồ năng lượng, chúng ta duyệt qua từng điểm ảnh của hình ảnh và gọi hàm `getPixelEnergy()` đã mô tả trước đó.
 
 ```typescript
-// Helper function that creates a matrix (2D array) of specific
-// size (w x h) and fills it with specified value.
+// Hàm trợ giúp tạo ma trận (mảng 2D) có kích thước cụ thể
+// (w x h) và điền nó bằng giá trị đã cho.
 const matrix = <T>(w: number, h: number, filler: T): T[][] => {
-  return new Array(h)
-    .fill(null)
-    .map(() => {
-      return new Array(w).fill(filler);
-    });
+  return new Array(h).fill(null).map(() => {
+    return new Array(w).fill(filler);
+  });
 };
 
-// Calculates the energy of each pixel of the image.
+// Tính toán năng lượng của mỗi điểm ảnh của hình ảnh.
 const calculateEnergyMap = (img: ImageData, { w, h }: ImageSize): EnergyMap => {
-  // Create an empty energy map where each pixel has infinitely high energy.
-  // We will update the energy of each pixel.
+  // Tạo một bản đồ năng lượng trống nơi mỗi điểm ảnh có năng lượng vô cùng cao.
+  // Chúng tôi sẽ cập nhật năng lượng của mỗi điểm ảnh.
   const energyMap: number[][] = matrix<number>(w, h, Infinity);
   for (let y = 0; y < h; y += 1) {
     for (let x = 0; x < w; x += 1) {
-      // Left pixel might not exist if we're on the very left edge of the image.
-      const left = (x - 1) >= 0 ? getPixel(img, { x: x - 1, y }) : null;
-      // The color of the middle pixel that we're calculating the energy for.
+      // Điểm ảnh bên trái có thể không tồn tại nếu chúng tôi đang ở biên trái cực của hình ảnh.
+      const left = x - 1 >= 0 ? getPixel(img, { x: x - 1, y }) : null;
+      // Màu sắc của điểm ảnh ở giữa mà chúng tôi đang tính toán năng lượng cho.
       const middle = getPixel(img, { x, y });
-      // Right pixel might not exist if we're on the very right edge of the image.
-      const right = (x + 1) < w ? getPixel(img, { x: x + 1, y }) : null;
+      // Điểm ảnh bên phải có thể không tồn tại nếu chúng tôi đang ở biên phải cực
+
+ của hình ảnh.
+      const right = x + 1 < w ? getPixel(img, { x: x + 1, y }) : null;
       energyMap[y][x] = getPixelEnergy(left, middle, right);
     }
   }
@@ -307,91 +322,96 @@ const calculateEnergyMap = (img: ImageData, { w, h }: ImageSize): EnergyMap => {
 };
 ```
 
-> The energy map is going to be recalculated on every resize iteration. It means that it will be recalculated, let's say, 500 times if we need to shrink the image by 500 pixels which is not optimal. To speed up the energy map calculation on the 2nd, 3rd, and further steps, we may re-calculate the energy only for those pixels that are placed around the seam that is going to be removed. For simplicity reasons this optimization is omitted here, but you may find the example source-code in [js-image-carver](https://github.com/trekhleb/js-image-carver) repo.
+> Bản đồ năng lượng sẽ được tính toán lại sau mỗi lần thay đổi kích thước. Điều này có nghĩa là nó sẽ được tính toán lại, chẳng hạn, 500 lần nếu chúng ta cần thu nhỏ hình ảnh đi 500 điểm ảnh, điều này không hiệu quả. Để tăng tốc độ tính toán của bản đồ năng lượng ở các bước 2, 3 và các bước tiếp theo, chúng ta có thể tính toán lại năng lượng chỉ cho những điểm ảnh được đặt xung quanh đường cắt sẽ được loại bỏ. Vì lý do đơn giản, tối ưu hóa này đã bị bỏ qua ở đây, nhưng bạn có thể tìm mã nguồn ví dụ trong kho lưu trữ [js-image-carver](https://github.com/trekhleb/js-image-carver).
 
-### Finding the seam with the lowest energy (Dynamic Programming approach)
+### Tìm đường cắt có năng lượng thấp nhất (phương pháp lập trình động)
 
-> I've described some Dynamic Programming basics in [Dynamic Programming vs Divide-and-Conquer](https://trekhleb.dev/blog/2018/dynamic-programming-vs-divide-and-conquer/) article before. There is a DP example based on the minimum edit distance problem. You might want to check it out to get some more context.
+> Tôi đã mô tả một số kiến thức cơ bản về lập trình động trong bài viết [Dynamic Programming vs Divide-and-Conquer](https://trekhleb.dev/blog/2018/dynamic-programming-vs-divide-and-conquer/). Có một ví dụ về lập trình động dựa trên vấn đề khoảng cách chỉnh sửa tối thiểu. Bạn có thể muốn kiểm tra để hiểu rõ hơn về ngữ cảnh.
 
-The issue we need to solve now is to find the path (the seam) on the energy map that goes from top to bottom and has the minimum sum of pixel energies.
+Vấn đề chúng ta cần giải quyết bây giờ là tìm đường (đường cắt) trên bản đồ năng lượng đi từ trên xuống dưới và có tổng năng lượng pixel nhỏ nhất.
 
-#### The naive approach
+#### Phương pháp ngây thơ
 
-The naive approach would be to check all possible paths one after another.
+Phương pháp ngây thơ sẽ là kiểm tra tất cả các đường đi có thể một sau một.
 
-![The naive approach](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/50-naive-approach.png)
+![Phương pháp ngây thơ](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/50-naive-approach.png)
 
-Going from top to bottom, for each pixel, we have 3 options (↙︎ go down-left, ↓ go down, ↘︎ go down-right). This gives us the time complexity of `O(w * 3^h)` or simply `O(3^h)`, where `w` and `h` are the width and the height of the image. This approach looks slow.
+Đi từ trên xuống dưới, cho mỗi điểm ảnh, chúng ta có 3 lựa chọn (↙︎ đi xuống bên trái, ↓ đi xuống, ↘︎ đi xuống bên phải). Điều này cho chúng ta độ phức tạp thời gian là `O(w * 3^h)` hoặc đơn giản là `O(3^h)`, trong đó `w` và `h` lần lượt là chiều rộng và chiều cao của hình ảnh. Phương pháp này trông chậm.
 
-#### The greedy approach
+#### Phương pháp tham lam
 
-We may also try to choose the next pixel as a pixel with the lowest energy, hoping that the resulting seam energy will be the smallest one.
+Chúng ta cũng có thể thử chọn điểm ảnh tiếp theo là điểm ảnh có năng lượng thấp nhất, hy vọng rằng năng lượng của đường cắt kết quả sẽ là nhỏ nhất.
 
-![The greedy approach](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/51-greedy-approach.png)
+![Phương pháp tham lam](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/51-greedy-approach.png)
 
-This approach gives not the worst solution, but it cannot guarantee that we will find the best available solution. On the image above you may see how the greedy approach chose `5` instead of `10` at first and missed the chain of optimal pixels.
+Phương pháp này không cho kết quả tồi nhất, nhưng không thể đảm bảo rằng chúng ta sẽ tìm được giải pháp tốt nhất có sẵn. Trên hình ảnh trên, bạn có thể thấy cách phương pháp tham lam đã chọn `5` thay vì `10` ban đầu và bỏ lỡ chuỗi điểm ảnh tối ưu.
 
-The good part about this approach is that it is fast, and it has a time complexity of `O(w + h)`, where `w` and `h` are the width and the height of the image. In this case, the cost of the speed is the low quality of resizing. We need to find a minimum value in the first row (traversing `w` cells) and then we explore only 3 neighbor pixels for each row (traversing `h` rows).
+Phần tốt của phương pháp này là nó nhanh chóng, và nó có độ phức tạp thời gian là `O(w + h)`, trong đó `w` và `h` lần lượt là chiều rộng và chiều cao của hình ảnh. Trong trường hợp này, chi phí của tốc độ là chất lượng thấp của việc thay đổi kích thước. Chúng ta cần tìm một giá trị nhỏ nhất trong hàng đầu tiên (duyệt `w` ô) và sau đó chúng ta khám phá chỉ 3 ô hàng xóm cho mỗi hàng (duyệt `h` hàng).
 
-#### The dynamic programming approach
+#### Phương pháp lập trình động
 
-You might have noticed that in the naive approach we summed up the same pixel energies over and over again while calculating the resulting seams' energy.
+Bạn có thể đã nhận ra rằng trong phương pháp ngây thơ chúng ta đã tính tổng năng lượng pixel giống nhau lần lượt khi tính toán năng lượng của các đường cắt kết quả.
 
-![Repeated problems](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/52-dp-repeated-problems.png)
+![Các vấn đề lặp lại](https://raw.githubusercontent.com/trekhleb/trekhleb
 
-In the example above you see that for the first two seams we are re-using the energy of the shorter seam (which has the energy of `235`). Instead of doing just one operation `235 + 70` to calculate the energy of the 2nd seam we're doing four operations `(5 + 0 + 80 + 150) + 70`.
+.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/52-dp-repeated-problems.png)
 
-> This fact that we're re-using the energy of the previous seam to calculate the current seam's energy might be applied recursively to all the shorter seams up to the very top 1st row seam. When we have such overlapping sub-problems, [it is a sign](https://trekhleb.dev/blog/2018/dynamic-programming-vs-divide-and-conquer/) that the general problem *might* be optimized by dynamic programming approach.
+Trong ví dụ trên, bạn thấy rằng cho hai đường cắt đầu tiên, chúng ta đang sử dụng lại năng lượng của đường cắt ngắn hơn (có năng lượng là `235`). Thay vì thực hiện một thao tác `235 + 70` để tính toán năng lượng của đường cắt thứ hai, chúng ta đang thực hiện bốn thao tác `(5 + 0 + 80 + 150) + 70`.
 
-So, we may **save the energy of the current seam** at the particular pixel in an additional `seamsEnergies` table to make it re-usable for calculating the next seams faster (the `seamsEnergies` table will have the same size as the energy map and the image itself).
+> Sự thật rằng chúng ta đang sử dụng lại năng lượng của đường cắt trước để tính toán năng lượng của đường cắt hiện tại có thể được áp dụng đệ quy cho tất cả các đường cắt ngắn hơn lên tới đường cắt đầu tiên ở hàng 1. Khi chúng ta có các bài toán con trùng lặp như vậy, [đó là một dấu hiệu](https://trekhleb.dev/blog/2018/dynamic-programming-vs-divide-and-conquer/) cho thấy vấn đề chung _có thể_ được tối ưu hóa bằng cách tiế approach này.
 
-Let's also keep in mind that for one particular pixel on the image (i.e. the bottom left one) we may have *several* values of the previous seams energies.
+Vì vậy, chúng ta có thể **lưu năng lượng của đường cắt hiện tại** tại pixel cụ thể trong một bảng bổ sung `seamsEnergies` để làm cho nó có thể sử dụng lại cho việc tính toán các đường cắt tiếp theo nhanh hơn (bảng `seamsEnergies` sẽ có kích thước giống như bản đồ năng lượng và hình ảnh chính nó).
 
-![What seam to choose](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/53-dp-what-to-choose.png)
+Hãy cũng nhớ rằng cho một pixel cụ thể trên hình ảnh (ví dụ: ở góc dưới bên trái) chúng ta có thể có _nhiều_ giá trị của năng lượng đường cắt trước đó.
 
-Since we're looking for a seam with the lowest resulting energy it would make sense to pick the previous seam with the lowest resulting energy as well.
+![Chọn đường cắt nào](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/53-dp-what-to-choose.png)
 
-![Seams energies example](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/56-dp-seams-energies-example.png)
+Vì chúng ta đang tìm kiếm một đường cắt có năng lượng kết quả thấp nhất nên sẽ hợp lý khi chọn đường cắt trước đó có năng lượng kết quả thấp nhất.
 
-In general, we have three possible previous seems to choose from:
+![Ví dụ về năng lượng đường cắt](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/56-dp-seams-energies-example.png)
 
-![Three options to choose from](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/55-dp-three-options.png)
+Nói chung, chúng ta có ba đường cắt trước đó có thể lựa chọn:
 
-You may think about it this way:
+![Ba lựa chọn để chọn](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/55-dp-three-options.png)
 
-- The cell `[1][x]`: contains the lowest possible energy of the seam that starts somewhere on the row `[0][?]` and ends up at cell `[1][x]`
-- **The current cell** `[2][3]`: contains the lowest possible energy of the seam that starts somewhere on the row `[0][?]` and ends up at cell `[2][3]`. To calculate it we need to sum up the energy of the current pixel `[2][3]` (from the energy map) with the `min(seam_energy_1_2, seam_energy_1_3, seam_energy_1_4)`
+Bạn có thể nghĩ về nó như sau:
 
-If we fill the `seamsEnergies` table completely, then the minimum number in the lowest row would be the lowest possible seam energy.
+- Ô `[1][x]`: chứa năng lượng thấp nhất có thể của đường cắt bắt đầu từ đâu đó trên hàng `[0][?]` và kết thúc tại ô `[1][x]`
+- **Ô hiện tại** `[2][3]`: chứa năng lượng thấp nhất có thể của đường cắt bắt đầu từ đâu đó trên hàng `[0][?]` và kết thúc tại ô `[2][3]`. Để tính toán nó, chúng ta cần cộng năng lượng của pixel hiện tại `[2][3]` (từ bản đồ năng lượng) với `min(seam_energy_1_2, seam_energy_1_3, seam_energy_1_4)`
 
-Let's try to fill several cells of this table to see how it works.
+Nếu chúng ta điền đầy đủ bảng `seamsEnergies`, thì số nhỏ nhất ở hàng dưới cùng sẽ là năng lượng đường cắt nhỏ nhất có thể.
 
-![Seams energies map traversal](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/57-dp-seams-energies-traversal.png)
+Hãy thử điền vài ô của bảng này để xem nó hoạt động như thế nào.
 
-After filling out the `seamsEnergies` table we may see that the lowest energy pixel has an energy of `50`. For convenience, during the `seamsEnergies` generation for each pixel, we may save not only the energy of the seam but also the coordinates of the previous lowest energy seam. This will give us the possibility to reconstruct the seam path from the bottom to the top easily.
+![Điều hướng bản đồ năng lượng đường cắt](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/57-dp-seams-energies-traversal.png)
 
-The time complexity of DP approach would be `O(w * h)`, where `w` and `h` are the width and the height of the image. We need to calculate energies for *every* pixel of the image.
+Sau khi điền bảng `seamsEnergies`, chúng ta có thể thấy rằng pixel năng lượng thấp nhất có năng lượng là `50`. Để thuận tiện trong quá trình tạo bảng `seamsEnergies` cho mỗi pixel, chúng ta có thể lưu không chỉ năng lượng của đường cắt mà còn là tọa độ của đường cắt trước đó. Điều này sẽ cho chúng ta khả năng tái tạo đường cắt từ dưới lên trên một cách dễ dàng.
 
-Here is an example of how this logic might be implemented:
+Độ phức tạp thời gian của phương pháp lập trình động sẽ là `O(w * h)`, trong đó `w` và `h` lần lượt là chiều rộng và chiều cao của hình ảnh. Chúng ta cần tính năng lượng cho _mỗi_ pixel của hình ảnh.
+
+Dưới đây là một ví dụ về cách triển khai logic này:
 
 ```typescript
-// The metadata for the pixels in the seam.
+// Thông tin về các pixel
+
+ trong đường cắt.
 type SeamPixelMeta = {
-  energy: number, // The energy of the pixel.
-  coordinate: Coordinate, // The coordinate of the pixel.
-  previous: Coordinate | null, // The previous pixel in a seam.
+  energy: number; // Năng lượng của pixel.
+  coordinate: Coordinate; // Tọa độ của pixel.
+  previous: Coordinate | null; // Pixel trước đó trong một đường cắt.
 };
 
-// Finds the seam (the sequence of pixels from top to bottom) that has the
-// lowest resulting energy using the Dynamic Programming approach.
+// Tìm đường cắt (dãy các pixel từ trên xuống dưới) có
+// năng lượng kết quả thấp nhất sử dụng phương pháp lập trình động.
 const findLowEnergySeam = (energyMap: EnergyMap, { w, h }: ImageSize): Seam => {
-  // The 2D array of the size of w and h, where each pixel contains the
-  // seam metadata (pixel energy, pixel coordinate and previous pixel from
-  // the lowest energy seam at this point).
-  const seamsEnergies: (SeamPixelMeta | null)[][] = matrix<SeamPixelMeta | null>(w, h, null);
+  // Mảng 2D có kích thước w và h, mỗi pixel chứa
+  // thông tin metadata của đường cắt (năng lượng pixel, tọa độ pixel và pixel trước
+  // đó từ đường cắt năng lượng thấp nhất ở điểm này).
+  const seamsEnergies: (SeamPixelMeta | null)[][] =
+    matrix<SeamPixelMeta | null>(w, h, null);
 
-  // Populate the first row of the map by just copying the energies
-  // from the energy map.
+  // Điền vào hàng đầu tiên của bảng bằng cách sao chép năng lượng
+  // từ bản đồ năng lượng.
   for (let x = 0; x < w; x += 1) {
     const y = 0;
     seamsEnergies[y][x] = {
@@ -401,24 +421,24 @@ const findLowEnergySeam = (energyMap: EnergyMap, { w, h }: ImageSize): Seam => {
     };
   }
 
-  // Populate the rest of the rows.
+  // Điền vào phần còn lại của các hàng.
   for (let y = 1; y < h; y += 1) {
     for (let x = 0; x < w; x += 1) {
-      // Find the top adjacent cell with minimum energy.
-      // This cell would be the tail of a seam with lowest energy at this point.
-      // It doesn't mean that this seam (path) has lowest energy globally.
-      // Instead, it means that we found a path with the lowest energy that may lead
-      // us to the current pixel with the coordinates x and y.
+      // Tìm ô kề trên với năng lượng thấp nhất.
+      // Ô này sẽ là đuôi của một đường cắt với năng lượng thấp nhất tại điểm này.
+      // Điều này không có nghĩa là đường cắt (đường dẫn) này có năng lượng thấp nhất
+      // toàn cầu. Thay vào đó, điều này có nghĩa là chúng ta đã tìm thấy một đường dẫn với
+      // năng lượng thấp nhất có thể dẫn chúng ta đến pixel hiện tại với tọa độ x và y.
       let minPrevEnergy = Infinity;
       let minPrevX: number = x;
-      for (let i = (x - 1); i <= (x + 1); i += 1) {
+      for (let i = x - 1; i <= x + 1; i += 1) {
         if (i >= 0 && i < w && seamsEnergies[y - 1][i].energy < minPrevEnergy) {
           minPrevEnergy = seamsEnergies[y - 1][i].energy;
           minPrevX = i;
         }
       }
 
-      // Update the current cell.
+      // Cập nhật ô hiện tại.
       seamsEnergies[y][x] = {
         energy: minPrevEnergy + energyMap[y][x],
         coordinate: { x, y },
@@ -427,9 +447,9 @@ const findLowEnergySeam = (energyMap: EnergyMap, { w, h }: ImageSize): Seam => {
     }
   }
 
-  // Find where the minimum energy seam ends.
-  // We need to find the tail of the lowest energy seam to start
-  // traversing it from its tail to its head (from the bottom to the top).
+  // Tìm nơi đường cắt năng lượng thấp nhất kết thúc.
+  // Chúng ta cần tìm đuôi của đường cắt năng lượng thấp nhất để bắt đầu
+  // điều hướng nó từ đuôi đến đầu (từ dưới lên trên).
   let lastMinCoordinate: Coordinate | null = null;
   let minSeamEnergy = Infinity;
   for (let x = 0; x < w; x += 1) {
@@ -440,9 +460,9 @@ const findLowEnergySeam = (energyMap: EnergyMap, { w, h }: ImageSize): Seam => {
     }
   }
 
-  // Find the lowest energy energy seam.
-  // Once we know where the tail is we may traverse and assemble the lowest
-  // energy seam based on the "previous" value of the seam pixel metadata.
+  // Tìm đường cắt năng lượng thấp nhất.
+  // Khi chúng ta biết nơi đuôi đặt, chúng ta có thể điều hướng và lắp ráp
+  // đường cắt năng lượng thấp nhất dựa trên giá trị "trước" của metadata pixel đường cắt.
   const seam: Seam = [];
   if (!lastMinCoordinate) {
     return seam;
@@ -450,7 +470,7 @@ const findLowEnergySeam = (energyMap: EnergyMap, { w, h }: ImageSize): Seam => {
 
   const { x: lastMinX, y: lastMinY } = lastMinCoordinate;
 
-  // Adding new pixel to the seam path one by one until we reach the top.
+  // Thêm pixel mới vào đường cắt một cách tuần tự cho đến khi chúng ta đến đầu.
   let currentSeam = seamsEnergies[lastMinY][lastMinX];
   while (currentSeam) {
     seam.push(currentSeam.coordinate);
@@ -467,18 +487,18 @@ const findLowEnergySeam = (energyMap: EnergyMap, { w, h }: ImageSize): Seam => {
 };
 ```
 
-### Removing the seam with the lowest energy
+### Xóa đường cắt có năng lượng thấp nhất
 
-Once we found the lowest energy seam, we need to remove (to carve) the pixels that form it from the image. The removal is happening by shifting the pixels to the right of the seam by `1px` to the left. For performance reasons, we don't actually delete the last columns. Instead, the rendering component will just ignore the part of the image that lays beyond the resized image width.
+Sau khi chúng ta đã tìm ra đường cắt có năng lượng thấp nhất, chúng ta cần xóa (điêu chỉnh) các pixel tạo thành nó khỏi hình ảnh. Việc xóa diễn ra bằng cách dịch chuyển các pixel sang phải của đường cắt sang trái `1px`. Vì lý do hiệu suất, chúng ta không thực sự xóa các cột cuối cùng. Thay vào đó, thành phần hiển thị sẽ chỉ bỏ qua phần của hình ảnh nằm ngoài chiều rộng của hình ảnh đã được thay đổi kích thước.
 
-![Deleting the seam](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/60-deleting-example.png)
+![Xóa đường cắt](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/60-deleting-example.png)
 
 ```typescript
-// Deletes the seam from the image data.
-// We delete the pixel in each row and then shift the rest of the row pixels to the left.
+// Xóa đường cắt khỏi dữ liệu hình ảnh.
+// Chúng ta xóa pixel trong mỗi hàng và sau đó dịch chuyển các pixel còn lại của hàng sang trái.
 const deleteSeam = (img: ImageData, seam: Seam, { w }: ImageSize): void => {
   seam.forEach(({ x: seamX, y: seamY }: Coordinate) => {
-    for (let x = seamX; x < (w - 1); x += 1) {
+    for (let x = seamX; x < w - 1; x += 1) {
       const nextPixel = getPixel(img, { x: x + 1, y: seamY });
       setPixel(img, { x, y: seamY }, nextPixel);
     }
@@ -486,24 +506,24 @@ const deleteSeam = (img: ImageData, seam: Seam, { w }: ImageSize): void => {
 };
 ```
 
-## Objects removal
+## Xóa đối tượng
 
-The Seam Carving algorithm tries to remove the seams which consist of low energy pixels first. We could leverage this fact and by assigning low energy to some pixels manually (i.e. by drawing on the image and masking out some areas of it) we could make the Seam Carving algorithm to do *objects removal* for us for free.
+Thuật toán Seam Carving cố gắng xóa các đường cắt được tạo thành từ các pixel có năng lượng thấp trước tiên. Chúng ta có thể tận dụng sự thật này và bằng cách gán năng lượng thấp cho một số pixel một cách thủ công (tức là bằng cách vẽ trên hình ảnh và che khuất một số khu vực của nó), chúng ta có thể làm cho thuật toán Seam Carving thực hiện _xóa đối tượng_ cho chúng ta miễn phí.
 
-Currently, in `getPixelEnergy()` function we were using only the `R`, `G`, `B` color channels to calculate the pixel's energy. But there is also the `A` (alpha, transparency) parameter of the color that we didn't use yet. We may use the transparency channel to tell the algorithm that transparent pixels are the pixels we want to remove. You may check the [source-code of the energy function](https://github.com/trekhleb/js-image-carver/blob/main/src/utils/contentAwareResizer.ts#L54) that takes transparency into account.
+Hiện tại, trong hàm `getPixelEnergy()`, chúng ta chỉ sử dụng các kênh màu `R`, `G`, `B` để tính toán năng lượng của pixel. Nhưng cũng có tham số `A` (alpha, độ trong suốt) của màu mà chúng ta chưa sử dụng. Chúng ta có thể sử dụng kênh độ trong suốt để thông báo cho thuật toán rằng các pixel trong suốt là các pixel chúng ta muốn xóa. Bạn có thể kiểm tra [mã nguồn của hàm năng lượng](https://github.com/trekhleb/js-image-carver/blob/main/src/utils/contentAwareResizer.ts#L54) mà tính đến độ trong suốt.
 
-Here is how the algorithm works for object removal.
+Dưới đây là cách thuật toán hoạt động cho việc xóa đối tượng.
 
 ![JS IMAGE CARVER OBJECT REMOVAL DEMO](https://raw.githubusercontent.com/trekhleb/trekhleb.github.io/master/src/posts/2021/content-aware-image-resizing-in-javascript/assets/10-demo-02.gif)
 
-## Issues and what's next
+## Vấn đề và những gì tiếp theo
 
-The [JS IMAGE CARVER](https://github.com/trekhleb/js-image-carver) web app is far from being a production ready resizer of course. Its main purpose was to experiment with the Seam Carving algorithm interactively. So the plan for the future is to continue experimentation.
+Ứng dụng web [JS IMAGE CARVER](https://github.com/trekhleb/js-image-carver) chắc chắn chưa thể trở thành một công cụ thay đổi kích thước sẵn sàng cho sản xuất. Mục đích chính của nó là thử nghiệm với thuật toán Seam Carving theo cách tương tác. Vì vậy, kế hoạch cho tương lai là tiếp tục thử nghiệm.
 
-The [original paper](https://perso.crans.org/frenoy/matlab2012/seamcarving.pdf) describes how the Seam Carving algorithm might be used not only for the downscaling but also for the **upscaling of the images**. The upscaling, in turn, might be used to **upscale the image back to its original width after the objects' removal**.
+[Bài báo gốc](https://perso.crans.org/frenoy/matlab2012/seamcarving.pdf) mô tả cách thuật toán Seam Carving có thể được sử dụng không chỉ để co giảm kích thước mà còn để **mở rộng kích thước của hình ảnh**. Việc mở rộng, lần lượt, có thể được sử dụng để **mở rộng lại hình ảnh về chiều rộng ban đầu sau khi loại bỏ các đối tượng**.
 
-Another interesting area of experimentation might be to make the algorithm work in a **real-time**.
+Một lĩnh vực thử nghiệm thú vị khác có thể là làm cho thuật toán hoạt động **trực tiếp**.
 
-> Those are the plans for the future, but for now, I hope that the example with image downsizing was interesting and useful for you. I also hope that you've got the idea of using dynamic programming to implement it.
+> Đó là các kế hoạch cho tương lai, nhưng hiện tại, tôi hy vọng rằng ví dụ về việc giảm kích thước hình ảnh đã làm bạn thấy thú vị và hữu ích. Tôi cũng hy vọng rằng bạn đã hiểu được cách sử dụng lập trình động để triển khai nó.
 >
-> So, good luck with your own experiments!
+> Vì vậy, chúc bạn may mắn với các thử nghiệm của riêng bạn!

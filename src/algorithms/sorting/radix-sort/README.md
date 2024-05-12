@@ -1,7 +1,7 @@
 # Radix Sort
 
 _Read this in other languages:_
-[_Português_](README.pt-BR.md),
+[_Tiếng Việt_](README.md)
 
 In computer science, **radix sort** is a non-comparative integer sorting
 algorithm that sorts data with integer keys by grouping keys by the individual
@@ -10,9 +10,9 @@ is required, but because integers can represent strings of characters
 (e.g., names or dates) and specially formatted floating point numbers, radix
 sort is not limited to integers.
 
-*Where does the name come from?*
+_Where does the name come from?_
 
-In mathematical numeral systems, the *radix* or base is the number of unique digits,
+In mathematical numeral systems, the _radix_ or base is the number of unique digits,
 including the digit zero, used to represent numbers in a positional numeral system.
 For example, a binary system (using numbers 0 and 1) has a radix of 2 and a decimal
 system (using numbers 0 to 9) has a radix of 10.
@@ -37,9 +37,9 @@ comparison-based sorts (and worse if keys are much longer than `log n`).
 
 ## Complexity
 
-| Name                  | Best            | Average             | Worst               | Memory    | Stable    | Comments  |
-| --------------------- | :-------------: | :-----------------: | :-----------------: | :-------: | :-------: | :-------- |
-| **Radix sort**        | n * k           | n * k               | n * k               | n + k     | Yes       | k - length of longest key |
+| Name           |  Best  | Average | Worst  | Memory | Stable | Comments                  |
+| -------------- | :----: | :-----: | :----: | :----: | :----: | :------------------------ |
+| **Radix sort** | n \* k | n \* k  | n \* k | n + k  |  Yes   | k - length of longest key |
 
 ## References
 
