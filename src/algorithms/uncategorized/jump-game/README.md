@@ -1,128 +1,107 @@
-# Jump Game
+# Bước Nhảy
 
-## The Problem
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Given an array of non-negative integers, you are initially positioned at 
-the first index of the array. Each element in the array represents your maximum 
-jump length at that position.
+## Bài Toán
 
-Determine if you are able to reach the last index.
+Cho một mảng các số nguyên không âm, ban đầu bạn đứng ở
+chỉ mục đầu tiên của mảng. Mỗi phần tử trong mảng đại diện cho
+độ dài bước nhảy tối đa của bạn tại vị trí đó.
 
-**Example #1**
+Xác định xem bạn có thể đạt được chỉ mục cuối cùng không.
+
+**Ví dụ #1**
 
 ```
 Input: [2,3,1,1,4]
 Output: true
-Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+Giải thích: Nhảy 1 bước từ chỉ mục 0 đến 1, sau đó 3 bước đến chỉ mục cuối cùng.
 ```
 
-**Example #2**
+**Ví dụ #2**
 
 ```
 Input: [3,2,1,0,4]
 Output: false
-Explanation: You will always arrive at index 3 no matter what. Its maximum
-             jump length is 0, which makes it impossible to reach the last index.
+Giải thích: Bạn luôn đến chỉ mục 3 dù cho điều gì. Độ dài bước nhảy tối đa là 0, điều này khiến cho việc đạt được chỉ mục cuối cùng là không thể.
 ```
 
-## Naming
+## Đặt Tên
 
-We call a position in the array a **"good index"** if starting at that position,
-we can reach the last index. Otherwise, that index is called a **"bad index"**.
-The problem then reduces to whether or not index 0 is a "good index".
+Chúng tôi gọi một vị trí trong mảng là **"chỉ mục tốt"** nếu bắt đầu từ vị trí đó,
+chúng ta có thể đạt được chỉ mục cuối cùng. Ngược lại, chỉ mục đó được gọi là **"chỉ mục xấu"**.
+Vấn đề sau đó thu gọn lại là xem chỉ mục 0 có phải là "chỉ mục tốt" không.
 
-## Solutions
+## Các Giải Pháp
 
-### Approach 1: Backtracking
+### Phương Pháp 1: Quay Lại (Backtracking)
 
-This is the inefficient solution where we try every single jump pattern that 
-takes us from the first position to the last. We start from the first position 
-and jump to every index that is reachable. We repeat the process until last 
-index is reached. When stuck, backtrack.
+Đây là phương pháp không hiệu quả nơi chúng ta thử mọi cách nhảy từ
+vị trí đầu tiên đến cuối cùng. Chúng ta bắt đầu từ vị trí đầu tiên
+và nhảy đến mỗi chỉ mục có thể đạt được. Chúng ta lặp lại quá trình cho đến khi cuối
+chỉ mục cuối cùng được đạt. Khi bị kẹt, quay lại.
 
-> See [backtrackingJumpGame.js](backtrackingJumpGame.js) file
+> Xem tập tin [backtrackingJumpGame.js](backtrackingJumpGame.js)
 
-**Time complexity:**: `O(2^n)`.
-There are 2<sup>n</sup> (upper bound) ways of jumping from 
-the first position to the last, where `n` is the length of 
-array `nums`.
+**Độ phức tạp thời gian:** `O(2^n)`.
+Có 2<sup>n</sup> (giới hạn trên) cách nhảy từ vị trí đầu tiên đến
+cuối cùng, nơi `n` là độ dài của mảng `nums`.
 
-**Auxiliary Space Complexity**: `O(n)`.
-Recursion requires additional memory for the stack frames.
+**Độ phức tạp không gian phụ**: `O(n)`.
+Đệ quy yêu cầu bộ nhớ bổ sung cho các khung ngăn xếp.
 
-### Approach 2: Dynamic Programming Top-down
+### Phương Pháp 2: Quy Hoạch Động Trên Xuống (Dynamic Programming Top-down)
 
-Top-down Dynamic Programming can be thought of as optimized 
-backtracking. It relies on the observation that once we determine 
-that a certain index is good / bad, this result will never change.
-This means that we can store the result and not need to recompute
-it every time.
+Quy hoạch động trên xuống có thể được coi là quay lại tối ưu hóa.
+Nó dựa trên quan sát rằng một khi chúng ta xác định
+rằng một chỉ mục nhất định là tốt / xấu, kết quả này sẽ không bao giờ thay đổi.
+Điều này có nghĩa là chúng ta có thể lưu kết quả và không cần phải tính toán lại
+nó mỗi lần.
 
-Therefore, for each position in the array, we remember whether the 
-index is good or bad. Let's call this array memo and let its values
-be either one of: GOOD, BAD, UNKNOWN. This technique is 
-called memoization.
+Do đó, đối với mỗi vị trí trong mảng, chúng ta nhớ xem chỉ mục đó có tốt hay xấu không. Hãy gọi mảng này là bảng nhớ và để giá trị của nó là một trong các giá trị sau: GOOD, BAD, UNKNOWN. Kỹ thuật này được gọi là memoization (ghi nhớ).
 
-> See [dpTopDownJumpGame.js](dpTopDownJumpGame.js) file
+> Xem tập tin [dpTopDownJumpGame.js](dpTopDownJumpGame.js)
 
-**Time complexity:**: `O(n^2)`.
-For every element in the array, say `i`, we are looking at the 
-next `nums[i]` elements to its right aiming to find a GOOD
-index. `nums[i]` can be at most `n`, where `n` is the length 
-of array `nums`.
+**Độ phức tạp thời gian:** `O(n^2)`.
+Đối với mỗi phần tử trong mảng, nói `i`, chúng ta đang xem xét
+các phần tử `nums[i]` tiếp theo ở bên phải mục tiêu là tìm chỉ mục tốt. `nums[i]` có thể là tối đa `n`, nơi `n` là độ dài của mảng `nums`.
 
-**Auxiliary Space Complexity**: `O(2 * n) = O(n)`.
-First `n` originates from recursion. Second `n` comes from the 
-usage of the memo table.
+**Độ phức tạp không gian phụ**: `O(2 * n) = O(n)`.
+Đầu tiên `n` xuất phát từ đệ quy. Thứ hai `n` xuất phát từ việc sử dụng bảng memo.
 
-### Approach 3: Dynamic Programming Bottom-up
+### Phương Pháp 3: Quy Hoạch Động Dưới Lên (Dynamic Programming Bottom-up)
 
-Top-down to bottom-up conversion is done by eliminating recursion. 
-In practice, this achieves better performance as we no longer have the 
-method stack overhead and might even benefit from some caching. More 
-importantly, this step opens up possibilities for future optimization.
-The recursion is usually eliminated by trying to reverse the order of 
-the steps from the top-down approach.
+Chuyển từ trên xuống sang dưới được thực hiện bằng cách loại bỏ đệ quy. Trong thực tế, điều này đạt được hiệu suất tốt hơn vì chúng ta không còn bị ảnh hưởng bởi overhead ngăn xếp phương thức và thậm chí còn có thể tận dụng một số bộ nhớ cache. Quan trọng hơn, bước này mở ra các cơ hội tối ưu hóa trong tương lai. Đệ quy thường được loại bỏ bằng cách cố gắng đảo ngược thứ tự các bước từ phương pháp trên xuống.
 
-The observation to make here is that we only ever jump to the right.
-This means that if we start from the right of the array, every time 
-we will query a position to our right, that position has already be
-determined as being GOOD or BAD. This means we don't need to recurse
-anymore, as we will always hit the memo table.
+Quan sát phải là chúng ta chỉ nhảy sang phải. Điều này có nghĩa là nếu chúng ta bắt đầu từ phải của mảng, mỗi khi chúng ta truy vấn một vị trí sang phải của chúng ta, vị trí đó đã được xác định là tốt hoặc xấu. Điều này có nghĩa là chúng ta không cần phải đệ quy nữa, vì chúng ta luôn sẽ đạt được bảng nhớ.
 
-> See [dpBottomUpJumpGame.js](dpBottomUpJumpGame.js) file
+> Xem tập tin [dpBottomUpJumpGame.js](dpBottomUpJumpGame.js)
 
-**Time complexity:**: `O(n^2)`.
-For every element in the array, say `i`, we are looking at the 
-next `nums[i]` elements to its right aiming to find a GOOD
-index. `nums[i]` can be at most `n`, where `n` is the length 
-of array `nums`.
+**Độ phức tạp thời gian:** `O(n^2)`.
+Đối với mỗi phần tử trong mảng, nói `i`, chúng ta đang xem xét
+các phần tử `nums[i]` tiếp theo ở bên phải mục tiêu là tìm chỉ mục tốt. `nums[i]` có thể là tối đa `n`, nơi `n` là độ dài của mảng `nums`.
 
-**Auxiliary Space Complexity**: `O(n)`.
-This comes from the usage of the memo table.
- 
-### Approach 4: Greedy
+**Độ phức tạp không gian phụ**: `O(n)`.
+Điều này đến từ việc sử dụng bảng memo.
 
-Once we have our code in the bottom-up state, we can make one final,
-important observation. From a given position, when we try to see if
-we can jump to a GOOD position, we only ever use one - the first one.
-In other words, the left-most one. If we keep track of this left-most
-GOOD position as a separate variable, we can avoid searching for it in
-the array. Not only that, but we can stop using the array altogether.
+### Phương Pháp 4: Tham Lam (Greedy)
 
-> See [greedyJumpGame.js](greedyJumpGame.js) file
+Khi chúng ta có mã của mình ở trạng thái từ dưới lên, chúng ta có thể thực hiện một quan sát cuối cùng, quan trọng. Từ một vị trí đã cho, khi chúng ta cố gắng xem liệu chúng ta có thể nhảy đến một vị trí TỐT, chúng ta chỉ sử dụng một vị trí - vị trí đầu tiên. Nói cách khác, vị trí cách xa bên trái. Nếu chúng ta tiếp tục theo dõi vị trí TỐT cách xa bên trái như một biến riêng biệt, chúng ta có thể tránh việc tìm kiếm nó trong mảng. Không chỉ vậy, nhưng chúng ta có thể dừng việc sử dụng mảng hoàn toàn.
 
-**Time complexity:**: `O(n)`.
-We are doing a single pass through the `nums` array, hence `n` steps,
-where `n` is the length of array `nums`.
+> Xem tập tin [greedyJumpGame.js](greedyJumpGame.js)
 
-**Auxiliary Space Complexity**: `O(1)`.
-We are not using any extra memory.
+**Độ phức tạp thời gian:** `O(n)`.
+Chúng tôi thực hiện một lượt qua mảng `nums`, do đó có `n` bước,
+nơi `n` là độ dài của mảng `nums`.
 
-## References
+**Độ phức tạp không gian phụ**: `O(1)`.
+Chúng tôi không sử dụng bất kỳ bộ nhớ phụ nào.
 
-- [Jump Game Fully Explained on LeetCode](https://leetcode.com/articles/jump-game/)
+## Tham Khảo
+
+- [Jump Game Fully Explained trên LeetCode](https://leetcode.com/articles/jump-game/)
 - [Dynamic Programming vs Divide and Conquer](https://itnext.io/dynamic-programming-vs-divide-and-conquer-2fea680becbe)
-- [Dynamic Programming](https://en.wikipedia.org/wiki/Dynamic_programming)
-- [Memoization on Wikipedia](https://en.wikipedia.org/wiki/Memoization)
-- [Top-Down and Bottom-Up Design on Wikipedia](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design)
+- [Quy Hoạch Động](https://en.wikipedia.org/wiki/Dynamic_programming)
+- [Memoization trên Wikipedia](https://en.wikipedia.org/wiki/Memoization)
+- [Thiết Kế Từ Trên Xuống và Từ Dưới Lên trên Wikipedia](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design)

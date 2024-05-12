@@ -1,47 +1,51 @@
-# Unique Paths Problem
+# Bài toán Đường đi duy nhất
 
-A robot is located at the top-left corner of a `m x n` grid 
-(marked 'Start' in the diagram below).
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-The robot can only move either down or right at any point in 
-time. The robot is trying to reach the bottom-right corner 
-of the grid (marked 'Finish' in the diagram below).
+Một con robot đang được đặt ở góc trên cùng bên trái của một lưới `m x n`
+(mô tả là 'Bắt đầu' trong hình dưới đây).
 
-How many possible unique paths are there?
+Robot chỉ có thể di chuyển xuống hoặc sang phải tại bất kỳ thời điểm nào.
+Robot đang cố gắng đến góc dưới cùng bên phải của lưới (được đánh dấu là 'Kết thúc'
+trong hình dưới đây).
 
-![Unique Paths](https://leetcode.com/static/images/problemset/robot_maze.png)
+Có bao nhiêu đường đi duy nhất có thể có?
 
-## Examples
+![Đường đi duy nhất](https://leetcode.com/static/images/problemset/robot_maze.png)
 
-**Example #1**
+## Ví dụ
 
-```
-Input: m = 3, n = 2
-Output: 3
-Explanation:
-From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
-1. Right -> Right -> Down
-2. Right -> Down -> Right
-3. Down -> Right -> Right
-```
-
-**Example #2**
+**Ví dụ #1**
 
 ```
-Input: m = 7, n = 3
-Output: 28
+Đầu vào: m = 3, n = 2
+Đầu ra: 3
+Giải thích:
+Từ góc trên cùng bên trái, có tổng cộng 3 cách để đến góc dưới cùng bên phải:
+1. Sang phải -> Sang phải -> Xuống
+2. Sang phải -> Xuống -> Sang phải
+3. Xuống -> Sang phải -> Sang phải
 ```
 
-## Algorithms
-
-### Backtracking
-
-First thought that might came to mind is that we need to build a decision tree 
-where `D` means moving down and `R` means moving right. For example in case
-of boars `width = 3` and `height = 2` we will have the following decision tree:
+**Ví dụ #2**
 
 ```
-                START
+Đầu vào: m = 7, n = 3
+Đầu ra: 28
+```
+
+## Thuật toán
+
+### Quay lui
+
+Ý tưởng đầu tiên mà có thể nghĩ đến là chúng ta cần xây dựng một cây quyết định
+trong đó `D` có nghĩa là di chuyển xuống và `R` có nghĩa là di chuyển sang phải.
+Ví dụ trong trường hợp bảng `chiều rộng = 3` và `chiều cao = 2` chúng ta sẽ có cây
+quyết định như sau:
+
+```
+                BẮT ĐẦU
                 /   \
                D     R
              /     /   \
@@ -49,58 +53,58 @@ of boars `width = 3` and `height = 2` we will have the following decision tree:
          /      /         \
         R      R            D
 
-       END    END          END
+       KẾT THÚC KẾT THÚC KẾT THÚC
 ```
 
-We can see three unique branches here that is the answer to our problem.
+Chúng ta có thể thấy ba nhánh duy nhất ở đây đó là câu trả lời cho vấn đề của chúng ta.
 
-**Time Complexity**: `O(2 ^ n)` - roughly in worst case with square board
-of size `n`.
+**Độ phức tạp thời gian**: `O(2 ^ n)` - khoảng cách xấp xỉ trong trường hợp xấu nhất
+với bảng vuông có kích thước `n`.
 
-**Auxiliary Space Complexity**: `O(m + n)` - since we need to store current path with
-positions.
+**Độ phức tạp không gian phụ**: `O(m + n)` - vì chúng ta cần lưu trữ đường đi hiện tại với
+các vị trí.
 
-### Dynamic Programming
+### Lập trình động
 
-Let's treat `BOARD[i][j]` as our sub-problem.
+Hãy xem `BẢNG[i][j]` như là bài toán phụ của chúng ta.
 
-Since we have restriction of moving only to the right
-and down we might say that number of unique paths to the current
-cell is a sum of numbers of unique paths to the cell above the
-current one and to the cell to the left of current one.
-
-```
-BOARD[i][j] = BOARD[i - 1][j] + BOARD[i][j - 1]; // since we can only move down or right.
-```
-
-Base cases are:
+Khi chúng ta có hạn chế chỉ được di chuyển sang phải
+và xuống, chúng ta có thể nói rằng số lượng đường đi duy nhất đến ô hiện
+tại là tổng của số lượng đường đi duy nhất đến ô phía trên ô hiện tại
+và ô bên trái của ô hiện tại.
 
 ```
-BOARD[0][any] = 1; // only one way to reach any top slot.
-BOARD[any][0] = 1; // only one way to reach any slot in the leftmost column.
+BẢNG[i][j] = BẢNG[i - 1][j] + BẢNG[i][j - 1]; // vì chúng ta chỉ có thể di chuyển xuống hoặc sang phải.
 ```
 
-For the board `3 x 2` our dynamic programming matrix will look like:
+Các trường hợp cơ sở là:
 
-|     | 0   | 1   | 1   |
-|:---:|:---:|:---:|:---:|
-|**0**| 0   | 1   | 1   |
-|**1**| 1   | 2   | 3   |
+```
+BẢNG[0][bất kỳ] = 1; // chỉ có một cách để đến bất kỳ ô trên cùng nào.
+BẢNG[bất kỳ][0] = 1; // chỉ có một cách để đến bất kỳ ô nào trong cột bên trái.
+```
 
-Each cell contains the number of unique paths to it. We need 
-the bottom right one with number `3`.
+Đối với bảng `3 x 2` của chúng ta, ma trận lập trình động sẽ trông như sau:
 
-**Time Complexity**: `O(m * n)` - since we're going through each cell of the DP matrix.
+|       |  0  |  1  |  1  |
+| :---: | :-: | :-: | :-: |
+| **0** |  0  |  1  |  1  |
+| **1** |  1  |  2  |  3  |
 
-**Auxiliary Space Complexity**: `O(m * n)` - since we need to have DP matrix.
+Mỗi ô chứa số lượng đường đi duy nhất đến nó. Chúng ta cần
+ô phía dưới bên phải với số `3`.
 
-### Pascal's Triangle Based
+**Độ phức tạp thời gian**: `O(m * n)` - vì chúng ta đi qua mỗi ô của ma trận lập trình động.
 
-This question is actually another form of Pascal Triangle.
+**Độ phức tạp không gian phụ**: `O(m * n)` - vì chúng ta cần có ma trận lập trình động.
 
-The corner of this rectangle is at `m + n - 2` line, and 
-at `min(m, n) - 1` position of the Pascal's Triangle.
+### Dựa trên Tam giác Pascal
 
-## References
+Câu hỏi này thực sự là một dạng khác của Tam giác Pascal.
+
+Góc của hình chữ nhật này ở dòng `m + n - 2`, và
+ở vị trí `min(m, n) - 1` của Tam giác Pascal.
+
+## Tham khảo
 
 - [LeetCode](https://leetcode.com/problems/unique-paths/description/)

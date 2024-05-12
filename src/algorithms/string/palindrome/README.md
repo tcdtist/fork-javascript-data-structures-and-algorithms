@@ -1,12 +1,13 @@
-# Palindrome Check
+# Kiểm Tra Chuỗi Palindrome
 
-A [Palindrome](https://en.wikipedia.org/wiki/Palindrome) is a string that reads the same forwards and backwards.
-This means that the second half of the string is the reverse of the
-first half.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-## Examples
+Một [Palindrome](https://en.wikipedia.org/wiki/Palindrome) là một chuỗi mà khi đọc từ trái sang phải hoặc từ phải sang trái đều giống nhau. Điều này có nghĩa là nửa sau của chuỗi là đảo ngược của nửa đầu.
 
-The following are palindromes (thus would return `TRUE`):
+## Ví dụ
+
+Dưới đây là các chuỗi Palindrome (do đó sẽ trả về `TRUE`):
 
 ```
 - "a"
@@ -16,7 +17,7 @@ The following are palindromes (thus would return `TRUE`):
 - "racecar" ->  rac + e + car
 ```
 
-The following are NOT palindromes (thus would return `FALSE`):
+Dưới đây là các chuỗi KHÔNG PHẢI Palindrome (do đó sẽ trả về `FALSE`):
 
 ```
 - "rad"
@@ -24,6 +25,6 @@ The following are NOT palindromes (thus would return `FALSE`):
 - "polo"
 ```
 
-## References
+## Tham khảo
 
-- [GeeksForGeeks - Check if a number is Palindrome](https://www.geeksforgeeks.org/check-if-a-number-is-palindrome/)
+- [GeeksForGeeks - Kiểm tra một số có phải là Palindrome không](https://www.geeksforgeeks.org/check-if-a-number-is-palindrome/)

@@ -1,21 +1,24 @@
-# Square Matrix In-Place Rotation
+# Xoay ma trận vuông tại chỗ
 
-## The Problem
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-You are given an `n x n` 2D matrix (representing an image). 
-Rotate the matrix by `90` degrees (clockwise).
+## Vấn đề
 
-**Note**
+Bạn được cho một ma trận 2D `n x n` (đại diện cho một hình ảnh).
+Xoay ma trận theo góc `90` độ (theo chiều kim đồng hồ).
 
-You have to rotate the image **in-place**, which means you 
-have to modify the input 2D matrix directly. **DO NOT** allocate
-another 2D matrix and do the rotation.
+**Lưu Ý**
 
-## Examples
+Bạn phải xoay hình ảnh **tại chỗ**, điều này có nghĩa là bạn
+phải sửa đổi trực tiếp ma trận 2D đầu vào. **KHÔNG** phải cấp
+phát một ma trận 2D khác và thực hiện xoay.
 
-**Example #1**
+## Ví dụ
 
-Given input matrix:
+**Ví dụ #1**
+
+Ma trận đầu vào được cho:
 
 ```
 [
@@ -25,7 +28,7 @@ Given input matrix:
 ]
 ```
 
-Rotate the input matrix in-place such that it becomes:
+Xoay ma trận đầu vào tại chỗ sao cho nó trở thành:
 
 ```
 [
@@ -35,9 +38,9 @@ Rotate the input matrix in-place such that it becomes:
 ]
 ```
 
-**Example #2**
+**Ví dụ #2**
 
-Given input matrix:
+Ma trận đầu vào được cho:
 
 ```
 [
@@ -48,7 +51,7 @@ Given input matrix:
 ]
 ```
 
-Rotate the input matrix in-place such that it becomes:
+Xoay ma trận đầu vào tại chỗ sao cho nó trở thành:
 
 ```
 [
@@ -59,52 +62,45 @@ Rotate the input matrix in-place such that it becomes:
 ]
 ```
 
-## Algorithm
+## Thuật Toán
 
-We would need to do two reflections of the matrix: 
+Chúng ta cần thực hiện hai phản chiếu của ma trận:
 
-- reflect vertically
-- reflect diagonally from bottom-left to top-right
+- phản chiếu theo chiều dọc
+- phản chiếu theo đường chéo từ dưới lên trên từ góc dưới bên trái đến góc trên bên phải
 
-Or we also could Furthermore, you can reflect diagonally 
-top-left/bottom-right and reflect horizontally.
+Hoặc bạn cũng có thể phản chiếu theo đường chéo từ trên xuống dưới và phản chiếu theo chiều ngang.
 
-A common question is how do you even figure out what kind 
-of reflections to do? Simply rip a square piece of paper,
-write a random word on it so you know its rotation. Then,
-flip the square piece of paper around until you figure out
-how to come to the solution.
- 
-Here is an example of how first line may be rotated using
-diagonal top-right/bottom-left rotation along with horizontal
-rotation.
+Một câu hỏi phổ biến là làm sao bạn có thể tìm ra loại phản chiếu nào để thực hiện? Đơn giản là lấy một tờ giấy vuông, viết một từ ngẫu nhiên trên đó để bạn biết nó đã được xoay. Sau đó, quay tờ giấy vuông cho đến khi bạn tìm ra cách để đến được giải pháp.
+
+Dưới đây là một ví dụ về cách dòng đầu tiên có thể được xoay bằng cách sử dụng phản chiếu đường chéo từ trên xuống dưới và phản chiếu theo chiều ngang.
 
 ```
-Let's say we have a string at the top of the matrix:
+Hãy nói chúng ta có một chuỗi ở đầu của ma trận:
 
 A B C
 • • •
 • • •
 
-Let's do top-right/bottom-left diagonal reflection:
+Hãy thực hiện phản chiếu đường chéo từ trên xuống dưới:
 
 A B C
 / / •
-/ • •  
+/ • •
 
-And now let's do horizontal reflection:
+Và bây giờ hãy thực hiện phản chiếu theo chiều ngang:
 
 A → →
 B → →
 C → →
 
-The string has been rotated to 90 degree:
+Chuỗi đã được xoay 90 độ:
 
 • • A
 • • B
 • • C
 ```
 
-## References
+## Tham Khảo
 
 - [LeetCode](https://leetcode.com/problems/rotate-image/description/)

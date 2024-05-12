@@ -1,107 +1,110 @@
-# Best Time to Buy and Sell Stock
+# Thời điểm Tốt Nhất để Mua và Bán Cổ Phiếu
 
-## Task Description
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Say you have an array prices for which the `i`-th element is the price of a given stock on day `i`.
+## Mô tả Công Việc
 
-Find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+Cho một mảng giá cổ phiếu trong đó phần tử thứ `i` là giá của một cổ phiếu cụ thể vào ngày `i`.
 
-> Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+Tìm lợi nhuận lớn nhất có thể. Bạn có thể thực hiện bất kỳ số giao dịch nào bạn muốn (tức là, mua và bán một cổ phiếu nhiều lần).
 
-**Example #1**
+> Lưu ý: Bạn không thể tham gia nhiều giao dịch cùng một lúc (tức là, bạn phải bán cổ phiếu trước khi mua lại).
+
+**Ví dụ #1**
 
 ```
 Input: [7, 1, 5, 3, 6, 4]
 Output: 7
 ```
 
-_Explanation:_ Buy on day `2` (`price = 1`) and sell on day `3` (`price = 5`), `profit = 5-1 = 4`. Then buy on day `4` (`price = 3`) and sell on day `5` (`price = 6`), `profit = 6-3 = 3`.
+_Giải thích:_ Mua vào ngày `2` (`giá = 1`) và bán vào ngày `3` (`giá = 5`), `lợi nhuận = 5-1 = 4`. Sau đó mua vào ngày `4` (`giá = 3`) và bán vào ngày `5` (`giá = 6`), `lợi nhuận = 6-3 = 3`.
 
-**Example #2**
+**Ví dụ #2**
 
 ```
 Input: [1, 2, 3, 4, 5]
 Output: 4
 ```
 
-_Explanation:_ Buy on day `1` (`price = 1`) and sell on day `5` (`price = 5`), `profit = 5-1 = 4`. Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are engaging multiple transactions at the same time. You must sell before buying again.
+_Giải thích:_ Mua vào ngày `1` (`giá = 1`) và bán vào ngày `5` (`giá = 5`), `lợi nhuận = 5-1 = 4`. Lưu ý rằng bạn không thể mua vào ngày 1, mua vào ngày 2 và sau đó bán chúng sau này, vì bạn đang tham gia nhiều giao dịch cùng một lúc. Bạn phải bán trước khi mua lại.
 
-**Example #3**
+**Ví dụ #3**
 
 ```
 Input: [7, 6, 4, 3, 1]
 Output: 0
 ```
 
-_Explanation:_ In this case, no transaction is done, i.e. max `profit = 0`.
+_Giải thích:_ Trong trường hợp này, không có giao dịch nào được thực hiện, tức là lợi nhuận tối đa `lợi nhuận = 0`.
 
-## Possible Solutions
+## Các Giải Pháp Có Thể
 
-### Divide and conquer approach `O(2^n)`
+### Tiếp Cận Chia và Trị `O(2^n)`
 
-We may try **all** combinations of buying and selling and find out the most profitable one by applying _divide and conquer approach_.
+Chúng ta có thể thử **tất cả** các kết hợp mua và bán và tìm ra kết quả có lợi nhuận lớn nhất bằng cách áp dụng _tiếp cận chia và trị_.
 
-Let's say we have an array of prices `[7, 6, 4, 3, 1]` and we're on the _1st_ day of trading (at the very beginning of the array). At this point we may say that the overall maximum profit would be the _maximum_ of two following values:
+Hãy giả sử chúng ta có một mảng giá `[7, 6, 4, 3, 1]` và chúng ta đang ở _ngày thứ nhất_ của giao dịch (tại điểm bắt đầu của mảng). Tại thời điểm này, chúng ta có thể nói rằng tổng lợi nhuận toàn bộ sẽ là _lớn nhất_ của hai giá trị sau:
 
-1. _Option 1: Keep the money_ → profit would equal to the profit from buying/selling the rest of the stocks → `keepProfit = profit([6, 4, 3, 1])`.
-2. _Option 2: Buy/sell at current price_ → profit in this case would equal to the profit from buying/selling the rest of the stocks plus (or minus, depending on whether we're selling or buying) the current stock price → `buySellProfit = -7 + profit([6, 4, 3, 1])`.
+1. _Tùy chọn 1: Giữ lại tiền_ → lợi nhuận sẽ bằng lợi nhuận từ việc mua/bán cổ phiếu còn lại → `keepProfit = profit([6, 4, 3, 1])`.
+2. _Tùy chọn 2: Mua/bán tại giá hiện tại_ → lợi nhuận trong trường hợp này sẽ bằng lợi nhuận từ việc mua/bán cổ phiếu còn lại cộng (hoặc trừ, phụ thuộc vào việc chúng ta bán hay mua) giá cổ phiếu hiện tại → `buySellProfit = -7 + profit([6, 4, 3, 1])`.
 
-The overall profit would be equal to → `overalProfit = Max(keepProfit, buySellProfit)`.
+Tổng lợi nhuận sẽ bằng → `overalProfit = Max(keepProfit, buySellProfit)`.
 
-As you can see the `profit([6, 4, 3, 1])` task is being solved in the same recursive manner.
+Như bạn có thể thấy nhiệm vụ `profit([6, 4, 3, 1])` được giải quyết theo cùng một cách đệ quy.
 
-> See the full code example in [dqBestTimeToBuySellStocks.js](dqBestTimeToBuySellStocks.js)
+> Xem ví dụ mã đầy đủ tại [dqBestTimeToBuySellStocks.js](dqBestTimeToBuySellStocks.js)
 
-#### Time Complexity
+#### Độ Phức Tạp Thời Gian
 
-As you may see, every recursive call will produce _2_ more recursive branches. The depth of the recursion will be `n` (size of prices array) and thus, the time complexity will equal to `O(2^n)`.
+Như bạn có thể thấy, mỗi lời gọi đệ quy sẽ tạo ra _2_ nhánh đệ quy nữa. Độ sâu của đệ quy sẽ là `n` (kích thước của mảng giá) và do đó, độ phức tạp thời gian sẽ bằng `O(2^n)`.
 
-As you may see, this is very inefficient. For example for just `20` prices the number of recursive calls will be somewhere close to `2M`!
+Như bạn có thể thấy, điều này rất không hiệu quả. Ví dụ, chỉ cần `20` giá trị thì số lời gọi đệ quy sẽ gần bằng `2M`!
 
-#### Additional Space Complexity
+#### Độ Phức Tạp Không Gian Bổ Sung
 
-If we avoid cloning the prices array between recursive function calls and will use the array pointer then additional space complexity will be proportional to the depth of the recursion: `O(n)`
+Nếu chúng ta tránh việc sao chép mảng giá giữa các lời gọi hàm đệ quy và sử dụng con trỏ mảng thì độ phức tạp không gian bổ sung sẽ tỉ lệ với độ sâu của đệ quy: `O(n)`.
 
-## Peak Valley Approach `O(n)`
+## Tiếp Cận Đỉnh Thung Lũng `O(n)`
 
-If we plot the prices array (i.e. `[7, 1, 5, 3, 6, 4]`) we may notice that the points of interest are the consecutive valleys and peaks
+Nếu chúng ta vẽ biểu đồ của mảng giá (ví dụ: `[7, 1, 5, 3, 6, 4]`) thì chúng ta có thể nhận thấy các điểm quan trọng là các thung lũng và đỉnh liên tiếp
 
-![Peak Valley Approach](https://leetcode.com/media/original_images/122_maxprofit_1.PNG)
+![Tiếp Cận Đỉnh Thung Lũng](https://leetcode.com/media/original_images/122_maxprofit_1.PNG)
 
-_Image source: [LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/solution/)_
+_Nguồn hình ảnh: [LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/solution/)_
 
-So, if we will track the growing price and will sell the stocks immediately _before_ the price goes down we'll get the maximum profit (remember, we bought the stock in the valley at its low price).
+Vì vậy, nếu chúng ta theo dõi giá tăng và bán cổ phiếu ngay _trước khi_ giá giảm xuống, chúng ta sẽ nhận được lợi nhuận tối đa (hãy nhớ, chúng ta mua cổ phiếu ở thung lũng với giá thấp của nó).
 
-> See the full code example in [peakvalleyBestTimeToBuySellStocks.js](peakvalleyBestTimeToBuySellStocks.js)
+> Xem ví dụ mã đầy đủ tại [peakvalleyBestTimeToBuySellStocks.js](peakvalleyBestTimeToBuySellStocks.js)
 
-#### Time Complexity
+#### Độ Phức Tạp Thời Gian
 
-Since the algorithm requires only one pass through the prices array, the time complexity would equal `O(n)`.
+Vì thuật toán chỉ yêu cầu một lần duyệt qua mảng giá, do đó độ phức tạp thời gian sẽ bằng `O(n)`.
 
-#### Additional Space Complexity
+#### Độ Phức Tạp Không Gian Bổ Sung
 
-Except of the prices array itself the algorithm consumes the constant amount of memory. Thus, additional space complexity is `O(1)`.
+Ngoài mảng giá chính nó, thuật toán chỉ tiêu thụ một lượng bộ nhớ cố định. Do đó, độ phức tạp không gian bổ sung là `O(1)`.
 
-## Accumulator Approach `O(n)`
+## Tiếp Cận Tích Lũy `O(n)`
 
-There is even simpler approach exists. Let's say we have the prices array which looks like this `[1, 7, 2, 3, 6, 7, 6, 7]`:
+Còn một cách tiếp cận đơn giản hơn tồn tại. Hãy giả sử chúng ta có mảng giá như sau `[1, 7, 2, 3, 6, 7, 6, 7]`:
 
-![Simple One Pass](https://leetcode.com/media/original_images/122_maxprofit_2.PNG)
+![Duyệt Một Lần](https://leetcode.com/media/original_images/122_maxprofit_2.PNG)
 
-_Image source: [LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/solution/)_
+_Nguồn hình ảnh: [LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/solution/)_
 
-You may notice, that we don't even need to keep tracking of a constantly growing price. Instead, we may simply add the price difference for _all growing segments_ of the chart which eventually sums up to the highest possible profit,
+Bạn có thể nhận thấy, chúng ta thậm chí không cần theo dõi một giá cả liên tục tăng. Thay vào đó, chúng ta có thể đơn giản là thêm số chênh lệch giá cho _tất cả các đoạn liên tiếp_ của biểu đồ mà tăng giá, điều này cuối cùng sẽ cộng lại thành lợi nhuận cao nhất có thể,
 
-> See the full code example in [accumulatorBestTimeToBuySellStocks.js](accumulatorBestTimeToBuySellStocks.js)
+> Xem ví dụ mã đầy đủ tại [accumulatorBestTimeToBuySellStocks.js](accumulatorBestTimeToBuySellStocks.js)
 
-#### Time Complexity
+#### Độ Phức Tạp Thời Gian
 
-Since the algorithm requires only one pass through the prices array, the time complexity would equal `O(n)`.
+Vì thuật toán chỉ yêu cầu một lần duyệt qua mảng giá, do đó độ phức tạp thời gian sẽ bằng `O(n)`.
 
-#### Additional Space Complexity
+#### Độ Phức Tạp Không Gian Bổ Sung
 
-Except of the prices array itself the algorithm consumes the constant amount of memory. Thus, additional space complexity is `O(1)`.
+Ngoài mảng giá chính nó, thuật toán chỉ tiêu thụ một lượng bộ nhớ cố định. Do đó, độ phức tạp không gian bổ sung là `O(1)`.
 
-## References
+## Tham Khảo
 
-- [Best Time to Buy and Sell Stock on LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)
+- [Thời Điểm Tốt Nhất để Mua và Bán Cổ Phiếu trên LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)

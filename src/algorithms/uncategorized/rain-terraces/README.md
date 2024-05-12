@@ -1,122 +1,110 @@
-# Rain Terraces (Trapping Rain Water) Problem
+# Bài toán Tận Dụng Nước Mưa (Tính Nước Mưa)
 
-Given an array of non-negative integers representing terraces in an elevation map 
-where the width of each bar is `1`, compute how much water it is able to trap 
-after raining.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
+
+Cho một mảng các số nguyên không âm biểu diễn các sân thượng trong một bản đồ độ cao với chiều rộng của mỗi thanh là `1`, tính toán xem sau cơn mưa có thể lấy được bao nhiêu nước.
 
 ![Rain Terraces](https://www.geeksforgeeks.org/wp-content/uploads/watertrap.png)
 
-## Examples
+## Ví dụ
 
-**Example #1**
+**Ví dụ #1**
 
 ```
 Input: arr[] = [2, 0, 2]
 Output: 2
-Structure is like below:
+Cấu trúc như sau:
 
 | |
 |_|
 
-We can trap 2 units of water in the middle gap.
+Chúng ta có thể lấy được 2 đơn vị nước ở khoảng trống giữa.
 ```
 
-**Example #2**
+**Ví dụ #2**
 
 ```
 Input: arr[] = [3, 0, 0, 2, 0, 4]
 Output: 10
-Structure is like below:
+Cấu trúc như sau:
 
      |
 |    |
 |  | |
-|__|_| 
+|__|_|
 
-We can trap "3*2 units" of water between 3 an 2,
-"1 unit" on top of bar 2 and "3 units" between 2 
-and 4. See below diagram also.
+Chúng ta có thể lấy được "3*2 đơn vị" nước giữa 3 và 2,
+"1 đơn vị" trên đỉnh của thanh 2 và "3 đơn vị" giữa 2
+và 4. Xem biểu đồ bên dưới để biết thêm.
 ```
 
-**Example #3**
+**Ví dụ #3**
 
 ```
 Input: arr[] = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
 Output: 6
-Structure is like below:
+Cấu trúc như sau:
 
-       | 
+       |
    |   || |
 _|_||_||||||
 
-Trap "1 unit" between first 1 and 2, "4 units" between
-first 2 and 3 and "1 unit" between second last 1 and last 2.
+Lấy "1 đơn vị" nước giữa số 1 đầu tiên và 2, "4 đơn vị" giữa
+số 2 đầu tiên và 3 và "1 đơn vị" giữa số 1 cuối cùng và số 2 cuối cùng.
 ```
 
-## The Algorithm
+## Thuật Toán
 
-An element of array can store water if there are higher bars on left and right. 
-We can find amount of water to be stored in every element by finding the heights 
-of bars on left and right sides. The idea is to compute amount of water that can
-be stored in every element of array. For example, consider the array
-`[3, 0, 0, 2, 0, 4]`, We can trap "3*2 units" of water between 3 an 2, "1 unit" 
-on top of bar 2 and "3 units" between 2 and 4. See below diagram also.
+Một phần tử của mảng có thể chứa nước nếu có thanh cao hơn ở bên trái và bên phải. Chúng ta có thể tính được lượng nước có thể được lưu trữ trong mỗi phần tử bằng cách tìm chiều cao của thanh ở cả hai bên trái và phải. Ý tưởng là tính toán lượng nước có thể được lưu trữ trong mỗi phần tử của mảng. Ví dụ, xem xét mảng `[3, 0, 0, 2, 0, 4]`, Chúng ta có thể lấy được "3\*2 đơn vị" nước giữa 3 và 2, "1 đơn vị" trên đỉnh của thanh 2 và "3 đơn vị" giữa 2 và 4. Xem biểu đồ dưới đây để biết thêm.
 
-### Approach 1: Brute force
+### Phương pháp 1: Lực Brute
 
-**Intuition**
+**Ý tưởng**
 
-For each element in the array, we find the maximum level of water it can trap 
-after the rain, which is equal to the minimum of maximum height of bars on both 
-the sides minus its own height.
+Đối với mỗi phần tử trong mảng, chúng ta tìm mức nước cao nhất nó có thể lưu trữ sau cơn mưa, tức là bằng cách tính toán giá trị tối thiểu của chiều cao tối đa của thanh ở cả hai bên trái và phải trừ chiều cao của chính nó.
 
-**Steps**
+**Bước thực hiện**
 
-- Initialize `answer = 0`
-- Iterate the array from left to right:
-  - Initialize `max_left = 0`  and `max_right = 0`
-  - Iterate from the current element to the beginning of array updating: `max_left = max(max_left, height[j])`
-  - Iterate from the current element to the end of array updating: `max_right = max(max_right, height[j])`
-  - Add `min(max_left, max_right) − height[i]` to `answer`
+- Khởi tạo `answer = 0`
+- Lặp qua mảng từ trái sang phải:
+  - Khởi tạo `max_left = 0` và `max_right = 0`
+  - Lặp từ phần tử hiện tại đến đầu mảng cập nhật: `max_left = max(max_left, height[j])`
+  - Lặp từ phần tử hiện tại đến cuối mảng cập nhật: `max_right = max(max_right, height[j])`
+  - Thêm `min(max_left, max_right) − height[i]` vào `answer`
 
-**Complexity Analysis**
+**Phân Tích Độ Phức Tạp**
 
-Time complexity: `O(n^2)`. For each element of array, we iterate the left and right parts.
+Độ phức tạp thời gian: `O(n^2)`. Đối với mỗi phần tử của mảng, chúng ta lặp qua các phần bên trái và bên phải.
 
-Auxiliary space complexity: `O(1)` extra space.
+Độ phức tạp không gian phụ: `O(1)` không gian phụ.
 
-### Approach 2: Dynamic Programming
+### Phương pháp 2: Lập Trình Động
 
-**Intuition**
+**Ý tưởng**
 
-In brute force, we iterate over the left and right parts again and again just to 
-find the highest bar size up to that index. But, this could be stored. Voila, 
-dynamic programming.
+Trong lực brute, chúng ta lặp lại phần bên trái và phải một lần nữa chỉ để tìm kích thước thanh cao nhất cho đến vị trí đó. Nhưng điều này có thể được lưu trữ. Đúng vậy, lập trình động.
 
-So we may pre-compute highest bar on left and right of every bar in `O(n)` time.
-Then use these pre-computed values to find the amount of water in every array element.
+Vì vậy, chúng ta có thể tính trước chiều cao cao nhất từ bên trái và phải của mỗi thanh trong `O(n)` thời gian. Sau đó sử dụng các giá trị được tính trước này để tìm lượng nước trong mỗi phần tử mảng.
 
-The concept is illustrated as shown:
+Khái niệm được minh họa như dưới đây:
 
-![DP Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/Figures/42/trapping_rain_water.png)
+![Lập Trình Động Tính Nước Mưa](https://leetcode.com/problems/trapping-rain-water/Figures/42/trapping_rain_water.png)
 
-**Steps**
+**Bước thực hiện**
 
-- Find maximum height of bar from the left end up to an index `i` in the array `left_max`.
-- Find maximum height of bar from the right end up to an index `i` in the array `right_max`.
-- Iterate over the `height` array and update `answer`:
-  - Add `min(max_left[i], max_right[i]) − height[i]` to `answer`.
+- Tìm chiều cao cao nhất của thanh từ đầu bên trái đến một chỉ số `i` trong mảng `left_max`.
+- Tìm chiều cao cao nhất của thanh từ cuối bên phải đến một chỉ số `i` trong mảng `right_max`.
+- Lặp qua mảng `height` và cập nhật `answer`:
+  - Thêm `min(max_left[i], max_right[i]) − height[i]` vào `answer`.
 
-**Complexity Analysis**
+**Phân Tích Độ Phức Tạp**
 
-Time complexity: `O(n)`. We store the maximum heights upto a point using 2 
-iterations of `O(n)` each. We finally update `answer` using the stored 
-values in `O(n)`.
+Độ phức tạp thời gian: `O(n)`. Chúng ta lưu trữ các chiều cao tối đa cho đến một điểm bằng cách sử dụng 2 lặp `O(n)` mỗi lần. Cuối cùng, chúng ta cập nhật `answer` bằng cách sử dụng các giá trị đã lưu trữ trong `O(n)`.
 
-Auxiliary space complexity: `O(n)` extra space. Additional space 
-for `left_max` and `right_max` arrays than in Approach 1.
+Độ phức tạp không gian phụ: `O(n)` không gian phụ. Dùng thêm không gian cho các mảng `left_max` và `right_max` so với Phương pháp 1.
 
-## References
+## Tham Khảo
 
 - [GeeksForGeeks](https://www.geeksforgeeks.org/trapping-rain-water/)
 - [LeetCode](https://leetcode.com/problems/trapping-rain-water/solution/)

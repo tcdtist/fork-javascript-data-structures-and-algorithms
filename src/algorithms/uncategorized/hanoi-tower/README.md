@@ -1,29 +1,27 @@
-# Tower of Hanoi
+# Tháp Hà Nội
 
-The Tower of Hanoi (also called the Tower of Brahma or Lucas'
-Tower and sometimes pluralized) is a mathematical game or puzzle. 
-It consists of three rods and a number of disks of different sizes,
-which can slide onto any rod. The puzzle starts with the disks in 
-a neat stack in ascending order of size on one rod, the smallest 
-at the top, thus making a conical shape.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-The objective of the puzzle is to move the entire stack to another 
-rod, obeying the following simple rules:
+Tháp Hà Nội (cũng được gọi là Tháp Brahma hoặc Tháp Lucas và đôi khi được sử dụng số ít) là một trò chơi hoặc bài toán toán học.
+Nó bao gồm ba thanh và một số đĩa có kích thước khác nhau,
+có thể trượt lên bất kỳ thanh nào. Bài toán bắt đầu với các đĩa được xếp gọn theo thứ tự tăng dần về kích thước trên một thanh, với đĩa nhỏ nhất ở trên cùng, tạo thành một hình nón.
 
-- Only one disk can be moved at a time.
-- Each move consists of taking the upper disk from one of the 
-stacks and placing it on top of another stack or on an empty rod.
-- No disk may be placed on top of a smaller disk.
+Mục tiêu của bài toán là di chuyển toàn bộ các đĩa sang một thanh khác,
+tuân theo các quy tắc đơn giản sau đây:
 
-![Hanoi Tower](https://upload.wikimedia.org/wikipedia/commons/8/8d/Iterative_algorithm_solving_a_6_disks_Tower_of_Hanoi.gif)
+- Chỉ có thể di chuyển một đĩa mỗi lần.
+- Mỗi lần di chuyển bao gồm việc lấy đĩa trên cùng từ một trong các thanh và đặt nó lên trên đỉnh của một thanh khác hoặc trên một thanh trống.
+- Không có đĩa nào được đặt lên trên đĩa nhỏ hơn.
 
-Animation of an iterative algorithm solving 6-disk problem
+![Tháp Hà Nội](https://upload.wikimedia.org/wikipedia/commons/8/8d/Iterative_algorithm_solving_a_6_disks_Tower_of_Hanoi.gif)
 
-With `3` disks, the puzzle can be solved in `7` moves. The minimal 
-number of moves required to solve a Tower of Hanoi puzzle 
-is `2^n − 1`, where `n` is the number of disks.
+Phim hoạt hình của một thuật toán lặp giải quyết bài toán với 6 đĩa
 
-## References
+Với `3` đĩa, bài toán có thể giải quyết trong `7` bước. Số lần di chuyển tối thiểu cần thiết để giải quyết bài toán Tháp Hà Nội
+là `2^n - 1`, trong đó `n` là số đĩa.
+
+## Tham Khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi)
 - [HackerEarth](https://www.hackerearth.com/blog/algorithms/tower-hanoi-recursion-game-algorithm-explained/)

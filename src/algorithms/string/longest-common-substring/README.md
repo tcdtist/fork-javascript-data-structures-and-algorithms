@@ -1,14 +1,13 @@
-# Longest Common Substring Problem
+# Bài toán Chuỗi Con Chung Dài Nhất
 
-The longest common substring problem is to find the longest string 
-(or strings) that is a substring (or are substrings) of two or more 
-strings.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-## Example
+Bài toán chuỗi con chung dài nhất là tìm chuỗi dài nhất (hoặc các chuỗi) là một chuỗi con (hoặc là các chuỗi con) của hai hoặc nhiều chuỗi.
 
-The longest common substring of the strings `ABABC`, `BABCA` and 
-`ABCBA` is string `ABC` of length 3. Other common substrings are
-`A`, `AB`, `B`, `BA`, `BC` and `C`.
+## Ví dụ
+
+Chuỗi con chung dài nhất của các chuỗi `ABABC`, `BABCA` và `ABCBA` là chuỗi `ABC` có độ dài 3. Các chuỗi con chung khác là `A`, `AB`, `B`, `BA`, `BC` và `C`.
 
 ```
 ABABC
@@ -18,7 +17,7 @@ ABABC
   ABCBA
 ```
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Longest_common_substring_problem)
 - [YouTube](https://www.youtube.com/watch?v=BysNXJHzCEs&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

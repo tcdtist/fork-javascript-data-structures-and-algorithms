@@ -1,21 +1,24 @@
-# Recursive Staircase Problem
+# Bài toán Cầu Thang Đệ Quy
 
-## The Problem
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-There are `n` stairs, a person standing at the bottom wants to reach the top. The person can climb either `1` or `2` stairs at a time. _Count the number of ways, the person can reach the top._
+## Vấn đề
+
+Có `n` bậc cầu thang, một người đứng ở dưới muốn đến đỉnh. Người đó có thể leo `1` hoặc `2` bậc cầu thang mỗi lần. _Đếm số cách mà người đó có thể đến được đỉnh._
 
 ![](https://cdncontribute.geeksforgeeks.org/wp-content/uploads/nth-stair.png)
 
-## The Solution
+## Giải Pháp
 
-This is an interesting problem because there are several ways of how it may be solved that illustrate different programming paradigms.
+Đây là một vấn đề thú vị vì có nhiều cách để giải quyết mà minh họa các phương pháp lập trình khác nhau.
 
-- [Brute Force Recursive Solution](./recursiveStaircaseBF.js) - Time: `O(2^n)`; Space: `O(1)`
-- [Recursive Solution With Memoization](./recursiveStaircaseMEM.js) - Time: `O(n)`; Space: `O(n)`
-- [Dynamic Programming Solution](./recursiveStaircaseDP.js) - Time: `O(n)`; Space: `O(n)`
-- [Iterative Solution](./recursiveStaircaseIT.js) - Time: `O(n)`; Space: `O(1)` 
+- [Giải Pháp Đệ Quy Brute Force](./recursiveStaircaseBF.js) - Thời gian: `O(2^n)`; Không gian: `O(1)`
+- [Giải Pháp Đệ Quy Với Ghi Nhớ](./recursiveStaircaseMEM.js) - Thời gian: `O(n)`; Không gian: `O(n)`
+- [Giải Pháp Lập Trình Động](./recursiveStaircaseDP.js) - Thời gian: `O(n)`; Không gian: `O(n)`
+- [Giải Pháp Lặp](./recursiveStaircaseIT.js) - Thời gian: `O(n)`; Không gian: `O(1)`
 
-## References
+## Tham Khảo
 
-- [On YouTube by Gayle Laakmann McDowell](https://www.youtube.com/watch?v=eREiwuvzaUM&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=81&t=0s)
+- [Trên YouTube bởi Gayle Laakmann McDowell](https://www.youtube.com/watch?v=eREiwuvzaUM&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=81&t=0s)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/count-ways-reach-nth-stair/)

@@ -1,73 +1,77 @@
-# Regular Expression Matching
+# Khớp Biểu Thức Chính Quy
 
-Given an input string `s` and a pattern `p`, implement regular 
-expression matching with support for `.` and `*`.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-- `.` Matches any single character.
-- `*` Matches zero or more of the preceding element.
+Cho một chuỗi đầu vào `s` và một mẫu `p`, hãy thực hiện việc khớp biểu thức chính quy với hỗ trợ cho `.` và `*`.
 
-The matching should cover the **entire** input string (not partial).
+- `.` Khớp với bất kỳ ký tự nào.
+- `*` Khớp với không hoặc nhiều hơn một phần tử trước đó.
 
-**Note**
+Việc khớp này nên bao gồm **toàn bộ** chuỗi đầu vào (không phải là một phần).
 
-- `s` could be empty and contains only lowercase letters `a-z`.
-- `p` could be empty and contains only lowercase letters `a-z`, and characters like `.` or `*`.
+**Ghi Chú**
 
-## Examples
+- `s` có thể trống và chỉ chứa các chữ cái thường `a-z`.
+- `p` có thể trống và chỉ chứa các chữ cái thường `a-z`, và các ký tự như `.` hoặc `*`.
 
-**Example #1**
+## Ví dụ
 
-Input:
+**Ví dụ #1**
+
+Đầu vào:
+
 ```
 s = 'aa'
 p = 'a'
 ```
 
-Output: `false`
+Đầu ra: `false`
 
-Explanation: `a` does not match the entire string `aa`.
+Giải thích: `a` không khớp với toàn bộ chuỗi `aa`.
 
-**Example #2**
+**Ví dụ #2**
 
-Input:
+Đầu vào:
+
 ```
 s = 'aa'
 p = 'a*'
 ```
 
-Output: `true`
+Đầu ra: `true`
 
-Explanation: `*` means zero or more of the preceding element, `a`. 
-Therefore, by repeating `a` once, it becomes `aa`.
+Giải thích: `*` có nghĩa là không hoặc nhiều hơn một phần tử trước đó, `a`.
+Do đó, bằng cách lặp lại `a` một lần, nó trở thành `aa`.
 
-**Example #3**
+**Ví dụ #3**
 
-Input:
+Đầu vào:
 
 ```
 s = 'ab'
 p = '.*'
 ```
 
-Output: `true`
+Đầu ra: `true`
 
-Explanation: `.*` means "zero or more (`*`) of any character (`.`)".
+Giải thích: `.*` có nghĩa là "không hoặc nhiều hơn (`*`) bất kỳ ký tự nào (`.`)".
 
-**Example #4**
+**Ví dụ #4**
 
-Input:
+Đầu vào:
 
 ```
 s = 'aab'
 p = 'c*a*b'
 ```
 
-Output: `true`
+Đầu ra: `true`
 
-Explanation: `c` can be repeated 0 times, `a` can be repeated 
-1 time. Therefore it matches `aab`.
+Giải thích: `c` có thể được lặp lại 0 lần, `a` có thể được lặp lại
+1 lần. Do đó nó khớp với `aab`.
 
-## References
+## Tham Khảo
 
 - [YouTube](https://www.youtube.com/watch?v=l3hda49XcDE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=71&t=0s)
 - [LeetCode](https://leetcode.com/problems/regular-expression-matching/description/)

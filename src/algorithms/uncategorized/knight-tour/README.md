@@ -1,33 +1,23 @@
-# Knight's Tour
+# Hành trình của quân mã
 
-A **knight's tour** is a sequence of moves of a knight on a chessboard 
-such that the knight visits every square only once. If the knight 
-ends on a square that is one knight's move from the beginning 
-square (so that it could tour the board again immediately, 
-following the same path), the tour is **closed**, otherwise it 
-is **open**.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-The **knight's tour problem** is the mathematical problem of 
-finding a knight's tour. Creating a program to find a knight's 
-tour is a common problem given to computer science students.
-Variations of the knight's tour problem involve chessboards of 
-different sizes than the usual `8×8`, as well as irregular 
-(non-rectangular) boards.
+Một **hành trình của quân mã** là một chuỗi các nước đi của một quân mã trên bàn cờ cờ vua sao cho quân mã ghé qua mỗi ô chỉ một lần. Nếu quân mã kết thúc trên một ô mà chỉ cách ô ban đầu một nước đi của quân mã (vì vậy nó có thể thăm bàn cờ lại ngay lập tức, theo cùng một con đường), thì hành trình đó là **đóng**, nếu không thì nó là **mở**.
 
-The knight's tour problem is an instance of the more 
-general **Hamiltonian path problem** in graph theory. The problem of finding 
-a closed knight's tour is similarly an instance of the Hamiltonian 
-cycle problem.
+**Vấn đề hành trình của quân mã** là vấn đề toán học của việc tìm một hành trình của quân mã. Việc tạo ra một chương trình để tìm một hành trình của quân mã là một vấn đề phổ biến được giao cho sinh viên khoa học máy tính. Các biến thể của vấn đề hành trình của quân mã liên quan đến các bàn cờ vua có kích thước khác so với kích thước thông thường là `8×8`, cũng như các bảng không đều (không hình chữ nhật).
 
-![Knight's Tour](https://upload.wikimedia.org/wikipedia/commons/d/da/Knight%27s_tour_anim_2.gif)
+Vấn đề hành trình của quân mã là một trường hợp của vấn đề **đường đi Hamiltonian** trong lý thuyết đồ thị. Vấn đề tìm một hành trình đóng của quân mã cũng tương tự như vấn đề chu trình Hamiltonian.
 
-An open knight's tour of a chessboard.
+![Hành trình của quân mã](https://upload.wikimedia.org/wikipedia/commons/d/da/Knight%27s_tour_anim_2.gif)
 
-![Knight's Tour](https://upload.wikimedia.org/wikipedia/commons/c/ca/Knights-Tour-Animation.gif)
+Một hành trình mở của quân mã trên bàn cờ vua.
 
-An animation of an open knight's tour on a 5 by 5 board.
+![Hành trình của quân mã](https://upload.wikimedia.org/wikipedia/commons/c/ca/Knights-Tour-Animation.gif)
 
-## References
+Một đoạn animation của một hành trình mở của quân mã trên bàn cờ kích thước `5×5`.
+
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Knight%27s_tour)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/backtracking-set-1-the-knights-tour-problem/)

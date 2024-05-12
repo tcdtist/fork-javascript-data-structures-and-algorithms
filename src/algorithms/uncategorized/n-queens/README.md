@@ -1,20 +1,15 @@
-# N-Queens Problem
+# Vấn đề N Hậu
 
-The **eight queens puzzle** is the problem of placing eight chess queens 
-on an `8×8` chessboard so that no two queens threaten each other. 
-Thus, a solution requires that no two queens share the same row, 
-column, or diagonal. The eight queens puzzle is an example of the 
-more general *n queens problem* of placing n non-attacking queens 
-on an `n×n` chessboard, for which solutions exist for all natural 
-numbers `n` with the exception of `n=2` and `n=3`.
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-For example, following is a solution for 4 Queen problem.
+**Bài toán bát quân hậu** là bài toán về việc đặt tám quân hậu trên một bàn cờ vua `8×8` sao cho không có hai quân hậu nào đe dọa nhau. Do đó, một giải pháp yêu cầu không có hai quân hậu nào chia sẻ cùng một hàng, cột hoặc đường chéo. Bài toán bát quân hậu là một ví dụ của **bài toán n quân hậu** tổng quát hơn, trong đó đặt n quân hậu không đe dọa lẫn nhau trên một bàn cờ vua `n×n`, và giải pháp tồn tại cho tất cả các số tự nhiên `n` ngoại trừ `n=2` và `n=3`.
+
+Ví dụ, dưới đây là một giải pháp cho bài toán 4 Quân hậu.
 
 ![N Queens](https://cdncontribute.geeksforgeeks.org/wp-content/uploads/N_Queen_Problem.jpg)
 
-The expected output is a binary matrix which has 1s for the blocks 
-where queens are placed. For example following is the output matrix 
-for above 4 queen solution.
+Kết quả mong đợi là một ma trận nhị phân có giá trị 1 cho các ô mà quân hậu được đặt. Ví dụ sau đây là ma trận kết quả cho giải pháp 4 quân hậu ở trên.
 
 ```
 { 0,  1,  0,  0}
@@ -23,95 +18,65 @@ for above 4 queen solution.
 { 0,  0,  1,  0}
 ```
 
-## Naive Algorithm
+## Thuật toán Ngu Naïve
 
-Generate all possible configurations of queens on board and print a 
-configuration that satisfies the given constraints.
+Tạo tất cả các cấu hình có thể của quân hậu trên bàn cờ và in ra một cấu hình thỏa mãn các ràng buộc đã cho.
 
 ```
-while there are untried configurations
+khi còn các cấu hình chưa thử
 {
-   generate the next configuration
-   if queens don't attack in this configuration then
+   tạo cấu hình tiếp theo
+   nếu các quân hậu không đe dọa trong cấu hình này thì
    {
-      print this configuration;
+      in ra cấu hình này;
    }
 }
 ```
 
-## Backtracking Algorithm
+## Thuật toán Backtracking
 
-The idea is to place queens one by one in different columns, 
-starting from the leftmost column. When we place a queen in a 
-column, we check for clashes with already placed queens. In 
-the current column, if we find a row for which there is no 
-clash, we mark this row and column as part of the solution. 
-If we do not find such a row due to clashes then we backtrack 
-and return false.
+Ý tưởng là đặt các quân hậu một cách tuần tự trong các cột khác nhau, bắt đầu từ cột trái nhất. Khi chúng ta đặt một quân hậu trong một cột, chúng ta kiểm tra xem có xung đột với các quân hậu đã đặt trước đó không. Trong cột hiện tại, nếu chúng ta tìm thấy một hàng mà không có xung đột, chúng ta đánh dấu hàng và cột này là một phần của giải pháp. Nếu chúng ta không tìm thấy hàng đó do xung đột, chúng ta quay lại và trả về giá trị sai.
 
 ```
-1) Start in the leftmost column
-2) If all queens are placed
-    return true
-3) Try all rows in the current column.  Do following for every tried row.
-    a) If the queen can be placed safely in this row then mark this [row, 
-        column] as part of the solution and recursively check if placing  
-        queen here leads to a solution.
-    b) If placing queen in [row, column] leads to a solution then return 
-        true.
-    c) If placing queen doesn't lead to a solution then umark this [row, 
-        column] (Backtrack) and go to step (a) to try other rows.
-3) If all rows have been tried and nothing worked, return false to trigger 
-    backtracking.
+1) Bắt đầu từ cột trái nhất
+2) Nếu tất cả quân hậu đã được đặt trả về true
+3) Thử tất cả các hàng trong cột hiện tại. Làm theo mỗi hàng đã thử.
+    a) Nếu quân hậu có thể được đặt an toàn trong hàng này thì đánh dấu [hàng, cột] này là một phần của giải pháp và kiểm tra đệ quy xem việc đặt quân hậu ở đây dẫn đến một giải pháp hay không.
+    b) Nếu việc đặt quân hậu ở [hàng, cột] dẫn đến một giải pháp thì trả về true.
+    c) Nếu việc đặt quân hậu không dẫn đến một giải pháp thì hủy đánh dấu [hàng, cột] này (Backtrack) và đi đến bước (a) để thử các hàng khác.
+3) Nếu tất cả các hàng đã được thử và không có gì hoạt động, trả về false để kích
+    hoạt quay lại.
 ```
 
-## Bitwise Solution
+## Giải Pháp Bitwise
 
-Bitwise algorithm basically approaches the problem like this:
+Thuật toán bitwise cơ bản tiếp cận vấn đề như sau:
 
-- Queens can attack diagonally, vertically, or horizontally. As a result, there 
-can only be one queen in each row, one in each column, and at most one on each 
-diagonal.
-- Since we know there can only one queen per row, we will start at the first row,
-place a queen, then move to the second row, place a second queen, and so on until
-either a) we reach a valid solution or b) we reach a dead end (ie. we can't place
-a queen such that it is "safe" from the other queens).
-- Since we are only placing one queen per row, we don't need to worry about
-horizontal attacks, since no queen will ever be on the same row as another queen.
-- That means we only need to check three things before placing a queen on a
-certain square: 1) The square's column doesn't have any other queens on it, 2)
-the square's left diagonal doesn't have any other queens on it, and 3) the
-square's right diagonal doesn't have any other queens on it.
-- If we ever reach a point where there is nowhere safe to place a queen, we can
-give up on our current attempt and immediately test out the next possibility.
+- Quân hậu có thể đe dọa theo đường chéo, dọc hoặc ngang. Do đó, chỉ có thể có một quân hậu trong mỗi hàng, một trong mỗi cột và tối đa một trong mỗi đường chéo.
+- Vì chúng ta biết chỉ có một quân hậu trên mỗi hàng, chúng ta sẽ bắt đầu ở hàng đầu tiên, đặt một quân hậu, sau đó di chuyển đến hàng thứ hai, đặt quân hậu thứ hai và tiếp tục cho đến khi a) chúng ta đạt được một giải pháp hợp lệ hoặc b) chúng ta đạt đến một thứ tự "tử thua" (tức là chúng ta không thể đặt một quân hậu sao cho nó "an toàn" từ các quân hậu khác).
+- Vì chúng ta chỉ đặt một quân hậu trên mỗi hàng, nên chúng ta không cần phải lo lắng về các cuộc tấn công ngang, vì không có quân hậu nào sẽ bao giờ ở trên cùng một hàng với quân hậu khác.
+- Điều đó có nghĩa là chúng ta chỉ cần kiểm tra ba điều trước khi đặt một quân hậu vào một ô nhất định: 1) Cột của ô đó không có bất kỳ quân hậu nào khác, 2) đường chéo trái của ô đó không có quân hậu nào khác, và 3) đường chéo phải của ô đó không có quân hậu nào khác.
+- Nếu chúng ta bao giờ đạt đến một điểm nơi không có nơi an toàn nào để đặt một quân hậu, chúng ta có thể từ bỏ nỗ lực hiện tại của mình và ngay lập tức thử nghiệm các khả năng tiếp theo.
 
-First let's talk about the recursive function. You'll notice that it accepts 
-3 parameters: `leftDiagonal`, `column`, and `rightDiagonal`. Each of these is 
-technically an integer, but the algorithm takes advantage of the fact that an 
-integer is represented by a sequence of bits. So, think of each of these 
-parameters as a sequence of `N` bits.
+Trước hết hãy nói về hàm đệ quy. Bạn sẽ nhận thấy rằng nó chấp nhận 3 tham số: `leftDiagonal`, `column`, và `rightDiagonal`. Mỗi tham số này kỹ thuật là một số nguyên, nhưng thuật toán tận dụng việc rằng một số nguyên được biểu diễn bằng một chuỗi bit. Vì vậy, hãy nghĩ về mỗi tham số này như một chuỗi gồm `N` bit.
 
-Each bit in each of the parameters represents whether the corresponding location
-on the current row is "available".
+Mỗi bit trong mỗi tham số này đại diện cho việc ô tương ứng trên hàng hiện tại "có sẵn" hay không.
 
-For example:
-- For `N=4`, column having a value of `0010` would mean that the 3rd column is 
-already occupied by a queen.
-- For `N=8`, ld having a value of `00011000` at row 5 would mean that the 
-top-left-to-bottom-right diagonals that pass through columns 4 and 5 of that 
-row are already occupied by queens.
+Ví dụ:
 
-Below is a visual aid for `leftDiagonal`, `column`, and `rightDiagonal`.
+- Với `N=4`, cột có giá trị `0010` sẽ có nghĩa là cột thứ 3 đã bị chiếm bởi một quân hậu.
+- Với `N=8`, ld có giá trị `00011000` tại hàng 5 sẽ có nghĩa là các đường chéo từ trên xuống dưới qua cột 4 và 5 của hàng đó đã bị chiếm bởi quân hậu.
+
+Dưới đây là một hình minh họa cho `leftDiagonal`, `column`, và `rightDiagonal`.
 
 ![](http://gregtrowbridge.com/content/images/2014/Jul/Screenshot-from-2014-06-17-19-46-20.png)
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
 - [GeeksForGeeks](https://www.geeksforgeeks.org/backtracking-set-3-n-queen-problem/)
-- [On YouTube by Abdul Bari](https://www.youtube.com/watch?v=xFv_Hl4B83A&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- [On YouTube by Tushar Roy](https://www.youtube.com/watch?v=xouin83ebxE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
-- Bitwise Solution
+- [Trên YouTube bởi Abdul Bari](https://www.youtube.com/watch?v=xFv_Hl4B83A&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Trên YouTube bởi Tushar Roy](https://www.youtube.com/watch?v=xouin83ebxE&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- Giải Pháp Bitwise
   - [Wikipedia](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
-  - [Solution by Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/)
-  
+  - [Giải pháp của Greg Trowbridge](http://gregtrowbridge.com/a-bitwise-solution-to-the-n-queens-problem-in-javascript/)
