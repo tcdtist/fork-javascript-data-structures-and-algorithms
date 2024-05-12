@@ -1,24 +1,20 @@
-# Insertion Sort
+# Sắp xếp chèn - Insertion Sort
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Insertion sort is a simple sorting algorithm that builds
-the final sorted array (or list) one item at a time.
-It is much less efficient on large lists than more
-advanced algorithms such as quicksort, heapsort, or merge
-sort.
+Sắp xếp chèn là một thuật toán sắp xếp đơn giản xây dựng mảng đã sắp xếp cuối cùng (hoặc danh sách) một phần tử vào một lần. Nó không hiệu quả bằng các thuật toán tiên tiến hơn như quicksort, heapsort hoặc merge sort trên danh sách lớn.
 
-![Algorithm Visualization](https://upload.wikimedia.org/wikipedia/commons/4/42/Insertion_sort.gif)
+![Hiển thị thuật toán](https://upload.wikimedia.org/wikipedia/commons/4/42/Insertion_sort.gif)
 
-![Algorithm Visualization](https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif)
+![Hiển thị thuật toán](https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif)
 
-## Complexity
+## Phức tạp
 
-| Name               | Best |    Average    |     Worst     | Memory | Stable | Comments |
-| ------------------ | :--: | :-----------: | :-----------: | :----: | :----: | :------- |
-| **Insertion sort** |  n   | n<sup>2</sup> | n<sup>2</sup> |   1    |  Yes   |          |
+| Tên              | Tốt nhất |  Trung bình   |    Tệ nhất    | Bộ nhớ | Ổn định | Bình luận |
+| ---------------- | :------: | :-----------: | :-----------: | :----: | :-----: | :-------- |
+| **Sắp xếp chèn** |    n     | n<sup>2</sup> | n<sup>2</sup> |   1    |   Có    |           |
 
-## References
+## Tham khảo
 
 [Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)

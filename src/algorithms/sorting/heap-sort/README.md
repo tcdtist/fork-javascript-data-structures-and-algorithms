@@ -1,27 +1,20 @@
-# Heap Sort
+# Sắp xếp Heap - Heap Sort
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Heapsort is a comparison-based sorting algorithm.
-Heapsort can be thought of as an improved selection
-sort: like that algorithm, it divides its input into
-a sorted and an unsorted region, and it iteratively
-shrinks the unsorted region by extracting the largest
-element and moving that to the sorted region. The
-improvement consists of the use of a heap data structure
-rather than a linear-time search to find the maximum.
+Heap Sort là một thuật toán sắp xếp dựa trên so sánh. Heap Sort có thể được coi như một cải tiến của thuật toán sắp xếp chọn: giống như thuật toán đó, nó chia đầu vào của mình thành một khu vực đã sắp xếp và một khu vực chưa sắp xếp, và nó lặp lại việc thu nhỏ khu vực chưa sắp xếp bằng cách trích xuất phần tử lớn nhất và di chuyển nó vào khu vực đã sắp xếp. Sự cải tiến này bao gồm việc sử dụng cấu trúc dữ liệu heap thay vì tìm kiếm thời gian tuyến tính để tìm phần tử lớn nhất.
 
-![Algorithm Visualization](https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif)
+![Hiển thị thuật toán](https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif)
 
-![Algorithm Visualization](https://upload.wikimedia.org/wikipedia/commons/4/4d/Heapsort-example.gif)
+![Hiển thị thuật toán](https://upload.wikimedia.org/wikipedia/commons/4/4d/Heapsort-example.gif)
 
-## Complexity
+## Phức tạp
 
-| Name          |     Best      |    Average    |     Worst     | Memory | Stable | Comments |
-| ------------- | :-----------: | :-----------: | :-----------: | :----: | :----: | :------- |
-| **Heap sort** | n&nbsp;log(n) | n&nbsp;log(n) | n&nbsp;log(n) |   1    |   No   |          |
+| Tên           |   Tốt nhất    |  Trung bình   |    Tệ nhất    | Bộ nhớ | Ổn định | Bình luận |
+| ------------- | :-----------: | :-----------: | :-----------: | :----: | :-----: | :-------- |
+| **Heap sort** | n&nbsp;log(n) | n&nbsp;log(n) | n&nbsp;log(n) |   1    |  Không  |           |
 
-## References
+## Tham khảo
 
 [Wikipedia](https://en.wikipedia.org/wiki/Heapsort)

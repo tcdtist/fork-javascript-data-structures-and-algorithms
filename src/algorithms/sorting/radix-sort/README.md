@@ -1,47 +1,47 @@
-# Radix Sort
+# Sắp xếp Radix
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-In computer science, **radix sort** is a non-comparative integer sorting
-algorithm that sorts data with integer keys by grouping keys by the individual
-digits which share the same significant position and value. A positional notation
-is required, but because integers can represent strings of characters
-(e.g., names or dates) and specially formatted floating point numbers, radix
-sort is not limited to integers.
+Trong khoa học máy tính, **sắp xếp radix** là một thuật toán sắp xếp số nguyên không so sánh
+sắp xếp dữ liệu với các khóa số nguyên bằng cách nhóm các khóa theo từng chữ số
+chung vị trí và giá trị quan trọng. Cần có một ký hiệu vị trí,
+nhưng vì số nguyên có thể đại diện cho chuỗi ký tự
+(ví dụ, tên hoặc ngày) và số thực được định dạng đặc biệt,
+sắp xếp radix không giới hạn ở số nguyên.
 
-_Where does the name come from?_
+_Tên này đến từ đâu?_
 
-In mathematical numeral systems, the _radix_ or base is the number of unique digits,
-including the digit zero, used to represent numbers in a positional numeral system.
-For example, a binary system (using numbers 0 and 1) has a radix of 2 and a decimal
-system (using numbers 0 to 9) has a radix of 10.
+Trong hệ thống số toán học, _radix_ hoặc cơ số là số lượng chữ số duy nhất,
+bao gồm số không, được sử dụng để đại diện cho các số trong hệ thống số có vị trí.
+Ví dụ, hệ thống nhị phân (sử dụng số 0 và 1) có một radix là 2 và hệ thống thập phân
+(sử dụng số 0 đến 9) có một radix là 10.
 
-## Efficiency
+## Hiệu suất
 
-The topic of the efficiency of radix sort compared to other sorting algorithms is
-somewhat tricky and subject to quite a lot of misunderstandings. Whether radix
-sort is equally efficient, less efficient or more efficient than the best
-comparison-based algorithms depends on the details of the assumptions made.
-Radix sort complexity is `O(wn)` for `n` keys which are integers of word size `w`.
-Sometimes `w` is presented as a constant, which would make radix sort better
-(for sufficiently large `n`) than the best comparison-based sorting algorithms,
-which all perform `O(n log n)` comparisons to sort `n` keys. However, in
-general `w` cannot be considered a constant: if all `n` keys are distinct,
-then `w` has to be at least `log n` for a random-access machine to be able to
-store them in memory, which gives at best a time complexity `O(n log n)`. That
-would seem to make radix sort at most equally efficient as the best
-comparison-based sorts (and worse if keys are much longer than `log n`).
+Chủ đề về hiệu suất của sắp xếp radix so với các thuật toán sắp xếp khác là
+một chút phức tạp và phụ thuộc vào nhiều hiểu biết sai lầm. Dù sắp xếp radix
+có hiệu suất bằng nhau, kém hiệu suất hoặc cao hơn so với các thuật toán
+so sánh tốt nhất phụ thuộc vào chi tiết của các giả định được thực hiện.
+Phức tạp của sắp xếp radix là `O(wn)` cho `n` khóa là số nguyên của kích thước từ `w`.
+Đôi khi `w` được hiển thị như một hằng số, điều này sẽ làm cho sắp xếp radix tốt hơn
+(đối với `n` đủ lớn) so với các thuật toán sắp xếp so sánh tốt nhất,
+tất cả đều thực hiện `O(n log n)` so sánh để sắp xếp `n` khóa. Tuy nhiên, trong
+tổng quát `w` không thể được xem xét là một hằng số: nếu tất cả các `n` khóa là phân biệt,
+thì `w` phải ít nhất là `log n` cho máy truy cập ngẫu nhiên có thể
+lưu trữ chúng trong bộ nhớ, điều này cho tối đa là một phức tạp thời gian `O(n log n)`.
+Điều này dường như làm cho sắp xếp radix tối đa là tương đương hiệu quả như các
+sắp xếp dựa trên so sánh tốt nhất (và tồi hơn nếu khóa dài hơn nhiều so với `log n`).
 
-![Radix Sort](./images/radix-sort.png)
+![Sắp xếp Radix](./images/radix-sort.png)
 
-## Complexity
+## Phức tạp
 
-| Name           |  Best  | Average | Worst  | Memory | Stable | Comments                  |
-| -------------- | :----: | :-----: | :----: | :----: | :----: | :------------------------ |
-| **Radix sort** | n \* k | n \* k  | n \* k | n + k  |  Yes   | k - length of longest key |
+| Tên               | Tốt nhất | Trung bình | Tệ nhất | Bộ nhớ | Ổn định | Bình luận                       |
+| ----------------- | :------: | :--------: | :-----: | :----: | :-----: | :------------------------------ |
+| **Sắp xếp radix** |  n \* k  |   n \* k   | n \* k  | n + k  |   Có    | k - chiều dài của khóa dài nhất |
 
-## References
+## Tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Radix_sort)
 - [YouTube](https://www.youtube.com/watch?v=XiuSW_mEn7g&index=62&t=0s&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

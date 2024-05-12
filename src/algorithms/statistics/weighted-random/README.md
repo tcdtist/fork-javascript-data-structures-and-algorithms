@@ -1,98 +1,117 @@
-# Weighted Random
+# Ngẫu nhiên có trọng số
 
-![Weighted Random](images/cover.png)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-## What is "Weighted Random"
+![Ngẫu nhiên có trọng số](images/cover.png)
 
-Let's say you have a list of **items**. Item could be anything. For example, we may have a list of fruits and vegetables that you like to eat: `[ '🍌', '🍎', '🥕' ]`.
+## Khái niệm "Ngẫu nhiên có trọng số"
 
-The list of **weights** represent the weight (or probability, or importance) of each item. Weights are numbers. For example, the weights like `[3, 7, 1]` would say that:
+Hãy tưởng tượng bạn có một danh sách các **mục**. Mục có thể là bất cứ thứ gì. Ví dụ, chúng ta có thể có một danh sách các loại hoa quả và rau mà bạn thích ăn: `[ '🍌', '🍎', '🥕' ]`.
 
-- you would like to eat `🍎 apples` more often (`7` out of `3 + 7 + 1 = 11` times),
-- then you would like to eat `bananas 🍌` less often (only `3` out of `11` times),
-- and the `carrots 🥕` you really don't like (want to eat it only `1` out of `11` times).
+Danh sách **trọng số** đại diện cho trọng số (hoặc xác suất, hoặc mức độ quan trọng) của mỗi mục. Trọng số là số. Ví dụ, các trọng số như `[3, 7, 1]` sẽ nói rằng:
 
-> If we speak in terms of probabilities than the weights list might be an array of floats that sum up to `1` (i.e. `[0.1, 0.5, 0.2, 0.2]`).
+- bạn muốn ăn `🍎 táo` thường xuyên hơn (`7` trên tổng số `3 + 7 + 1 = 11` lần),
+- sau đó bạn muốn ăn `chuối 🍌` ít hơn (chỉ `3` trên `11` lần),
+- và bạn thực sự không thích `cà rốt 🥕` (chỉ muốn ăn nó `1` trong `11` lần).
 
-The **Weighted Random** in this case will be the function that will randomly return you the item from the list, and it will take each item's weight into account, so that items with the higher weight will be picked more often.
+> Nếu nói về xác suất thì danh sách trọng số có thể là một mảng các số thập phân có tổng bằng `1` (ví dụ: `[0.1, 0.5, 0.2, 0.2]`).
 
-Example of the function interface:
+**Ngẫu nhiên có trọng số** trong trường hợp này sẽ là hàm sẽ ngẫu nhiên trả về một mục từ danh sách, và nó sẽ tính đến trọng số của mỗi mục, vì vậy các mục có trọng số cao sẽ được chọn thường xuyên hơn.
+
+Ví dụ về giao diện hàm:
 
 ```javascript
-const items =   [ '🍌', '🍎', '🥕' ];
-const weights = [  3,    7,    1  ];
+const items = ['🍌', '🍎', '🥕'];
+const weights = [3, 7, 1];
 
 function weightedRandom(items, weights) {
   // implementation goes here ...
 }
 
-const nextSnackToEat = weightedRandom(items, weights); // Could be '🍎'
+const nextSnackToEat = weightedRandom(items, weights); // Có thể là '🍎'
 ```
 
-## Applications of Weighted Random
+## Ứng dụng của Ngẫu nhiên có trọng số
 
-- In [Genetic Algorithm](https://en.wikipedia.org/wiki/Genetic_algorithm) the weighted random is used during the "Selection" phase, when we need to select the fittest/strongest individuums based on their fitness score for mating and for producing the next stronger generation. You may find an **example** in the [Self-Parking Car in 500 Lines of Code](https://trekhleb.dev/blog/2021/self-parking-car-evolution/) article.
-- In [Recurrent Neural Networks (RNN)](https://en.wikipedia.org/wiki/Recurrent_neural_network) when trying to decide what letter to choose next (to form the sentence) based on the next letter probability. You may find an **example** in the [Recipe Generation using Recurrent Neural Network (RNN)](https://nbviewer.org/github/trekhleb/machine-learning-experiments/blob/master/experiments/recipe_generation_rnn/recipe_generation_rnn.ipynb) Jupyter notebook.
-- In [Nginx Load Balancing](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/) to send HTTP requests more often to the servers with the higher weights.
-- And more...
+- Trong [Giải thuật di truyền](https://en.wikipedia.org/wiki/Genetic_algorithm) ngẫu nhiên có trọng số được sử dụng trong giai đoạn "Lựa chọn", khi chúng ta cần lựa chọn các cá thể mạnh mẽ/dẻo dai dựa trên điểm thích hợp của họ để giao phối và tạo ra thế hệ tiếp theo mạnh mẽ hơn. Bạn có thể tìm thấy một **ví dụ** trong bài viết [Xe tự đỗ trong 500 dòng mã](https://trekhleb.dev/blog/2021/self-parking-car-evolution/).
+- Trong [Mạng nơ-ron tái phát (RNN)](https://en.wikipedia.org/wiki/Recurrent_neural_network) khi cố gắng quyết định chọn chữ cái tiếp theo (để tạo thành câu) dựa trên xác suất chọn chữ cái tiếp theo. Bạn có thể tìm thấy một **ví dụ** trong Jupyter notebook [Tạo ra công thức bằng Mạng nơ-ron tái phát (RNN)](https://nbviewer.org/github/trekhleb/machine-learning-experiments/blob/master/experiments/recipe_generation_rnn/recipe_generation_rnn.ipynb).
+- Trong [Cân bằng tải Nginx](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/) để gửi các yêu cầu HTTP thường xuyên hơn đến các máy chủ có trọng số cao hơn.
+- Và nhiều hơn nữa...
 
-## The Algorithm
+## Thuật toán
 
-The **straightforward approach** would be to:
+**Cách tiếp cận trực tiếp** sẽ là:
 
-1. Repeat each item in the list according to its weight.
-2. Pick the random item from the list.
+1. Lặp lại mỗi mục trong danh sách theo trọng số của nó.
+2. Chọn ngẫu nhiên một mục từ danh sách.
 
-For example in our case with fruits and vegetables we could generate the following list of size `3 + 7 + 1 = 11`:
+Ví dụ trong trường hợp của chúng ta với hoa quả và rau chúng ta có thể tạo ra danh sách sau với kích thước `3 + 7 + 1 = 11`:
 
 ```javascript
-const items =   [ '🍌', '🍎', '🥕' ];
-const weights = [  3,    7,    1  ];
+const items = ['🍌', '🍎', '🥕'];
+const weights = [3, 7, 1];
 
-// Repeating the items based on weights.
+// Lặp lại các mục dựa trên trọng số.
 const weightedItems = [
-  '🍌', '🍌', '🍌',
-  '🍎', '🍎', '🍎', '🍎', '🍎', '🍎', '🍎',
+  '🍌',
+  '🍌',
+  '🍌',
+  '🍎',
+  '🍎',
+  '🍎',
+  '🍎',
+  '🍎',
+  '🍎',
+  '🍎',
   '🥕',
 ];
 
-// And now just pick the random item from weightedItems array.
+// Và bây giờ chỉ cần chọn một mục ngẫu nhiên từ mảng weightedItems.
 ```
 
-However, as you may see, this approach may require a lot of memory, in case if we have a lot of items to repeat in `weightedItems` list. Think of it as if you would need to repeat a string like `"some-random-string"` (`18` bytes) a ten million times. You will need to allocate around `180Mb` of additional memory space just for this array.
+Tuy nhiên, như bạn có thể thấy, cách tiếp cận này có thể yêu cầu rất nhiều bộ nhớ, trong trường hợp nếu chúng ta có nhiều mục cần lặp lại trong danh sách `weightedItems`. Hãy tưởng tượng nếu bạn cần lặp lại một chuỗi như `"một-đoạn-chuỗi-ngẫu-nhiên"` (`18` byte) mười triệu lần. Bạn sẽ cần cấp khoảng `180Mb` bộ nhớ phụ thêm chỉ để mảng này.
 
-The **more efficient approach** would be to:
+**Cách tiếp cận hiệu quả hơn** sẽ là:
 
-1. Prepare the list of cumulative weights for each item (i.e. the `cumulativeWeights` list which will have the same number of elements as the original `weights` list). In our case it will look like this: `cumulativeWeights = [3, 3 + 7, 3 + 7 + 1] = [3, 10, 11]`
-2. Generate the random number `randomNumber` from `0` to the highest cumulative weight value. In our case the random number will be in a range of `[0..11]`. Let's say that we have `randomNumber = 8`.
-3. Go through the `cumulativeWeights` list from left to right and pick the first element which is higher or equal to the `randomNumber`. The index of such element we will use to pick the item from the `items` array.
+1. Chuẩn bị danh sách trọng số tích lũy cho mỗi mục (tức là danh sách `cumulativeWeights` sẽ có cùng số phần tử như danh sách `weights` ban đầu). Trong trường hợp của chúng ta, nó sẽ trông như thế này: `cumulativeWeights = [3, 3 + 7, 3 + 7 + 1] = [3, 10, 11]`.
+2. Tạo số ngẫu nhiên `randomNumber` trong khoảng từ `0` đến giá trị trọng số tích lũy cao nhất. Trong trường hợp của chúng ta, số ngẫu nhiên sẽ nằm trong khoảng `[0..11]`. Hãy giả sử rằng chúng ta có `randomNumber = 8`.
+3. Duyệt qua danh sách `cumulativeWeights` từ trái sang phải và chọn phần tử đầu tiên mà lớn hơn hoặc bằng `randomNumber`. Chỉ số của phần tử như vậy chúng ta sẽ sử dụng để chọn mục từ mảng `items`.
 
-The idea behind this approach is that the higher weights will "occupy" more numeric space. Therefore, there is a higher chance that the random number will fall into the "higher weight numeric bucket".
+Ý tưởng đằng sau cách tiếp cận này là các trọng số cao sẽ "chiếm" nhiều không gian số học hơn. Do đó, có khả năng cao rằng số ngẫu nhiên sẽ rơi vào "hộp số cao hơn".
 
 ```javascript
-const weights =           [3, 7,  1 ];
+const weights = [3, 7, 1];
 const cumulativeWeights = [3, 10, 11];
 
-// In a pseudo-representation we may think about the cumulativeWeights array like this.
+// Trong một biểu diễn giả định chúng ta có thể nghĩ về mảng cumulativeWeights như sau.
 const pseudoCumulativeWeights = [
-  1, 2, 3,               // <-- [3] numbers
-  4, 5, 6, 7, 8, 9, 10,  // <-- [7] numbers
-  11,                    // <-- [1] number
+  1,
+  2,
+  3, // <-- [3] số
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10, // <-- [7] số
+  11, // <-- [1] số
 ];
 ```
 
-Here is an example of how the `weightedRandom` function might be implemented:
+Dưới đây là một ví dụ về cách hàm `weightedRandom` có thể được triển khai:
 
 ```javascript
 /**
- * Picks the random item based on its weight.
- * The items with higher weight will be picked more often (with a higher probability).
+ * Chọn mục ngẫu nhiên dựa trên trọng số của nó.
+ * Các mục có trọng số cao sẽ được chọn thường xuyên hơn (với xác suất cao hơn).
  *
- * For example:
- * - items = ['banana', 'orange', 'apple']
+ * Ví dụ:
+ * - items = ['chuối', 'cam', 'táo']
  * - weights = [0, 0.2, 0.8]
- * - weightedRandom(items, weights) in 80% of cases will return 'apple', in 20% of cases will return
- * 'orange' and it will never return 'banana' (because probability of picking the banana is 0%)
+ * - weightedRandom(items, weights) trong 80% trường hợp sẽ trả về 'táo', trong 20% trường hợp sẽ trả về
+ * 'cam' và nó sẽ không bao giờ trả về 'chuối' (vì xác suất chọn chuối là 0%)
  *
  * @param {any[]} items
  * @param {number[]} weights
@@ -107,8 +126,8 @@ export default function weightedRandom(items, weights) {
     throw new Error('Items must not be empty');
   }
 
-  // Preparing the cumulative weights array.
-  // For example:
+  // Chuẩn bị mảng trọng số tích lũy.
+  // Ví dụ:
   // - weights = [1, 4, 3]
   // - cumulativeWeights = [1, 5, 8]
   const cumulativeWeights = [];
@@ -116,16 +135,16 @@ export default function weightedRandom(items, weights) {
     cumulativeWeights[i] = weights[i] + (cumulativeWeights[i - 1] || 0);
   }
 
-  // Getting the random number in a range of [0...sum(weights)]
-  // For example:
+  // Lấy số ngẫu nhiên trong khoảng [0...tổng(weights)]
+  // Ví dụ:
   // - weights = [1, 4, 3]
   // - maxCumulativeWeight = 8
-  // - range for the random number is [0...8]
+  // - phạm vi cho số ngẫu nhiên là [0...8]
   const maxCumulativeWeight = cumulativeWeights[cumulativeWeights.length - 1];
   const randomNumber = maxCumulativeWeight * Math.random();
 
-  // Picking the random item based on its weight.
-  // The items with higher weight will be picked more often.
+  // Chọn mục ngẫu nhiên dựa trên trọng số của nó.
+  // Các mục có trọng số cao sẽ được chọn thường xuyên.
   for (let itemIndex = 0; itemIndex < items.length; itemIndex += 1) {
     if (cumulativeWeights[itemIndex] >= randomNumber) {
       return {
@@ -137,7 +156,8 @@ export default function weightedRandom(items, weights) {
 }
 ```
 
-## Implementation
+## Triển khai
 
-- Check the [weightedRandom.js](weightedRandom.js) file for the implementation of the `weightedRandom()` function.
-- Check the [weightedRandom.test.js](__test__/weightedRandom.test.js) file for the tests-cases.
+- Kiểm tra tệp [weightedRandom.js](weightedRandom.js) để xem cách triển khai của hàm `weightedRandom()`.
+
+- Kiểm tra tệp [weightedRandom.test.js](__test__/weightedRandom.test.js) để xem các trường hợp kiểm tra.

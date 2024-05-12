@@ -1,61 +1,60 @@
-# Shellsort
+# Sắp xếp Shell
 
-_Read this in other languages:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Shellsort, also known as Shell sort or Shell's method,
-is an in-place comparison sort. It can be seen as either a
-generalization of sorting by exchange (bubble sort) or sorting
-by insertion (insertion sort). The method starts by sorting
-pairs of elements far apart from each other, then progressively
-reducing the gap between elements to be compared. Starting
-with far apart elements, it can move some out-of-place
-elements into position faster than a simple nearest neighbor
-exchange
+Sắp xếp Shell, còn được biết đến như Shell sort hoặc phương pháp Shell,
+là một thuật toán so sánh in-place. Nó có thể được xem như là một
+sự tổng quát hóa của sắp xếp bằng trao đổi (sắp xếp nổi bọt) hoặc sắp xếp
+bằng chèn (sắp xếp chèn). Phương pháp bắt đầu bằng cách sắp xếp
+các cặp phần tử cách xa nhau, sau đó dần dần
+giảm khoảng cách giữa các phần tử cần so sánh. Bắt đầu
+với các phần tử cách xa nhau, nó có thể di chuyển một số phần tử
+nằm ngoài vị trí của chúng vào vị trí nhanh hơn so với việc trao đổi hàng xóm đơn giản.
 
-![Shellsort](https://upload.wikimedia.org/wikipedia/commons/d/d8/Sorting_shellsort_anim.gif)
+![Sắp xếp Shell](https://upload.wikimedia.org/wikipedia/commons/d/d8/Sorting_shellsort_anim.gif)
 
-## How Shell Sort Works
+## Cách Sắp Xếp Shell Hoạt Động
 
-For our example and ease of understanding, we take the interval
-of `4`. Make a virtual sub-list of all values located at the
-interval of 4 positions. Here these values are
-`{35, 14}`, `{33, 19}`, `{42, 27}` and `{10, 44}`
+Đối với ví dụ của chúng tôi và sự dễ hiểu, chúng tôi lấy khoảng
+cách là `4`. Tạo một danh sách con ảo của tất cả các giá trị nằm ở
+khoảng cách 4 vị trí. Ở đây các giá trị này là
+`{35, 14}`, `{33, 19}`, `{42, 27}` và `{10, 44}`
 
-![Shellsort](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_gap_4.jpg)
+![Sắp xếp Shell](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_gap_4.jpg)
 
-We compare values in each sub-list and swap them (if necessary)
-in the original array. After this step, the new array should
-look like this
+Chúng tôi so sánh các giá trị trong mỗi danh sách con và trao đổi chúng (nếu cần)
+trong mảng ban đầu. Sau bước này, mảng mới nên
+nhìn như sau
 
-![Shellsort](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_step_1.jpg)
+![Sắp xếp Shell](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_step_1.jpg)
 
-Then, we take interval of 2 and this gap generates two sub-lists
+Sau đó, chúng tôi lấy khoảng cách là 2 và khoảng cách này tạo ra hai danh sách con
 
 - `{14, 27, 35, 42}`, `{19, 10, 33, 44}`
 
-![Shellsort](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_gap_2.jpg)
+![Sắp xếp Shell](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_gap_2.jpg)
 
-We compare and swap the values, if required, in the original array.
-After this step, the array should look like this
+Chúng tôi so sánh và trao đổi các giá trị, nếu cần, trong mảng ban đầu.
+Sau bước này, mảng nên nhìn như sau
 
-![Shellsort](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_step_2.jpg)
+![Sắp xếp Shell](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort_step_2.jpg)
 
-> UPD: On the picture below there is a typo and result array is supposed to be `[14, 10, 27, 19, 35, 33, 42, 44]`.
+> Cập nhật: Trên hình ảnh dưới đây có một lỗi đánh máy và mảng kết quả cần phải là `[14, 10, 27, 19, 35, 33, 42, 44]`.
 
-Finally, we sort the rest of the array using interval of value 1.
-Shell sort uses insertion sort to sort the array.
+Cuối cùng, chúng tôi sắp xếp phần còn lại của mảng sử dụng khoảng cách có giá trị 1.
+Sắp xếp Shell sử dụng sắp xếp chèn để sắp xếp mảng.
 
-![Shellsort](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort.jpg)
+![Sắp xếp Shell](https://www.tutorialspoint.com/data_structures_algorithms/images/shell_sort.jpg)
 
-## Complexity
+## Phức Tạp
 
-| Name           |     Best      |         Average         |            Worst            | Memory | Stable | Comments |
-| -------------- | :-----------: | :---------------------: | :-------------------------: | :----: | :----: | :------- |
-| **Shell sort** | n&nbsp;log(n) | depends on gap sequence | n&nbsp;(log(n))<sup>2</sup> |   1    |   No   |          |
+| Tên               |   Tốt nhất    |           Trung bình            |           Tệ nhất           | Bộ nhớ | Ổn định | Bình luận |
+| ----------------- | :-----------: | :-----------------------------: | :-------------------------: | :----: | :-----: | :-------- |
+| **Sắp xếp Shell** | n&nbsp;log(n) | phụ thuộc vào chuỗi khoảng cách | n&nbsp;(log(n))<sup>2</sup> |   1    |  Không  |           |
 
-## References
+## Tham Khảo
 
 - [Tutorials Point](https://www.tutorialspoint.com/data_structures_algorithms/shell_sort_algorithm.htm)
 - [Wikipedia](https://en.wikipedia.org/wiki/Shellsort)
-- [YouTube by Rob Edwards](https://www.youtube.com/watch?v=ddeLSDsYVp8&index=79&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [YouTube bởi Rob Edwards](https://www.youtube.com/watch?v=ddeLSDsYVp8&index=79&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
