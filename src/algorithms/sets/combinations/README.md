@@ -1,68 +1,71 @@
-# Combinations
+# Combinations - Tổ Hợp
 
-When the order doesn't matter, it is a **Combination**.
+_Đọc bản dịch này bằng các ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-When the order **does** matter it is a **Permutation**.
+Khi thứ tự không quan trọng, đó là **Tổ hợp**.
 
-**"My fruit salad is a combination of apples, grapes and bananas"**
-We don't care what order the fruits are in, they could also be
-"bananas, grapes and apples" or "grapes, apples and bananas",
-its the same fruit salad.
+Khi thứ tự **quan trọng** thì đó là **Hoán vị**.
 
-## Combinations without repetitions
+**"Món tráng miệng của tôi là một tổ hợp của táo, nho và chuối"**
+Chúng tôi không quan tâm thứ tự của các loại trái cây, chúng cũng có thể là
+"chuối, nho và táo" hoặc "nho, táo và chuối",
+đó là một món tráng miệng giống nhau.
 
-This is how lotteries work. The numbers are drawn one at a
-time, and if we have the lucky numbers (no matter what order)
-we win!
+## Tổ hợp không lặp lại
 
-No Repetition: such as lottery numbers `(2,14,15,27,30,33)`
+Đây là cách làm việc của các trò chơi xổ số. Các số được rút ra một cách
+lần lượt, và nếu chúng ta có các số may mắn (bất kể thứ tự)
+thì chúng ta sẽ chiến thắng!
 
-**Number of combinations**
+Không Lặp Lại: chẳng hạn như các số xổ số `(2,14,15,27,30,33)`
 
-![Formula](https://www.mathsisfun.com/combinatorics/images/combinations-no-repeat.png)
+**Số lượng tổ hợp**
 
-where `n` is the number of things to choose from, and we choose `r` of them,
-no repetition, order doesn't matter.
+![Công thức](https://www.mathsisfun.com/combinatorics/images/combinations-no-repeat.png)
 
-It is often called "n choose r" (such as "16 choose 3"). And is also known as the Binomial Coefficient.
+trong đó `n` là số lượng thứ cần chọn từ, và chúng ta chọn `r` trong số đó,
+không lặp lại, thứ tự không quan trọng.
 
-## Combinations with repetitions
+Nó thường được gọi là "n chọn r" (như "16 chọn 3"). Và còn được gọi là Hệ số Nhị thức.
 
-Repetition is Allowed: such as coins in your pocket `(5,5,5,10,10)`
+## Tổ hợp có lặp lại
 
-Or let us say there are five flavours of ice cream:
-`banana`, `chocolate`, `lemon`, `strawberry` and `vanilla`.
+Cho phép Lặp Lại: chẳng hạn như các đồng xu trong túi của bạn `(5,5,5,10,10)`
 
-We can have three scoops. How many variations will there be?
+Hoặc cho rằng có năm hương vị kem:
+`chuối`, `sô-cô-la`, `chanh`, `dâu` và `vanilla`.
 
-Let's use letters for the flavours: `{b, c, l, s, v}`.
-Example selections include:
+Chúng tôi có thể chọn ba phần. Sẽ có bao nhiêu biến thể?
 
-- `{c, c, c}` (3 scoops of chocolate)
-- `{b, l, v}` (one each of banana, lemon and vanilla)
-- `{b, v, v}` (one of banana, two of vanilla)
+Hãy sử dụng các chữ cái để đại diện cho các hương vị: `{b, c, l, s, v}`.
+Các lựa chọn ví dụ bao gồm:
 
-**Number of combinations**
+- `{c, c, c}` (3 phần kem sô-cô-la)
+- `{b, l, v}` (mỗi loại một phần của chuối, chanh và vanilla)
+- `{b, v, v}` (một phần của chuối, hai phần của vanilla)
 
-![Formula](https://www.mathsisfun.com/combinatorics/images/combinations-repeat.gif)
+**Số lượng tổ hợp**
 
-Where `n` is the number of things to choose from, and we
-choose `r` of them. Repetition allowed,
-order doesn't matter.
+![Công thức](https://www.mathsisfun.com/combinatorics/images/combinations-repeat.gif)
 
-## Cheatsheet
+Trong đó `n` là số lượng thứ để chọn từ, và chúng ta
+chọn `r` trong số đó. Cho phép lặp lại,
+thứ tự không quan trọng.
 
-![Permutations and Combinations Overview](./images/overview.png)
+## Bảng Tóm Tắt
 
-![Combinations overview](./images/combinations-overview.jpg)
+![Tổng quan về Hoán vị và Tổ hợp](./images/overview.png)
 
-| | |
-| --- | --- |
-|![Combinations with repetition](./images/combinations-with-repetitions.jpg) | ![Combinations without repetition](./images/combinations-without-repetitions.jpg) |
+![Tổng quan về Tổ hợp](./images/combinations-overview.jpg)
 
-*Made with [okso.app](https://okso.app)*
+|                                                                  |                                                                        |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| ![Tổ hợp có lặp lại](./images/combinations-with-repetitions.jpg) | ![Tổ hợp không lặp lại](./images/combinations-without-repetitions.jpg) |
 
-## References
+_Tạo với [okso.app](https://okso.app)_
+
+## Tài liệu tham khảo
 
 - [Math Is Fun](https://www.mathsisfun.com/combinatorics/combinations-permutations.html)
-- [Permutations/combinations cheat sheets](https://medium.com/@trekhleb/permutations-combinations-algorithms-cheat-sheet-68c14879aba5)
+- [Bảng Tóm Tắt Hoán vị/tổ hợp](https://medium.com/@trekhleb/permutations-combinations-algorithms-cheat-sheet-68c14879aba5)

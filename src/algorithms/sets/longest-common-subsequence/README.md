@@ -1,25 +1,20 @@
-# Longest common subsequence problem
+# Bài toán dãy con chung dài nhất
 
-The longest common subsequence (LCS) problem is the problem of finding 
-the longest subsequence common to all sequences in a set of sequences 
-(often just two sequences). It differs from the longest common substring
-problem: unlike substrings, subsequences are not required to occupy 
-consecutive positions within the original sequences. 
+_Bạn đọc bản dịch này bằng các ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-## Application
+Bài toán dãy con chung dài nhất (LCS) là bài toán tìm dãy con dài nhất chung cho tất cả các dãy trong một tập hợp các dãy (thường chỉ là hai dãy). Nó khác với bài toán dãy con chung dài nhất: so với các dãy con, các dãy con không yêu cầu chiếm vị trí liên tiếp trong các dãy gốc.
 
-The longest common subsequence problem is a classic computer science 
-problem, the basis of data comparison programs such as the diff utility, 
-and has applications in bioinformatics. It is also widely used by 
-revision control systems such as Git for reconciling multiple changes 
-made to a revision-controlled collection of files.
+## Ứng dụng
 
-## Example
+Bài toán dãy con chung dài nhất là một bài toán kinh điển trong khoa học máy tính, là cơ sở của các chương trình so sánh dữ liệu như tiện ích diff, và có ứng dụng trong sinh học tin học. Nó cũng được sử dụng rộng rãi bởi các hệ thống kiểm soát phiên bản như Git để điều hòa nhiều thay đổi được thực hiện đối với một bộ sưu tập các tập tin được kiểm soát bản.
 
-- LCS for input Sequences `ABCDGH` and `AEDFHR` is `ADH` of length 3.
-- LCS for input Sequences `AGGTAB` and `GXTXAYB` is `GTAB` of length 4.
+## Ví dụ
 
-## References
+- LCS cho các dãy đầu vào `ABCDGH` và `AEDFHR` là `ADH` có độ dài là 3.
+- LCS cho các dãy đầu vào `AGGTAB` và `GXTXAYB` là `GTAB` có độ dài là 4.
+
+## Tài liệu tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)
 - [YouTube](https://www.youtube.com/watch?v=NnD96abizww&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

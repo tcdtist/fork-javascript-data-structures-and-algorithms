@@ -1,14 +1,15 @@
-# Power Set
+# Tập con lớn nhất
 
-Power set of a set `S` is the set of all of the subsets of `S`, including the
-empty set and `S` itself. Power set of set `S` is denoted as `P(S)`.
+_Đọc bản dịch này bằng các ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-For example for `{x, y, z}`, the subsets
-are:
+Tập con lớn nhất (Power set) của một tập hợp `S` là tập hợp của tất cả các tập con của `S`, bao gồm cả tập rỗng và `S` chính nó. Tập con lớn nhất của tập hợp `S` được ký hiệu là `P(S)`.
+
+Ví dụ với `{x, y, z}`, các tập con là:
 
 ```text
 {
-  {}, // (also denoted empty set ∅ or the null set)
+  {}, // (cũng được ký hiệu là tập rỗng ∅ hoặc tập con null)
   {x},
   {y},
   {z},
@@ -19,94 +20,82 @@ are:
 }
 ```
 
-![Power Set](https://www.mathsisfun.com/sets/images/power-set.svg)
+![Tập con lớn nhất](https://www.mathsisfun.com/sets/images/power-set.svg)
 
-Here is how we may illustrate the elements of the power set of the set `{x, y, z}` ordered with respect to
-inclusion:
+Dưới đây là cách chúng ta có thể minh họa các phần tử của tập con lớn nhất của tập hợp `{x, y, z}` được sắp xếp theo thứ tự bao gồm:
 
 ![](https://upload.wikimedia.org/wikipedia/commons/e/ea/Hasse_diagram_of_powerset_of_3.svg)
 
-**Number of Subsets**
+**Số lượng Tập con**
 
-If `S` is a finite set with `|S| = n` elements, then the number of subsets
-of `S` is `|P(S)| = 2^n`. This fact, which is the motivation for the
-notation `2^S`, may be demonstrated simply as follows:
+Nếu `S` là một tập hợp hữu hạn có `|S| = n` phần tử, thì số lượng tập con của `S` là `|P(S)| = 2^n`. Sự thật này, là động lực cho ký hiệu `2^S`, có thể được chứng minh một cách đơn giản như sau:
 
-> First, order the elements of `S` in any manner. We write any subset of `S` in
-the format `{γ1, γ2, ..., γn}` where `γi , 1 ≤ i ≤ n`, can take the value
-of `0` or `1`. If `γi = 1`, the `i`-th element of `S` is in the subset;
-otherwise, the `i`-th element is not in the subset. Clearly the number of
-distinct subsets that can be constructed this way is `2^n` as `γi ∈ {0, 1}`.
+> Trước tiên, sắp xếp các phần tử của `S` theo bất kỳ cách nào. Chúng ta viết bất kỳ tập con của `S` nào trong định dạng `{γ1, γ2, ..., γn}` với `γi , 1 ≤ i ≤ n`, có thể nhận giá trị là `0` hoặc `1`. Nếu `γi = 1`, phần tử thứ `i` của `S` được chọn; ngược lại, phần tử thứ `i` không được chọn. Rõ ràng số lượng tập con riêng biệt có thể được xây dựng theo cách này là `2^n` vì `γi ∈ {0, 1}`.
 
-## Algorithms
+## Thuật toán
 
-### Bitwise Solution
+### Giải pháp Bitwise
 
-Each number in binary representation in a range from `0` to `2^n` does exactly
-what we need: it shows by its bits (`0` or `1`) whether to include related
-element from the set or not. For example, for the set `{1, 2, 3}` the binary
-number of `0b010` would mean that we need to include only `2` to the current set.
+Mỗi số trong biểu diễn nhị phân trong khoảng từ `0` đến `2^n` chính xác làm những gì chúng ta cần: nó cho biết bằng các bit (`0` hoặc `1`) liệu có nên bao gồm phần tử tương ứng từ tập hợp hay không. Ví dụ, đối với tập hợp `{1, 2, 3}` số nhị phân `0b010` sẽ cho biết rằng chúng ta cần chỉ bao gồm `2` vào tập hiện tại.
 
-|       | `abc` | Subset        |
-| :---: | :---: | :-----------: |
-| `0`   | `000` | `{}`          |
-| `1`   | `001` | `{c}`         |
-| `2`   | `010` | `{b}`         |
-| `3`   | `011` | `{c, b}`      |
-| `4`   | `100` | `{a}`         |
-| `5`   | `101` | `{a, c}`      |
-| `6`   | `110` | `{a, b}`      |
-| `7`   | `111` | `{a, b, c}`   |
+|     | `abc` |   Tập con   |
+| :-: | :---: | :---------: |
+| `0` | `000` |    `{}`     |
+| `1` | `001` |    `{c}`    |
+| `2` | `010` |    `{b}`    |
+| `3` | `011` |  `{c, b}`   |
+| `4` | `100` |    `{a}`    |
+| `5` | `101` |  `{a, c}`   |
+| `6` | `110` |  `{a, b}`   |
+| `7` | `111` | `{a, b, c}` |
 
-> See [bwPowerSet.js](./bwPowerSet.js) file for bitwise solution.
+> Xem tệp [bwPowerSet.js](./bwPowerSet.js) cho giải pháp bitwise.
 
-### Backtracking Solution
+### Giải pháp Backtracking
 
-In backtracking approach we're constantly trying to add next element of the set
-to the subset, memorizing it and then removing it and try the same with the next
-element.
+Trong phương pháp quay lui, chúng ta liên tục cố gắng thêm phần tử tiếp theo của tập hợp vào tập con, ghi nhớ nó và sau đó loại bỏ nó và thử cùng với phần tử tiếp theo.
 
-> See [btPowerSet.js](./btPowerSet.js) file for backtracking solution.
+> Xem tệp [btPowerSet.js](./btPowerSet.js) cho giải pháp backtracking.
 
-### Cascading Solution
+### Giải pháp Lan truyền
 
-This is, arguably, the simplest solution to generate a Power Set.
+Đây có lẽ là giải pháp đơn giản nhất để tạo ra một tập con lớn nhất.
 
-We start with an empty set:
+Chúng ta bắt đầu với một tập hợp rỗng:
 
 ```text
 powerSets = [[]]
 ```
 
-Now, let's say:
+Bây giờ, giả sử:
 
 ```text
-originalSet = [1, 2, 3]
+tập ban đầu = [1, 2, 3]
 ```
 
-Let's add the 1st element from the originalSet to all existing sets:
+Thêm phần tử thứ nhất từ tập ban đầu vào tất cả các tập con hiện có:
 
 ```text
 [[]] ← 1 = [[], [1]]
 ```
 
-Adding the 2nd element to all existing sets:
+Thêm phần tử thứ hai vào tất cả các tập con hiện có:
 
 ```text
 [[], [1]] ← 2 = [[], [1], [2], [1, 2]]
 ```
 
-Adding the 3nd element to all existing sets:
+Thêm phần tử thứ ba vào tất cả các tập con hiện có:
 
 ```
 [[], [1], [2], [1, 2]] ← 3 = [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
 ```
 
-And so on, for the rest of the elements from the `originalSet`. On every iteration the number of sets is doubled, so we'll get `2^n` sets.
+Và tiếp tục như vậy, cho đến phần còn lại của các phần tử từ `tập ban đầu`. Trong mỗi lần lặp lại, số lượng tập được nhân đôi, vì vậy chúng ta sẽ có `2^n` tập.
 
-> See [caPowerSet.js](./caPowerSet.js) file for cascading solution.
+> Xem tệp [caPowerSet.js](./caPowerSet.js) cho giải pháp cascading.
 
-## References
+## Tài liệu tham khảo
 
-* [Wikipedia](https://en.wikipedia.org/wiki/Power_set)
-* [Math is Fun](https://www.mathsisfun.com/sets/power-set.html)
+- [Wikipedia](https://en.wikipedia.org/wiki/Power_set)
+- [Math is Fun](https://www.mathsisfun.com/sets/power-set.html)

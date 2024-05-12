@@ -1,69 +1,50 @@
-# Knapsack Problem
+# Knapsack Problem - Vấn đề Knapsack (Ba lô)
 
-The knapsack problem or rucksack problem is a problem in 
-combinatorial optimization: Given a set of items, each with 
-a weight and a value, determine the number of each item to 
-include in a collection so that the total weight is less 
-than or equal to a given limit and the total value is as 
-large as possible.
+_Bạn đọc bản dịch này bằng các ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-It derives its name from the problem faced by someone who is 
-constrained by a fixed-size knapsack and must fill it with the 
-most valuable items.
+Vấn đề ba lô, hay còn gọi là vấn đề túi rủ, là một vấn đề trong tối ưu hóa tổ hợp: Cho một tập hợp các mặt hàng, mỗi mặt hàng có trọng lượng và giá trị, hãy xác định số lượng của mỗi mặt hàng để bao gồm trong một bộ sưu tập sao cho tổng trọng lượng nhỏ hơn hoặc bằng một ngưỡng cho trước và tổng giá trị là lớn nhất có thể.
 
-Example of a one-dimensional (constraint) knapsack problem: 
-which boxes should be chosen to maximize the amount of money 
-while still keeping the overall weight under or equal to 15 kg?
+Tên của vấn đề được lấy từ tình huống mà ai đó bị ràng buộc bởi một chiếc ba lô có kích thước cố định và phải điền đầy nó với những mặt hàng có giá trị nhất.
 
-![knapsack problem](https://upload.wikimedia.org/wikipedia/commons/f/fd/Knapsack.svg)
+Ví dụ về vấn đề túi rủ một chiều (hạn chế): cần chọn những hộp nào để tối đa hóa số tiền trong khi vẫn giữ trọng lượng tổng thể dưới hoặc bằng 15 kg?
 
-## Definition
+![vấn đề ba lô](https://upload.wikimedia.org/wikipedia/commons/f/fd/Knapsack.svg)
 
-### 0/1 knapsack problem
+## Định nghĩa
 
-The most common problem being solved is the **0/1 knapsack problem**, 
-which restricts the number `xi` of copies of each kind of item to zero or one.
+### Vấn đề túi rủ 0/1
 
-Given a set of n items numbered from `1` up to `n`, each with a 
-weight `wi` and a value `vi`, along with a maximum weight 
-capacity `W`,
+Vấn đề phổ biến nhất được giải quyết là **vấn đề túi rủ 0/1**, giới hạn số lượng `xi` của mỗi loại mặt hàng là không hoặc một.
 
-maximize ![0/1 knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/85620037d368d2136fb3361702df6a489416931b)
+Cho một tập hợp các mặt hàng có số thứ tự từ `1` đến `n`, mỗi mặt hàng có trọng lượng `wi` và giá trị `vi`, cùng với một trọng lượng tối đa `W`,
 
-subject to ![0/1 knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/dd6e7c9bca4397980976ea6d19237500ce3b8176)
-and ![0/1 knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/07dda71da2a630762c7b21b51ea54f86f422f951)
+tối đa ![vấn đề túi rủ 0/1](https://wikimedia.org/api/rest_v1/media/math/render/svg/85620037d368d2136fb3361702df6a489416931b)
 
-Here `xi` represents the number of instances of item `i` to 
-include in the knapsack. Informally, the problem is to maximize 
-the sum of the values of the items in the knapsack so that the 
-sum of the weights is less than or equal to the knapsack's 
-capacity.
+điều kiện ![vấn đề túi rủ 0/1](https://wikimedia.org/api/rest_v1/media/math/render/svg/dd6e7c9bca4397980976ea6d19237500ce3b8176)
+và ![vấn đề túi rủ 0/1](https://wikimedia.org/api/rest_v1/media/math/render/svg/07dda71da2a630762c7b21b51ea54f86f422f951)
 
-### Bounded knapsack problem (BKP)
+Ở đây, `xi` đại diện cho số lượng của mỗi mặt hàng để bao gồm trong ba lô. Một cách không chính thức, vấn đề là tối đa hóa tổng giá trị của các mặt hàng trong ba lô sao cho tổng trọng lượng nhỏ hơn hoặc bằng khả năng chứa của ba lô.
 
-The **bounded knapsack problem (BKP)** removes the restriction 
-that there is only one of each item, but restricts the number 
-`xi` of copies of each kind of item to a maximum non-negative 
-integer value `c`:
+### Vấn đề túi rủ có giới hạn (BKP)
 
-maximize ![bounded knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/85620037d368d2136fb3361702df6a489416931b)
+**Vấn đề túi rủ có giới hạn (BKP)** loại bỏ ràng buộc là chỉ có một của mỗi mặt hàng, nhưng hạn chế số lượng `xi` bản sao của mỗi loại mặt hàng thành một giá trị số nguyên không âm tối đa `c`:
 
-subject to ![bounded knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/dd6e7c9bca4397980976ea6d19237500ce3b8176)
-and ![bounded knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/6c8c5ac4f8247b3b8e01e89de76a1df0ea969821)
+tối đa ![vấn đề túi rủ có giới hạn](https://wikimedia.org/api/rest_v1/media/math/render/svg/85620037d368d2136fb3361702df6a489416931b)
 
-### Unbounded knapsack problem (UKP)
+điều kiện ![vấn đề túi rủ có giới hạn](https://wikimedia.org/api/rest_v1/media/math/render/svg/dd6e7c9bca4397980976ea6d19237500ce3b8176)
+và ![vấn đề túi rủ có giới hạn](https://wikimedia.org/api/rest_v1/media/math/render/svg/6c8c5ac4f8247b3b8e01e89de76a1df0ea969821)
 
-The **unbounded knapsack problem (UKP)** places no upper bound 
-on the number of copies of each kind of item and can be 
-formulated as above except for that the only restriction 
-on `xi` is that it is a non-negative integer.
+### Vấn đề túi rủ không giới hạn (UKP)
 
-maximize ![unbounded knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/85620037d368d2136fb3361702df6a489416931b)
+**Vấn đề túi rủ không giới hạn (UKP)** không đặt ra hạn chế trên số lượng bản sao của mỗi loại mặt hàng và có thể được sắp xếp như trên ngoại trừ việc rằng ràng buộc duy nhất đối với `xi` là nó phải là số nguyên không âm.
 
-subject to ![unbounded knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/dd6e7c9bca4397980976ea6d19237500ce3b8176) 
-and ![unbounded knapsack](https://wikimedia.org/api/rest_v1/media/math/render/svg/90a99710f61d5dea19e49ae5b31164d2b56b07e3)
+tối đa ![vấn đề túi rủ không giới hạn](https://wikimedia.org/api/rest_v1/media/math/render/svg/85620037d368d2136fb3361702df6a489416931b)
 
-## References
+điều kiện ![vấn đề túi rủ không giới hạn](https://wikimedia.org/api/rest_v1/media/math/render/svg/dd6e7c9bca4397980976ea6d19237500ce3b8176)
+và ![vấn đề túi rủ không giới hạn](https://wikimedia.org/api/rest_v1/media/math/render/svg/90a99710f61d5dea19e49ae5b31164d2b56b07e3)
+
+## Tài liệu tham khảo
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Knapsack_problem)
-- [0/1 Knapsack Problem on YouTube](https://www.youtube.com/watch?v=8LusJS5-AGo&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)
+- [Vấn đề túi rủ 0/1 trên YouTube](https://www.youtube.com/watch?v=8LusJS5-AGo&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8)

@@ -1,14 +1,17 @@
-# Cartesian Product
+# Cartesian Product - Tích Descartes
 
-In set theory a Cartesian product is a mathematical operation that returns a set 
-(or product set or simply product) from multiple sets. That is, for sets A and B,
-the Cartesian product A × B is the set of all ordered pairs (a, b)
-where a ∈ A and b ∈ B. 
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
-Cartesian product `AxB` of two sets `A={x,y,z}` and `B={1,2,3}`
+Trong lý thuyết tập hợp, tích Descartes là một phép toán toán học trả về một tập hợp
+(hoặc tập hợp tích hoặc đơn giản là tích) từ nhiều tập hợp. Đó là, đối với các tập hợp A và B,
+tích Descartes A × B là tập hợp của tất cả các cặp có thứ tự (a, b)
+trong đó a ∈ A và b ∈ B.
 
-![Cartesian Product of Two Sets](https://upload.wikimedia.org/wikipedia/commons/4/4e/Cartesian_Product_qtl1.svg)
+Tích Descartes `AxB` của hai tập hợp `A={x,y,z}` và `B={1,2,3}`
 
-## References
+![Tích Descartes của Hai Tập Hợp](https://upload.wikimedia.org/wikipedia/commons/4/4e/Cartesian_Product_qtl1.svg)
+
+## Tham Khảo
 
 [Wikipedia](https://en.wikipedia.org/wiki/Cartesian_product)

@@ -1,7 +1,7 @@
 # Tìm Kiếm Bước Nhảy
 
-_Tiếp tục đọc trong các ngôn ngữ khác:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
 Giống như Tìm kiếm nhị phân, **Tìm kiếm bước nhảy** (hoặc **Tìm kiếm khối**) là một thuật toán tìm kiếm
 cho các mảng đã được sắp xếp. Ý tưởng cơ bản là kiểm tra ít phần tử hơn

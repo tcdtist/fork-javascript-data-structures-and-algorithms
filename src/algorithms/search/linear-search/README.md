@@ -1,7 +1,7 @@
 # Tìm Kiếm Tuyến Tính
 
-_Tiếp tục đọc trong các ngôn ngữ khác:_
-[_Tiếng Việt_](README.md)
+_Nhấn vào đây để đọc bằng ngôn ngữ khác:_
+[_English_](README.en-EN.md)
 
 Trong khoa học máy tính, tìm kiếm tuyến tính hoặc tìm kiếm tuần tự là một
 phương pháp để tìm một giá trị mục tiêu trong một danh sách. Nó kiểm tra
